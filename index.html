@@ -3,83 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ziyad Abdelaal | Academic Portfolio</title>
+    <title>Ziyad Abdelaal</title>
     <style>
         :root {
             --bg-color: #ffffff;
             --text-color: #222222;
-            --muted-color: #666666;
-            --accent-color: #004d40;
-            --border-color: #e0e0e0;
+            --muted-color: #555555;
+            --link-color: #1a0dab;
+            --border-color: #eaeaea;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-color);
             background-color: var(--bg-color);
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-        }
-        .header-content h1 {
-            margin: 0 0 5px 0;
-            font-size: 2.4rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-        .header-content p {
+            line-height: 1.6;
             margin: 0;
-            color: var(--muted-color);
-            font-size: 1.15rem;
+            padding: 0;
         }
-        nav a {
-            margin-left: 20px;
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 60px;
+        }
+        @media (max-width: 768px) {
+            .wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px 20px;
+            }
+        }
+        /* Sidebar styling */
+        aside {
+            display: flex;
+            flex-direction: column;
+        }
+        aside h1 {
+            font-size: 1.6rem;
+            margin: 0 0 5px 0;
+            font-weight: 700;
+        }
+        aside p.bio {
+            color: var(--muted-color);
+            font-size: 0.95rem;
+            margin: 0 0 20px 0;
+        }
+        nav.menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        nav.menu a {
             color: var(--text-color);
             text-decoration: none;
-            font-weight: 500;
             font-size: 0.95rem;
+            font-weight: 500;
         }
-        nav a:hover {
-            color: var(--accent-color);
+        nav.menu a:hover {
+            color: var(--link-color);
             text-decoration: underline;
         }
-        section {
-            margin-bottom: 45px;
+        /* Main content styling */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
         }
-        h2 {
-            font-size: 1.3rem;
+        section h2 {
+            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+            letter-spacing: 0.5px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
-        p {
-            margin-top: 0;
+            padding-bottom: 6px;
             margin-bottom: 15px;
-        }
-        .pub-item, .project-item {
-            margin-bottom: 20px;
-        }
-        .pub-title {
-            font-weight: 600;
             color: var(--text-color);
         }
-        .pub-venue {
+        section p {
+            margin: 0 0 15px 0;
+        }
+        .item {
+            margin-bottom: 20px;
+        }
+        .item-title {
+            font-weight: 600;
+        }
+        .item-details {
             color: var(--muted-color);
-            font-style: italic;
+            font-size: 0.95rem;
         }
         a {
-            color: var(--accent-color);
+            color: var(--link-color);
             text-decoration: none;
         }
         a:hover {
@@ -87,61 +103,63 @@
         }
         ul {
             padding-left: 20px;
+            margin: 0 0 15px 0;
         }
         li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
+    <div class="wrapper">
+        <!-- Left Sidebar -->
+        <aside>
             <h1>Ziyad Abdelaal</h1>
-            <p>Researcher & Computational Chemist</p>
-        </div>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#publications">Publications</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+            <p class="bio">Researcher & Developer</p>
+            
+            <nav class="menu">
+                <a href="#about">About</a>
+                <a href="#publications">Publications</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </aside>
 
-    <main>
-        <section id="about">
-            <h2>About</h2>
-            <p>I am a researcher focused on computational biochemistry, molecular dynamics simulations, and bioinformatics workflows. My work involves investigating structural dynamics and mechanisms at the molecular level using advanced computational tools.</p>
-        </section>
+        <!-- Right Content Area -->
+        <main>
+            <section id="about">
+                <h2>About</h2>
+                <p>I am a researcher focused on computational biochemistry, molecular dynamics simulations, and bioinformatics workflows.</p>
+                <p>My work centers around investigating structural dynamics and mechanisms at the molecular level utilizing advanced computational tools and automated pipelines.</p>
+            </section>
 
-        <section id="publications">
-            <h2>Selected Publications</h2>
-            <div class="pub-item">
-                <div class="pub-title">Your First Author Paper Title Here</div>
-                <div class="pub-venue">Molecular Diversity, 2026</div>
-                <div><a href="#" target="_blank">[View Publication]</a></div>
-            </div>
-        </section>
+            <section id="publications">
+                <h2>Publications</h2>
+                <div class="item">
+                    <div class="item-title">Your First Author Paper Title Here</div>
+                    <div class="item-details">Molecular Diversity, 2026</div>
+                    <div><a href="#" target="_blank">[Paper Link]</a></div>
+                </div>
+            </section>
 
-        <section id="projects">
-            <h2>Projects & Workflows</h2>
-            <div class="project-item">
-                <strong>Molecular Dynamics Analysis Toolkit:</strong> Custom Python and GROMACS workflows designed to process trajectory files and evaluate structural metrics.
-            </div>
-            <div class="project-item">
-                <strong>Chemoinformatics Scripting:</strong> Automated pipelines for docking preparation and structural analysis.
-            </div>
-        </section>
+            <section id="projects">
+                <h2>Projects</h2>
+                <div class="item">
+                    <div class="item-title">Molecular Dynamics Analysis Toolkit</div>
+                    <div class="item-details">Custom Python workflows designed to process simulation trajectories and evaluate structural metrics.</div>
+                </div>
+            </section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Feel free to reach out via email or connect through professional networks.</p>
-            <ul>
-                <li>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></li>
-                <li>GitHub: <a href="https://github.com/ZiyadAbdelaal" target="_blank">github.com/ZiyadAbdelaal</a></li>
-            </ul>
-        </section>
-    </main>
+            <section id="contact">
+                <h2>Contact</h2>
+                <ul>
+                    <li>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></li>
+                    <li>GitHub: <a href="https://github.com/ZiyadAbdelaal" target="_blank">github.com/ZiyadAbdelaal</a></li>
+                </ul>
+            </section>
+        </main>
+    </div>
 
 </body>
 </html>
