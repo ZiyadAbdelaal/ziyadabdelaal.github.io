@@ -1,165 +1,382 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ziyad Abdelaal</title>
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #222222;
-            --muted-color: #555555;
-            --link-color: #1a0dab;
-            --border-color: #eaeaea;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 60px;
-        }
-        @media (max-width: 768px) {
-            .wrapper {
-                grid-template-columns: 1fr;
-                gap: 30px;
-                padding: 30px 20px;
-            }
-        }
-        /* Sidebar styling */
-        aside {
-            display: flex;
-            flex-direction: column;
-        }
-        aside h1 {
-            font-size: 1.6rem;
-            margin: 0 0 5px 0;
-            font-weight: 700;
-        }
-        aside p.bio {
-            color: var(--muted-color);
-            font-size: 0.95rem;
-            margin: 0 0 20px 0;
-        }
-        nav.menu {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        nav.menu a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-        nav.menu a:hover {
-            color: var(--link-color);
-            text-decoration: underline;
-        }
-        /* Main content styling */
-        main {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-        section h2 {
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 6px;
-            margin-bottom: 15px;
-            color: var(--text-color);
-        }
-        section p {
-            margin: 0 0 15px 0;
-        }
-        .item {
-            margin-bottom: 20px;
-        }
-        .item-title {
-            font-weight: 600;
-        }
-        .item-details {
-            color: var(--muted-color);
-            font-size: 0.95rem;
-        }
-        a {
-            color: var(--link-color);
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        ul {
-            padding-left: 20px;
-            margin: 0 0 15px 0;
-        }
-        li {
-            margin-bottom: 6px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ziyad — Computational Medicinal Chemistry</title>
+<meta name="description" content="Ziyad — M.Sc. student in computational medicinal chemistry &amp; drug design, working on C. albicans Als3 as an antifungal target.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12181c;
+    --surface:#1b2329;
+    --surface-2:#222b31;
+    --paper:#f3f5f2;
+    --line: rgba(243,245,242,0.12);
+    --line-strong: rgba(243,245,242,0.22);
+    --text:#eef1ee;
+    --text-dim:#a9b3ae;
+    --teal:#57c2a8;
+    --amber:#e3a35c;
+    --max: 760px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:'Inter', -apple-system, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:500;
+    line-height:1.15;
+    margin:0;
+  }
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+  /* skip link */
+  .skip{position:absolute; left:-999px; top:0; background:var(--teal); color:var(--ink); padding:8px 14px; z-index:100;}
+  .skip:focus{left:24px; top:12px;}
+
+  /* nav */
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(18,24,28,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:60px;}
+  .brand{font-family:'Fraunces', serif; font-size:1.05rem; font-weight:500; text-decoration:none;}
+  .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .navlinks a{text-decoration:none; font-size:0.92rem; color:var(--text-dim); transition:color .15s;}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--text);}
+  .navtoggle{display:none; background:none; border:0; color:var(--text); font-size:1.4rem; cursor:pointer;}
+
+  @media (max-width:640px){
+    .navlinks{
+      position:absolute; top:60px; left:0; right:0;
+      flex-direction:column; gap:0;
+      background:var(--surface);
+      border-bottom:1px solid var(--line);
+      max-height:0; overflow:hidden;
+    }
+    .navlinks.open{max-height:300px;}
+    .navlinks a{display:block; padding:14px 24px; border-top:1px solid var(--line);}
+    .navtoggle{display:block;}
+  }
+
+  /* hero */
+  header.hero{padding:88px 0 56px;}
+  .kicker{
+    display:flex; align-items:center; gap:10px;
+    color:var(--teal); font-size:0.9rem; margin-bottom:22px;
+  }
+  .kicker .dot{width:7px; height:7px; border-radius:50%; background:var(--teal); flex:none;}
+  h1.name{font-size:clamp(2.3rem, 6vw, 3.4rem); letter-spacing:-0.01em;}
+  .role{
+    margin-top:14px; font-size:1.08rem; color:var(--text-dim);
+    max-width:52ch;
+  }
+  .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:26px;}
+  .tag{
+    font-size:0.8rem; padding:5px 11px; border:1px solid var(--line-strong);
+    border-radius:100px; color:var(--text-dim);
+  }
+  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:32px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 20px; border-radius:6px; font-size:0.92rem;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    font-family:'Inter', sans-serif;
+  }
+  .btn-primary{background:var(--teal); color:#0c1613; font-weight:600;}
+  .btn-primary:hover{background:#68d0b6;}
+  .btn-ghost{border-color:var(--line-strong); color:var(--text); background:transparent;}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
+
+  .social-row{display:flex; flex-wrap:wrap; gap:18px; margin-top:30px; font-size:0.88rem;}
+  .social-row a{text-decoration:none; color:var(--text-dim); border-bottom:1px solid transparent;}
+  .social-row a:hover{color:var(--teal); border-color:var(--teal);}
+
+  /* section shell */
+  section{padding:56px 0; border-top:1px solid var(--line);}
+  .eyebrow{
+    font-size:0.8rem; color:var(--text-dim); margin-bottom:10px;
+  }
+  h2.section-title{font-size:1.6rem; margin-bottom:22px;}
+
+  /* about */
+  .quote{
+    border-left:2px solid var(--teal);
+    padding:2px 0 2px 18px; margin:0 0 30px;
+    color:var(--text-dim); font-style:italic; font-size:0.98rem;
+  }
+  .about-body p{margin:0 0 16px; color:#d7ddd8;}
+  .about-body strong{color:var(--text); font-weight:600;}
+  .fill{color:var(--amber);}
+
+  /* timeline */
+  .timeline{position:relative; margin-top:8px;}
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:var(--line-strong);
+  }
+  .tl-item{position:relative; padding-left:28px; margin-bottom:26px;}
+  .tl-item::before{
+    content:""; position:absolute; left:0; top:6px; width:11px; height:11px;
+    border-radius:50%; background:var(--ink); border:2px solid var(--teal);
+  }
+  .tl-date{font-size:0.82rem; color:var(--teal); margin-bottom:4px;}
+  .tl-text{color:#d7ddd8; font-size:0.96rem;}
+
+  /* research cards */
+  .research-grid{display:grid; gap:20px;}
+  .research-card{
+    border:1px solid var(--line); border-radius:8px; padding:22px;
+    background:var(--surface);
+  }
+  .research-card h3{font-size:1.12rem; margin-bottom:8px; font-weight:500;}
+  .research-card p{color:var(--text-dim); font-size:0.94rem; margin:0 0 14px;}
+  .chip-row{display:flex; flex-wrap:wrap; gap:6px;}
+  .chip{font-size:0.75rem; color:var(--teal); border:1px solid rgba(87,194,168,0.35); border-radius:100px; padding:3px 9px;}
+
+  /* publications */
+  .pub{
+    border:1px solid var(--line); border-radius:8px; padding:20px 22px;
+    margin-bottom:16px; background:var(--surface);
+  }
+  .pub-venue{font-size:0.78rem; color:var(--amber); margin-bottom:8px; display:flex; gap:8px; align-items:center;}
+  .pub-venue .status{color:var(--text-dim); font-weight:normal;}
+  .pub h3{font-size:1.05rem; font-weight:500; margin-bottom:8px;}
+  .pub .authors{font-size:0.9rem; color:var(--text-dim); margin-bottom:12px;}
+  .pub .authors .me{color:var(--text); font-weight:600;}
+  .pub-links{display:flex; gap:16px; font-size:0.85rem;}
+  .pub-links a{text-decoration:none; color:var(--teal); border-bottom:1px solid transparent;}
+  .pub-links a:hover{border-color:var(--teal);}
+
+  /* contact / footer */
+  footer{padding:48px 0 60px; border-top:1px solid var(--line);}
+  .footer-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; align-items:flex-end;}
+  .footer-links{display:flex; flex-wrap:wrap; gap:18px; font-size:0.88rem;}
+  .footer-links a{text-decoration:none; color:var(--text-dim);}
+  .footer-links a:hover{color:var(--teal);}
+  .footer-note{color:var(--text-dim); font-size:0.82rem; margin-top:26px;}
+
+  @media (min-width:640px){
+    .research-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <!-- Left Sidebar -->
-        <aside>
-            <h1>Ziyad Abdelaal</h1>
-            <p class="bio">Researcher & Developer</p>
-            
-            <nav class="menu">
-                <a href="#about">About</a>
-                <a href="#publications">Publications</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </aside>
+<a href="#main" class="skip">Skip to content</a>
 
-        <!-- Right Content Area -->
-        <main>
-            <section id="about">
-                <h2>About</h2>
-                <p>I am a researcher focused on computational biochemistry, molecular dynamics simulations, and bioinformatics workflows.</p>
-                <p>My work centers around investigating structural dynamics and mechanisms at the molecular level utilizing advanced computational tools and automated pipelines.</p>
-            </section>
+<nav>
+  <div class="wrap">
+    <a href="#top" class="brand">Ziyad</a>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-            <section id="publications">
-                <h2>Publications</h2>
-                <div class="item">
-                    <div class="item-title">Your First Author Paper Title Here</div>
-                    <div class="item-details">Molecular Diversity, 2026</div>
-                    <div><a href="#" target="_blank">[Paper Link]</a></div>
-                </div>
-            </section>
-
-            <section id="projects">
-                <h2>Projects</h2>
-                <div class="item">
-                    <div class="item-title">Molecular Dynamics Analysis Toolkit</div>
-                    <div class="item-details">Custom Python workflows designed to process simulation trajectories and evaluate structural metrics.</div>
-                </div>
-            </section>
-
-            <section id="contact">
-                <h2>Contact</h2>
-                <ul>
-                    <li>Email: <a href="mailto:your-email@example.com">your-email@example.com</a></li>
-                    <li>GitHub: <a href="https://github.com/ZiyadAbdelaal" target="_blank">github.com/ZiyadAbdelaal</a></li>
-                </ul>
-            </section>
-        </main>
+<main id="main">
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="kicker"><span class="dot"></span>M.Sc. Student &middot; Computational Medicinal Chemistry &amp; CADD</div>
+      <h1 class="name">Ziyad</h1>
+      <p class="role">
+        Researching structure-based antifungal drug discovery, with a focus on
+        <em>Candida albicans</em> Als3 as a therapeutic target &mdash; combining molecular docking,
+        consensus scoring, and computational chemistry to identify new antibiofilm leads.
+      </p>
+      <div class="tags">
+        <span class="tag">Molecular Docking</span>
+        <span class="tag">CADD</span>
+        <span class="tag">Antifungal Drug Discovery</span>
+        <span class="tag">C. albicans Als3</span>
+        <span class="tag">Consensus Docking</span>
+        <span class="tag">Structure-Based Design</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:your.email@example.com">Get in touch</a>
+        <a class="btn btn-ghost" href="#" target="_blank" rel="noopener">View CV</a>
+      </div>
+      <div class="social-row">
+        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="#" target="_blank" rel="noopener">ORCID</a>
+      </div>
     </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="eyebrow">About</div>
+      <blockquote class="quote">
+        "<span class="fill">[add a short research philosophy or motivating quote here]</span>"
+      </blockquote>
+      <div class="about-body">
+        <p>
+          I am a <strong>Master's student in computational medicinal chemistry</strong>,
+          working at the intersection of medicinal chemistry and structure-based drug design.
+          My research centers on <strong><em>Candida albicans</em> Als3</strong>, a cell-surface
+          adhesin protein involved in biofilm formation, as a target for new antifungal and
+          antibiofilm agents. I use molecular docking, dual-engine consensus docking, and related
+          computational methods to screen and validate candidate compound libraries against this target.
+        </p>
+        <p>
+          I am currently based in <span class="fill">[your city/university, South Korea]</span>,
+          <span class="fill">[add your program, university, and lab/advisor here]</span>.
+        </p>
+        <p>
+          My work has been published as first author in <strong>Molecular Diversity</strong>
+          and as second author in the <strong>European Journal of Medicinal Chemistry</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="updates">
+    <div class="wrap">
+      <div class="eyebrow">Updates</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date"><span class="fill">[Month Year]</span></div>
+          <div class="tl-text"><span class="fill">[e.g. "Manuscript on Als3 consensus docking under revision"]</span></div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span class="fill">[Month Year]</span></div>
+          <div class="tl-text">Second-author paper published in the <strong>European Journal of Medicinal Chemistry</strong>.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span class="fill">[Month Year]</span></div>
+          <div class="tl-text">First-author paper published in <strong>Molecular Diversity</strong>, on molecular docking of an antifungal/antibiofilm library against Als3.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span class="fill">[Month Year]</span></div>
+          <div class="tl-text">Began M.Sc. studies in <span class="fill">[your program]</span> at <span class="fill">[your university]</span>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <div class="eyebrow">Research</div>
+      <h2 class="section-title">Research highlights</h2>
+      <div class="research-grid">
+        <div class="research-card">
+          <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
+          <p>
+            Structure-based screening of a compound library against <em>C. albicans</em> Als3,
+            aimed at identifying antifungal and antibiofilm lead candidates.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Molecular Docking</span>
+            <span class="chip">Als3</span>
+            <span class="chip">Antifungal</span>
+          </div>
+        </div>
+        <div class="research-card">
+          <h3>Dual-Engine Consensus Docking</h3>
+          <p>
+            Reviewer-driven validation of docking results against Als3 using a dual-engine
+            consensus approach to strengthen confidence in binding pose predictions.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Consensus Docking</span>
+            <span class="chip">Validation</span>
+            <span class="chip">CADD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="wrap">
+      <div class="eyebrow">Publications</div>
+      <h2 class="section-title">Featured publications</h2>
+
+      <div class="pub">
+        <div class="pub-venue">Molecular Diversity <span class="status">&middot; First author</span></div>
+        <h3><span class="fill">[Add exact paper title]</span></h3>
+        <div class="authors"><span class="me">Ziyad</span><span class="fill">, [co-authors]</span></div>
+        <div class="pub-links">
+          <a href="#" target="_blank" rel="noopener">Article</a>
+          <a href="#" target="_blank" rel="noopener">BibTeX</a>
+        </div>
+      </div>
+
+      <div class="pub">
+        <div class="pub-venue">European Journal of Medicinal Chemistry <span class="status">&middot; Second author</span></div>
+        <h3><span class="fill">[Add exact paper title]</span></h3>
+        <div class="authors"><span class="fill">[First author], </span><span class="me">Ziyad</span><span class="fill">, [co-authors]</span></div>
+        <div class="pub-links">
+          <a href="#" target="_blank" rel="noopener">Article</a>
+          <a href="#" target="_blank" rel="noopener">BibTeX</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="eyebrow">Contact</div>
+      <h2 class="section-title">Get in touch</h2>
+      <p style="color:var(--text-dim); max-width:52ch;">
+        Open to research collaboration and discussion around computational drug discovery,
+        antifungal targets, and molecular docking. Reach out by email or connect on LinkedIn.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:your.email@example.com">Email me</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-links">
+        <a href="#" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:your.email@example.com">Email</a>
+      </div>
+      <div style="color:var(--text-dim); font-size:0.85rem;">&copy; <span id="year"></span> Ziyad. All rights reserved.</div>
+    </div>
+    <div class="footer-note">Search this file for <code>[</code> or class <code>fill</code> to find every placeholder that still needs your details.</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var toggle = document.getElementById('navToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); });
+  });
+</script>
 
 </body>
 </html>
