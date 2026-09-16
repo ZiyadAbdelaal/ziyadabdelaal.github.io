@@ -186,6 +186,7 @@
     <ul class="navlinks" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#research">Research</a></li>
+      <li><a href="#toolkit">Toolkit</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -233,14 +234,19 @@
         <p>
           I am a <strong>Master's student in computational medicinal chemistry</strong>,
           working at the intersection of medicinal chemistry and structure-based drug design.
-          My research centers on <strong><em>Candida albicans</em> Als3</strong>, a cell-surface
-          adhesin protein involved in biofilm formation, as a target for new antifungal and
-          antibiofilm agents. I use molecular docking, dual-engine consensus docking, and related
-          computational methods to screen and validate candidate compound libraries against this target.
+          My research centers on <strong><em>Candida albicans</em> Als3</strong> (PDB: 4LEB), a
+          cell-surface adhesin protein involved in biofilm formation, as a target for new antifungal
+          and antibiofilm agents. Across two manuscripts I've combined large-scale molecular docking,
+          DFT/HOMO&ndash;LUMO analysis, scaffold classification, and a dual-engine consensus docking
+          framework (PharmaCoNet + AutoDock Vina) to screen, validate, and rationalize candidate
+          compounds against this target.
         </p>
         <p>
-          I am currently based in <span class="fill">[your city/university, South Korea]</span>,
-          <span class="fill">[add your program, university, and lab/advisor here]</span>.
+          I am currently based in <span class="fill">[your city/university]</span>, South Korea &mdash;
+          <span class="fill">[add your program, university, and lab/advisor here]</span>. I also serve
+          as a peer reviewer, most recently for an <em>A. baumannii</em> docking manuscript, and I'm
+          preparing to apply for a <strong>DPhil in bioinformatics or synthetic biology at the
+          University of Oxford</strong>.
         </p>
         <p>
           My work has been published as first author in <strong>Molecular Diversity</strong>
@@ -256,7 +262,11 @@
       <div class="timeline">
         <div class="tl-item">
           <div class="tl-date"><span class="fill">[Month Year]</span></div>
-          <div class="tl-text"><span class="fill">[e.g. "Manuscript on Als3 consensus docking under revision"]</span></div>
+          <div class="tl-text">Peer-reviewed an <em>A. baumannii</em> antibacterial docking manuscript, contributing targeted methodological critiques.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span class="fill">[Month Year]</span></div>
+          <div class="tl-text">Built a dual-engine consensus docking framework (PharmaCoNet + AutoDock Vina) to satisfy a reviewer's validation request on the Als3 consensus-docking manuscript, now under revision.</div>
         </div>
         <div class="tl-item">
           <div class="tl-date"><span class="fill">[Month Year]</span></div>
@@ -264,7 +274,11 @@
         </div>
         <div class="tl-item">
           <div class="tl-date"><span class="fill">[Month Year]</span></div>
-          <div class="tl-text">First-author paper published in <strong>Molecular Diversity</strong>, on molecular docking of an antifungal/antibiofilm library against Als3.</div>
+          <div class="tl-text">First-author paper published in <strong>Molecular Diversity</strong>, docking a curated antifungal/antibiofilm library against <em>C. albicans</em> Als3 (PDB 4LEB).</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span class="fill">[Month Year]</span></div>
+          <div class="tl-text">Earlier study screened natural carotenoids against Als3, identifying <strong>mangicrocin</strong> as a top hit.</div>
         </div>
         <div class="tl-item">
           <div class="tl-date"><span class="fill">[Month Year]</span></div>
@@ -282,25 +296,84 @@
         <div class="research-card">
           <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
           <p>
-            Structure-based screening of a compound library against <em>C. albicans</em> Als3,
-            aimed at identifying antifungal and antibiofilm lead candidates.
+            Large-scale structure-based screening of a curated antifungal/antibiofilm library against
+            <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
+            via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
+            correlation, pointing to mechanistic heterogeneity across the library.
           </p>
           <div class="chip-row">
             <span class="chip">Molecular Docking</span>
             <span class="chip">Als3</span>
-            <span class="chip">Antifungal</span>
+            <span class="chip">DFT / HOMO&ndash;LUMO</span>
           </div>
         </div>
         <div class="research-card">
           <h3>Dual-Engine Consensus Docking</h3>
           <p>
-            Reviewer-driven validation of docking results against Als3 using a dual-engine
-            consensus approach to strengthen confidence in binding pose predictions.
+            Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
+            validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
+            pose predictions on a manuscript now under revision.
           </p>
           <div class="chip-row">
             <span class="chip">Consensus Docking</span>
-            <span class="chip">Validation</span>
+            <span class="chip">RMSD Validation</span>
             <span class="chip">CADD</span>
+          </div>
+        </div>
+        <div class="research-card">
+          <h3>Natural Carotenoid Screening against Als3</h3>
+          <p>
+            First published study to screen natural carotenoids against Als3, identifying
+            <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
+            later antifungal library and consensus-docking work.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Natural Products</span>
+            <span class="chip">Virtual Screening</span>
+            <span class="chip">Als3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolkit">
+    <div class="wrap">
+      <div class="eyebrow">Toolkit</div>
+      <h2 class="section-title">Methods &amp; software</h2>
+      <div class="research-grid">
+        <div class="research-card">
+          <h3>Docking &amp; CADD</h3>
+          <div class="chip-row">
+            <span class="chip">Discovery Studio</span>
+            <span class="chip">AutoDock Vina</span>
+            <span class="chip">PharmaCoNet</span>
+            <span class="chip">MD Simulation</span>
+            <span class="chip">ADMET</span>
+          </div>
+        </div>
+        <div class="research-card">
+          <h3>Quantum Chemistry</h3>
+          <div class="chip-row">
+            <span class="chip">DFT</span>
+            <span class="chip">VeloxChem</span>
+            <span class="chip">ORCA</span>
+            <span class="chip">MESP</span>
+          </div>
+        </div>
+        <div class="research-card">
+          <h3>Cheminformatics</h3>
+          <div class="chip-row">
+            <span class="chip">RDKit</span>
+            <span class="chip">DataWarrior</span>
+            <span class="chip">ClassyFire</span>
+          </div>
+        </div>
+        <div class="research-card">
+          <h3>Environment</h3>
+          <div class="chip-row">
+            <span class="chip">Python</span>
+            <span class="chip">Anaconda / Jupyter</span>
           </div>
         </div>
       </div>
@@ -316,6 +389,10 @@
         <div class="pub-venue">Molecular Diversity <span class="status">&middot; First author</span></div>
         <h3><span class="fill">[Add exact paper title]</span></h3>
         <div class="authors"><span class="me">Ziyad</span><span class="fill">, [co-authors]</span></div>
+        <p style="color:var(--text-dim); font-size:0.9rem; margin:-4px 0 12px;">
+          Molecular docking of a curated antifungal/antibiofilm compound library against
+          <em>C. albicans</em> Als3 (PDB 4LEB), with scaffold classification and DFT analysis.
+        </p>
         <div class="pub-links">
           <a href="#" target="_blank" rel="noopener">Article</a>
           <a href="#" target="_blank" rel="noopener">BibTeX</a>
