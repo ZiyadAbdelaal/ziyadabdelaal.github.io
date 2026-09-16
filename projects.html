@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Ziyad Abdelaal</title>
+<meta name="description" content="Computational drug discovery projects by Ziyad Abdelaal, centered on C. albicans Als3.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress"></div>
+<a href="#main" class="skip">Skip to content</a>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html#top" class="brand">
+      <span class="avatar-sm avatar-fallback">ZA</span>
+      Ziyad Abdelaal
+    </a>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+        <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line><line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line></svg>
+        <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path></svg>
+      </button>
+      <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+    </div>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<main id="main">
+  <div class="page-header">
+    <div class="wrap">
+      <div class="eyebrow">Projects</div>
+      <h1>Projects</h1>
+      <p>Structure-based drug discovery work centered on <em>C. albicans</em> Als3, plus the toolkit behind it.</p>
+    </div>
+  </div>
+
+  <section id="research" style="border-top:none; padding-top:8px;">
+    <div class="wrap">
+      <div class="filter-row" id="researchFilters">
+        <button class="filter-btn active" data-filter="all" style="--fbg:rgba(148,163,158,0.16); --fc:var(--text);">All</button>
+        <button class="filter-btn" data-filter="docking" style="--fbg:rgba(79,209,181,0.14); --fc:var(--teal-ink);">Docking</button>
+        <button class="filter-btn" data-filter="validation" style="--fbg:rgba(94,179,234,0.14); --fc:var(--sky-ink);">Validation</button>
+        <button class="filter-btn" data-filter="natural" style="--fbg:rgba(164,138,240,0.14); --fc:var(--violet-ink);">Natural Products</button>
+      </div>
+      <div class="research-grid">
+        <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)" data-cat="docking">
+          <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
+          <p>
+            Large-scale structure-based screening of a curated antifungal/antibiofilm library against
+            <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
+            via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
+            correlation, pointing to mechanistic heterogeneity across the library.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Molecular Docking</span>
+            <span class="chip">Als3</span>
+            <span class="chip">DFT / HOMO&ndash;LUMO</span>
+          </div>
+        </div>
+        <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)" data-cat="validation">
+          <h3>Dual-Engine Consensus Docking</h3>
+          <p>
+            Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
+            validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
+            pose predictions on a manuscript now under revision.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Consensus Docking</span>
+            <span class="chip">RMSD Validation</span>
+            <span class="chip">CADD</span>
+          </div>
+        </div>
+        <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)" data-cat="natural">
+          <h3>Natural Carotenoid Screening against Als3</h3>
+          <p>
+            First published study to screen natural carotenoids against Als3, identifying
+            <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
+            later antifungal library and consensus-docking work.
+          </p>
+          <div class="chip-row">
+            <span class="chip">Natural Products</span>
+            <span class="chip">Virtual Screening</span>
+            <span class="chip">Als3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolkit">
+    <div class="wrap">
+      <div class="eyebrow">Toolkit</div>
+      <h2 class="section-title">Methods &amp; software</h2>
+      <div class="research-grid">
+        <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)">
+          <h3>Docking &amp; CADD</h3>
+          <div class="chip-row">
+            <span class="chip">Discovery Studio</span>
+            <span class="chip">AutoDock Vina</span>
+            <span class="chip">PharmaCoNet</span>
+            <span class="chip">MD Simulation</span>
+            <span class="chip">ADMET</span>
+          </div>
+        </div>
+        <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)">
+          <h3>Quantum Chemistry</h3>
+          <div class="chip-row">
+            <span class="chip">DFT</span>
+            <span class="chip">VeloxChem</span>
+            <span class="chip">ORCA</span>
+            <span class="chip">MESP</span>
+          </div>
+        </div>
+        <div class="research-card" style="--card-color:var(--amber); --card-color-ink:var(--amber-ink)">
+          <h3>Cheminformatics</h3>
+          <div class="chip-row">
+            <span class="chip">RDKit</span>
+            <span class="chip">DataWarrior</span>
+            <span class="chip">ClassyFire</span>
+          </div>
+        </div>
+        <div class="research-card" style="--card-color:var(--coral); --card-color-ink:var(--coral-ink)">
+          <h3>Environment</h3>
+          <div class="chip-row">
+            <span class="chip">Python</span>
+            <span class="chip">Anaconda / Jupyter</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-links">
+        <a href="#" target="_blank" rel="noopener">Google Scholar</a>
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:your.email@example.com">Email</a>
+      </div>
+      <div style="color:var(--text-dim); font-size:0.85rem;">&copy; <span id="year"></span> Ziyad Abdelaal. All rights reserved.</div>
+    </div>
+    <div class="footer-note">Search these files for <code>[</code> or class <code>fill</code> to find every placeholder that still needs your details.</div>
+  </div>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>

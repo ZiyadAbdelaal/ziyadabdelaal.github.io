@@ -3,222 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ziyad — Computational Medicinal Chemistry</title>
-<meta name="description" content="Ziyad — M.Sc. student in computational medicinal chemistry &amp; drug design, working on C. albicans Als3 as an antifungal target.">
+<title>Ziyad Abdelaal — Computational Medicinal Chemistry</title>
+<meta name="description" content="Ziyad Abdelaal — M.Sc. student in computational medicinal chemistry &amp; drug design, working on C. albicans Als3 as an antifungal target.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#10151a;
-    --surface:#1a222a;
-    --surface-2:#212b34;
-    --text:#eef1ee;
-    --text-dim:#a4b0ac;
-    --line: rgba(238,241,238,0.10);
-    --line-strong: rgba(238,241,238,0.20);
-
-    --teal:#4fd1b5;
-    --amber:#f0a94e;
-    --coral:#f0716c;
-    --violet:#a48af0;
-    --sky:#5eb3ea;
-
-    --teal-ink:#4fd1b5;
-    --amber-ink:#f0a94e;
-    --coral-ink:#f0716c;
-    --violet-ink:#a48af0;
-    --sky-ink:#5eb3ea;
-
-    --max: 780px;
-  }
-  :root[data-theme="light"]{
-    --ink:#f7f8f6;
-    --surface:#ffffff;
-    --surface-2:#eef1ee;
-    --text:#10151a;
-    --text-dim:#5a655f;
-    --line: rgba(16,21,26,0.10);
-    --line-strong: rgba(16,21,26,0.22);
-
-    --teal-ink:#0f8f73;
-    --amber-ink:#a15c00;
-    --coral-ink:#c23b35;
-    --violet-ink:#5c3fc4;
-    --sky-ink:#1f76b8;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
-  }
-  body{
-    margin:0;
-    background:var(--ink);
-    color:var(--text);
-    font-family:'Inter', -apple-system, sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-    transition:background-color .25s ease, color .25s ease;
-  }
-  nav, .research-card, .pub, .stat, .tag, footer{ transition:background-color .25s ease, border-color .25s ease, color .25s ease; }
-  a{color:inherit;}
-  h1,h2,h3{ font-family:'Fraunces', Georgia, serif; font-weight:500; line-height:1.15; margin:0; }
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px; position:relative;}
-
-  .skip{position:absolute; left:-999px; top:0; background:var(--teal); color:var(--ink); padding:8px 14px; z-index:100;}
-  .skip:focus{left:24px; top:12px;}
-
-  /* progress bar */
-  #progress{
-    position:fixed; top:0; left:0; height:3px; z-index:40;
-    background:linear-gradient(90deg, var(--teal), var(--sky), var(--violet), var(--coral));
-    width:0%; transition:width 0.1s linear;
-  }
-
-  nav{
-    position:sticky; top:0; z-index:20;
-    background:rgba(16,21,26,0.86);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:60px;}
-  .brand{font-family:'Fraunces', serif; font-size:1.05rem; font-weight:600; text-decoration:none;}
-  .navlinks{display:flex; gap:26px; list-style:none; margin:0; padding:0;}
-  .navlinks a{text-decoration:none; font-size:0.92rem; color:var(--text-dim); transition:color .15s; position:relative;}
-  .navlinks a:hover, .navlinks a:focus-visible{color:var(--text);}
-  .navlinks a.active{color:var(--teal-ink);}
-  .navtoggle{display:none; background:none; border:0; color:var(--text); font-size:1.4rem; cursor:pointer;}
-
-  .theme-toggle{
-    display:inline-flex; align-items:center; justify-content:center;
-    width:36px; height:36px; border-radius:8px; border:1px solid var(--line-strong);
-    background:transparent; color:var(--text); cursor:pointer; font-size:1rem;
-    margin-left:8px;
-  }
-  .theme-toggle:hover{border-color:var(--teal-ink); color:var(--teal-ink);}
-  .nav-right{display:flex; align-items:center;}
-
-  @media (max-width:640px){
-    .navlinks{
-      position:absolute; top:60px; left:0; right:0;
-      flex-direction:column; gap:0;
-      background:var(--surface);
-      border-bottom:1px solid var(--line);
-      max-height:0; overflow:hidden;
-    }
-    .navlinks.open{max-height:340px;}
-    .navlinks a{display:block; padding:14px 24px; border-top:1px solid var(--line);}
-    .navtoggle{display:block;}
-  }
-
-  /* hero with ambient bond animation */
-  header.hero{padding:88px 0 40px; position:relative; overflow:hidden;}
-  #bondfield{position:absolute; inset:-40px -10% auto -10%; height:520px; z-index:0; opacity:0.55; pointer-events:none;}
-  header.hero .wrap{z-index:1;}
-
-  .kicker{display:flex; align-items:center; gap:10px; color:var(--teal-ink); font-size:0.9rem; margin-bottom:22px; font-weight:500;}
-  .kicker .dot{width:7px; height:7px; border-radius:50%; background:var(--teal); flex:none; box-shadow:0 0 0 4px rgba(79,209,181,0.18);}
-
-  h1.name{
-    font-size:clamp(2.5rem, 7vw, 3.8rem); letter-spacing:-0.01em; font-weight:700;
-    background:linear-gradient(100deg, var(--teal) 0%, var(--sky) 30%, var(--violet) 55%, var(--coral) 80%, var(--teal) 100%);
-    background-size:200% auto;
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation:hue 10s linear infinite;
-  }
-  @keyframes hue{ 0%{background-position:0% 50%;} 100%{background-position:200% 50%;} }
-
-  .role{ margin-top:16px; font-size:1.1rem; color:var(--text-dim); max-width:54ch; }
-  .tags{display:flex; flex-wrap:wrap; gap:9px; margin-top:26px;}
-  .tag{
-    font-size:0.8rem; padding:6px 13px; border-radius:100px; font-weight:500;
-    border:1px solid transparent;
-  }
-  .tag.c-teal{background:rgba(79,209,181,0.14); color:var(--teal-ink); border-color:rgba(79,209,181,0.3);}
-  .tag.c-amber{background:rgba(240,169,78,0.14); color:var(--amber-ink); border-color:rgba(240,169,78,0.3);}
-  .tag.c-coral{background:rgba(240,113,108,0.14); color:var(--coral-ink); border-color:rgba(240,113,108,0.3);}
-  .tag.c-violet{background:rgba(164,138,240,0.14); color:var(--violet-ink); border-color:rgba(164,138,240,0.3);}
-  .tag.c-sky{background:rgba(94,179,234,0.14); color:var(--sky-ink); border-color:rgba(94,179,234,0.3);}
-
-  .hero-actions{display:flex; flex-wrap:wrap; gap:12px; margin-top:32px;}
-  .btn{ display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:8px; font-size:0.92rem; text-decoration:none; border:1px solid transparent; cursor:pointer; font-family:'Inter', sans-serif; font-weight:600; transition:transform .15s, box-shadow .15s, background .15s, color .15s; }
-  .btn-primary{background:var(--teal); color:#0a1613;}
-  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(79,209,181,0.55);}
-  .btn-ghost{border-color:var(--line-strong); color:var(--text); background:transparent;}
-  .btn-ghost:hover{border-color:var(--sky-ink); color:var(--sky-ink); transform:translateY(-2px);}
-
-  .social-row{display:flex; flex-wrap:wrap; gap:18px; margin-top:30px; font-size:0.88rem;}
-  .social-row a{text-decoration:none; color:var(--text-dim); border-bottom:1px solid transparent; transition:color .15s, border-color .15s;}
-  .social-row a:hover{color:var(--sky-ink); border-color:var(--sky-ink);}
-
-  /* stats strip */
-  .stats{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:44px; }
-  @media (min-width:560px){ .stats{grid-template-columns:repeat(4,1fr);} }
-  .stat{ padding:16px 6px 0; border-top:2px solid var(--stat-color-ink, var(--teal-ink)); }
-  .stat .num{ font-family:'Fraunces', serif; font-size:2rem; font-weight:600; color:var(--stat-color-ink, var(--teal-ink)); }
-  .stat .label{ font-size:0.78rem; color:var(--text-dim); margin-top:4px; }
-
-  section{padding:56px 0; border-top:1px solid var(--line);}
-  .eyebrow{font-size:0.8rem; color:var(--text-dim); margin-bottom:10px;}
-  h2.section-title{font-size:1.7rem; margin-bottom:22px;}
-
-  .quote{ border-left:3px solid var(--violet); padding:2px 0 2px 18px; margin:0 0 30px; color:var(--text-dim); font-style:italic; font-size:0.98rem; }
-  .about-body p{margin:0 0 16px; color:var(--text);}
-  .about-body strong{color:var(--text); font-weight:600;}
-  .fill{color:var(--amber-ink);}
-
-  .timeline{position:relative; margin-top:8px;}
-  .timeline::before{ content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line-strong); }
-  .tl-item{position:relative; padding-left:28px; margin-bottom:26px;}
-  .tl-item::before{ content:""; position:absolute; left:0; top:6px; width:11px; height:11px; border-radius:50%; background:var(--ink); border:2px solid var(--dot-color, var(--teal)); }
-  .tl-date{font-size:0.82rem; color:var(--dot-color-ink, var(--teal-ink)); margin-bottom:4px; font-weight:600;}
-  .tl-text{color:var(--text); font-size:0.96rem;}
-
-  .filter-row{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;}
-  .filter-btn{
-    font-size:0.82rem; padding:7px 14px; border-radius:100px; cursor:pointer;
-    border:1px solid var(--line-strong); background:transparent; color:var(--text-dim);
-    font-family:'Inter',sans-serif; transition:all .15s;
-  }
-  .filter-btn:hover{color:var(--text); border-color:var(--text-dim);}
-  .filter-btn.active{background:var(--fbg); color:var(--fc); border-color:var(--fc);}
-
-  .research-grid{display:grid; gap:20px;}
-  .research-card{
-    border:1px solid var(--line); border-left:3px solid var(--card-color, var(--teal)); border-radius:8px; padding:22px;
-    background:var(--surface); transition:transform .18s, box-shadow .18s, border-color .18s;
-  }
-  .research-card:hover{ transform:translateY(-4px); box-shadow:0 14px 30px -14px rgba(0,0,0,0.5); }
-  .research-card.hidden{display:none;}
-  .research-card h3{font-size:1.12rem; margin-bottom:8px; font-weight:500;}
-  .research-card p{color:var(--text-dim); font-size:0.94rem; margin:0 0 14px;}
-  .chip-row{display:flex; flex-wrap:wrap; gap:6px;}
-  .chip{font-size:0.75rem; border-radius:100px; padding:3px 10px; color:var(--card-color-ink, var(--teal-ink)); border:1px solid var(--card-color, var(--teal)); background:color-mix(in srgb, var(--card-color, var(--teal)) 12%, transparent);}
-
-  .pub{ border:1px solid var(--line); border-radius:8px; padding:20px 22px; margin-bottom:16px; background:var(--surface); border-left:3px solid var(--pub-color, var(--amber)); transition:transform .18s; }
-  .pub:hover{transform:translateY(-3px);}
-  .pub-venue{font-size:0.78rem; color:var(--pub-color-ink, var(--amber-ink)); margin-bottom:8px; display:flex; gap:8px; align-items:center; font-weight:600;}
-  .pub-venue .status{color:var(--text-dim); font-weight:normal;}
-  .pub h3{font-size:1.05rem; font-weight:500; margin-bottom:8px;}
-  .pub .authors{font-size:0.9rem; color:var(--text-dim); margin-bottom:12px;}
-  .pub .authors .me{color:var(--text); font-weight:600;}
-  .pub-links{display:flex; gap:16px; font-size:0.85rem;}
-  .pub-links a{text-decoration:none; color:var(--pub-color-ink, var(--amber-ink)); border-bottom:1px solid transparent;}
-  .pub-links a:hover{border-color:currentColor;}
-
-  footer{padding:48px 0 60px; border-top:1px solid var(--line);}
-  .footer-grid{display:flex; flex-wrap:wrap; justify-content:space-between; gap:24px; align-items:flex-end;}
-  .footer-links{display:flex; flex-wrap:wrap; gap:18px; font-size:0.88rem;}
-  .footer-links a{text-decoration:none; color:var(--text-dim);}
-  .footer-links a:hover{color:var(--teal-ink);}
-  .footer-note{color:var(--text-dim); font-size:0.82rem; margin-top:26px;}
-
-  @media (min-width:640px){ .research-grid{grid-template-columns:1fr 1fr;} }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -227,7 +17,10 @@
 
 <nav>
   <div class="wrap">
-    <a href="#top" class="brand">Ziyad</a>
+    <a href="index.html#top" class="brand">
+      <span class="avatar-sm avatar-fallback">ZA</span>
+      Ziyad Abdelaal
+    </a>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
         <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line><line x1="4.2" y1="4.2" x2="6.3" y2="6.3"></line><line x1="17.7" y1="17.7" x2="19.8" y2="19.8"></line><line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line><line x1="4.2" y1="19.8" x2="6.3" y2="17.7"></line><line x1="17.7" y1="6.3" x2="19.8" y2="4.2"></line></svg>
@@ -236,14 +29,15 @@
       <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
     </div>
     <ul class="navlinks" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
-      <li><a href="#toolkit">Toolkit</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="publications.html">Publications</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
+
 
 <main id="main">
   <header class="hero" id="top">
@@ -274,8 +68,9 @@
       </g>
     </svg>
     <div class="wrap">
+      <span class="avatar-lg avatar-fallback">ZA</span>
       <div class="kicker"><span class="dot"></span>M.Sc. Student &middot; Computational Medicinal Chemistry &amp; CADD</div>
-      <h1 class="name">Ziyad</h1>
+      <h1 class="name">Ziyad Abdelaal</h1>
       <p class="role">
         Researching structure-based antifungal drug discovery, with a focus on
         <em>Candida albicans</em> Als3 as a therapeutic target &mdash; combining molecular docking,
@@ -334,8 +129,10 @@
           University of Oxford</strong>.
         </p>
         <p>
-          My work has been published as first author in <strong>Molecular Diversity</strong>
-          and as second author in the <strong>European Journal of Medicinal Chemistry</strong>.
+          See my full <a href="experience.html" style="color:var(--navy); text-decoration:underline;">experience</a>,
+          <a href="projects.html" style="color:var(--navy); text-decoration:underline;">projects</a> and
+          <a href="publications.html" style="color:var(--navy); text-decoration:underline;">publications</a>
+          on their own pages.
         </p>
       </div>
     </div>
@@ -373,135 +170,6 @@
     </div>
   </section>
 
-  <section id="research">
-    <div class="wrap">
-      <div class="eyebrow">Research</div>
-      <h2 class="section-title">Research highlights</h2>
-      <div class="filter-row" id="researchFilters">
-        <button class="filter-btn active" data-filter="all" style="--fbg:rgba(148,163,158,0.16); --fc:var(--text);">All</button>
-        <button class="filter-btn" data-filter="docking" style="--fbg:rgba(79,209,181,0.14); --fc:var(--teal-ink);">Docking</button>
-        <button class="filter-btn" data-filter="validation" style="--fbg:rgba(94,179,234,0.14); --fc:var(--sky-ink);">Validation</button>
-        <button class="filter-btn" data-filter="natural" style="--fbg:rgba(164,138,240,0.14); --fc:var(--violet-ink);">Natural Products</button>
-      </div>
-      <div class="research-grid">
-        <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)" data-cat="docking">
-          <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
-          <p>
-            Large-scale structure-based screening of a curated antifungal/antibiofilm library against
-            <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
-            via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
-            correlation, pointing to mechanistic heterogeneity across the library.
-          </p>
-          <div class="chip-row">
-            <span class="chip">Molecular Docking</span>
-            <span class="chip">Als3</span>
-            <span class="chip">DFT / HOMO&ndash;LUMO</span>
-          </div>
-        </div>
-        <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)" data-cat="validation">
-          <h3>Dual-Engine Consensus Docking</h3>
-          <p>
-            Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
-            validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
-            pose predictions on a manuscript now under revision.
-          </p>
-          <div class="chip-row">
-            <span class="chip">Consensus Docking</span>
-            <span class="chip">RMSD Validation</span>
-            <span class="chip">CADD</span>
-          </div>
-        </div>
-        <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)" data-cat="natural">
-          <h3>Natural Carotenoid Screening against Als3</h3>
-          <p>
-            First published study to screen natural carotenoids against Als3, identifying
-            <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
-            later antifungal library and consensus-docking work.
-          </p>
-          <div class="chip-row">
-            <span class="chip">Natural Products</span>
-            <span class="chip">Virtual Screening</span>
-            <span class="chip">Als3</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="toolkit">
-    <div class="wrap">
-      <div class="eyebrow">Toolkit</div>
-      <h2 class="section-title">Methods &amp; software</h2>
-      <div class="research-grid">
-        <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)">
-          <h3>Docking &amp; CADD</h3>
-          <div class="chip-row">
-            <span class="chip">Discovery Studio</span>
-            <span class="chip">AutoDock Vina</span>
-            <span class="chip">PharmaCoNet</span>
-            <span class="chip">MD Simulation</span>
-            <span class="chip">ADMET</span>
-          </div>
-        </div>
-        <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)">
-          <h3>Quantum Chemistry</h3>
-          <div class="chip-row">
-            <span class="chip">DFT</span>
-            <span class="chip">VeloxChem</span>
-            <span class="chip">ORCA</span>
-            <span class="chip">MESP</span>
-          </div>
-        </div>
-        <div class="research-card" style="--card-color:var(--amber); --card-color-ink:var(--amber-ink)">
-          <h3>Cheminformatics</h3>
-          <div class="chip-row">
-            <span class="chip">RDKit</span>
-            <span class="chip">DataWarrior</span>
-            <span class="chip">ClassyFire</span>
-          </div>
-        </div>
-        <div class="research-card" style="--card-color:var(--coral); --card-color-ink:var(--coral-ink)">
-          <h3>Environment</h3>
-          <div class="chip-row">
-            <span class="chip">Python</span>
-            <span class="chip">Anaconda / Jupyter</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="publications">
-    <div class="wrap">
-      <div class="eyebrow">Publications</div>
-      <h2 class="section-title">Featured publications</h2>
-
-      <div class="pub" style="--pub-color:var(--teal); --pub-color-ink:var(--teal-ink)">
-        <div class="pub-venue">Molecular Diversity <span class="status">&middot; First author</span></div>
-        <h3><span class="fill">[Add exact paper title]</span></h3>
-        <div class="authors"><span class="me">Ziyad</span><span class="fill">, [co-authors]</span></div>
-        <p style="color:var(--text-dim); font-size:0.9rem; margin:-4px 0 12px;">
-          Molecular docking of a curated antifungal/antibiofilm compound library against
-          <em>C. albicans</em> Als3 (PDB 4LEB), with scaffold classification and DFT analysis.
-        </p>
-        <div class="pub-links">
-          <a href="#" target="_blank" rel="noopener">Article</a>
-          <a href="#" target="_blank" rel="noopener">BibTeX</a>
-        </div>
-      </div>
-
-      <div class="pub" style="--pub-color:var(--amber); --pub-color-ink:var(--amber-ink)">
-        <div class="pub-venue">European Journal of Medicinal Chemistry <span class="status">&middot; Second author</span></div>
-        <h3><span class="fill">[Add exact paper title]</span></h3>
-        <div class="authors"><span class="fill">[First author], </span><span class="me">Ziyad</span><span class="fill">, [co-authors]</span></div>
-        <div class="pub-links">
-          <a href="#" target="_blank" rel="noopener">Article</a>
-          <a href="#" target="_blank" rel="noopener">BibTeX</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="contact">
     <div class="wrap">
       <div class="eyebrow">Contact</div>
@@ -527,110 +195,12 @@
         <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:your.email@example.com">Email</a>
       </div>
-      <div style="color:var(--text-dim); font-size:0.85rem;">&copy; <span id="year"></span> Ziyad. All rights reserved.</div>
+      <div style="color:var(--text-dim); font-size:0.85rem;">&copy; <span id="year"></span> Ziyad Abdelaal. All rights reserved.</div>
     </div>
-    <div class="footer-note">Search this file for <code>[</code> or class <code>fill</code> to find every placeholder that still needs your details.</div>
+    <div class="footer-note">Search these files for <code>[</code> or class <code>fill</code> to find every placeholder that still needs your details.</div>
   </div>
 </footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // theme: init from saved choice, else system preference
-  var root = document.documentElement;
-  var themeBtn = document.getElementById('themeToggle');
-  var iconSun = document.getElementById('iconSun');
-  var iconMoon = document.getElementById('iconMoon');
-  function applyTheme(t){
-    root.setAttribute('data-theme', t);
-    iconSun.style.display = t === 'light' ? 'inline-block' : 'none';
-    iconMoon.style.display = t === 'light' ? 'none' : 'inline-block';
-  }
-  (function initTheme(){
-    var saved = null;
-    try{ saved = localStorage.getItem('theme'); }catch(e){}
-    if(saved === 'light' || saved === 'dark'){ applyTheme(saved); return; }
-    var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-    applyTheme(prefersLight ? 'light' : 'dark');
-  })();
-  themeBtn.addEventListener('click', function(){
-    var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-    applyTheme(next);
-    try{ localStorage.setItem('theme', next); }catch(e){}
-  });
-
-  // mobile nav toggle
-  var toggle = document.getElementById('navToggle');
-  var links = document.getElementById('navLinks');
-  toggle.addEventListener('click', function(){
-    var open = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){ links.classList.remove('open'); });
-  });
-
-  // scroll progress bar
-  var progress = document.getElementById('progress');
-  window.addEventListener('scroll', function(){
-    var h = document.documentElement;
-    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    progress.style.width = pct + '%';
-  });
-
-  // active nav link highlight
-  var sections = document.querySelectorAll('main section, header.hero');
-  var navA = document.querySelectorAll('.navlinks a');
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        var id = '#' + e.target.id;
-        navA.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === id); });
-      }
-    });
-  }, {rootMargin:'-40% 0px -50% 0px'});
-  sections.forEach(function(s){ if(s.id) obs.observe(s); });
-
-  // animated stat counters
-  var counters = document.querySelectorAll('.stat .num');
-  var counted = false;
-  var countObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting && !counted){
-        counted = true;
-        counters.forEach(function(el){
-          var target = parseInt(el.getAttribute('data-count'), 10);
-          var start = 0;
-          var duration = 900;
-          var startTime = null;
-          function step(ts){
-            if(!startTime) startTime = ts;
-            var progressT = Math.min((ts - startTime) / duration, 1);
-            el.textContent = Math.floor(progressT * (target - start) + start);
-            if(progressT < 1) requestAnimationFrame(step);
-            else el.textContent = target;
-          }
-          requestAnimationFrame(step);
-        });
-      }
-    });
-  }, {threshold:0.4});
-  if(counters.length) countObs.observe(counters[0].closest('.stats'));
-
-  // research filter
-  var filterBtns = document.querySelectorAll('.filter-btn');
-  var cards = document.querySelectorAll('#research .research-card');
-  filterBtns.forEach(function(btn){
-    btn.addEventListener('click', function(){
-      filterBtns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var f = btn.getAttribute('data-filter');
-      cards.forEach(function(c){
-        c.classList.toggle('hidden', f !== 'all' && c.getAttribute('data-cat') !== f);
-      });
-    });
-  });
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
