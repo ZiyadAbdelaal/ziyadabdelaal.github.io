@@ -203,3 +203,27 @@ filterBtns.forEach(function(btn){
     });
   });
 })();
+
+// contact form -> mailto (static site, no backend)
+var cf = document.getElementById('contactForm');
+if(cf){
+  cf.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = cf.name.value.trim();
+    var email = cf.email.value.trim();
+    var affiliation = cf.affiliation.value.trim();
+    var purpose = cf.purpose.value;
+    var message = cf.message.value.trim();
+    var subject = encodeURIComponent('[' + (purpose || 'Inquiry') + '] Message from ' + name);
+    var bodyLines = [
+      'Name: ' + name,
+      'Email: ' + email,
+      affiliation ? 'Affiliation: ' + affiliation : null,
+      'Purpose: ' + purpose,
+      '',
+      message
+    ].filter(Boolean);
+    var body = encodeURIComponent(bodyLines.join('\n'));
+    window.location.href = 'mailto:ziyadabdelaal1@gmail.com?subject=' + subject + '&body=' + body;
+  });
+}
