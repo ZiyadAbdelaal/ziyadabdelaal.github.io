@@ -112,13 +112,15 @@
       <div class="mol-card">
         <div class="mol-viewer" id="molViewer" data-pdb="assets/4LEB_complex.pdb" style="position:relative; height:460px; overflow:hidden; border-radius:12px;">
           <div class="mol-viewer-loading" id="molLoading">Loading structure&hellip;</div>
-          <div class="mol-viewer-hint">drag to rotate &middot; scroll to zoom</div>
+          <div class="mol-viewer-hint">drag to rotate &middot; scroll to zoom &middot; hover a residue to see its name</div>
         </div>
         <div class="mol-controls">
           <button class="mol-btn active" data-mol-style="cartoon">Cartoon</button>
           <button class="mol-btn" data-mol-style="surface">Surface</button>
+          <button class="mol-btn" id="molFocus">Focus ligand</button>
           <button class="mol-btn" id="molSpin">Spin</button>
           <button class="mol-btn" id="molReset">Reset view</button>
+          <button class="mol-btn" id="molSnapshot">Save image</button>
         </div>
       </div>
     </div>

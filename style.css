@@ -361,8 +361,9 @@
   .carousel-track{
     display:flex; gap:16px; overflow-x:auto; scroll-behavior:smooth; scroll-snap-type:x proximity;
     padding:4px 2px 14px; margin:0 -2px;
-    scrollbar-width:none;
+    scrollbar-width:none; cursor:grab; user-select:none;
   }
+  .carousel-track.dragging{ cursor:grabbing; scroll-behavior:auto; scroll-snap-type:none; }
   .carousel-track::-webkit-scrollbar{display:none;}
   .carousel-card{
     flex:0 0 auto; width:270px; scroll-snap-align:start; position:relative;

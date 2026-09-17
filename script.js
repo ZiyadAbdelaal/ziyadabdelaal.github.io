@@ -241,6 +241,33 @@ document.querySelectorAll('.carousel-wrap').forEach(function(wrap){
   }
   if(prev) prev.addEventListener('click', function(){ scrollByCard(-1); });
   if(next) next.addEventListener('click', function(){ scrollByCard(1); });
+
+  // click-and-drag to scroll (grab cursor)
+  var isDown = false, moved = false, startX = 0, startScroll = 0;
+  track.addEventListener('mousedown', function(e){
+    isDown = true; moved = false;
+    track.classList.add('dragging');
+    startX = e.pageX;
+    startScroll = track.scrollLeft;
+  });
+  window.addEventListener('mousemove', function(e){
+    if(!isDown) return;
+    var dx = e.pageX - startX;
+    if(Math.abs(dx) > 4) moved = true;
+    track.scrollLeft = startScroll - dx;
+  });
+  window.addEventListener('mouseup', function(){
+    if(!isDown) return;
+    isDown = false;
+    track.classList.remove('dragging');
+  });
+  track.addEventListener('mouseleave', function(){
+    if(isDown){ isDown = false; track.classList.remove('dragging'); }
+  });
+  // suppress accidental clicks on cards right after a drag
+  track.addEventListener('click', function(e){
+    if(moved){ e.preventDefault(); e.stopPropagation(); moved = false; }
+  }, true);
 });
 
 // staggered reveal for carousel cards as each row scrolls into view

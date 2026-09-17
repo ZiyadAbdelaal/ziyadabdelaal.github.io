@@ -55,6 +55,22 @@
       });
       themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
+      // hover a residue to see its name/number/chain
+      viewer.setHoverable({}, true, function (atom, v) {
+        if (!atom.label) {
+          atom.label = v.addLabel(
+            (atom.resn || '') + ' ' + (atom.resi || '') + (atom.chain ? ' · chain ' + atom.chain : ''),
+            {
+              position: { x: atom.x, y: atom.y, z: atom.z },
+              backgroundColor: '#12181c', backgroundOpacity: 0.85,
+              fontColor: '#eef1ee', fontSize: 12, borderRadius: 4, padding: 4
+            }
+          );
+        }
+      }, function (atom, v) {
+        if (atom.label) { v.removeLabel(atom.label); delete atom.label; }
+      });
+
       var buttons = document.querySelectorAll('[data-mol-style]');
       buttons.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -78,6 +94,31 @@
         resetBtn.addEventListener('click', function () {
           viewer.zoomTo();
           viewer.render();
+        });
+      }
+
+      var focusBtn = document.getElementById('molFocus');
+      if (focusBtn) {
+        focusBtn.addEventListener('click', function () {
+          spinning = false;
+          viewer.spin(false);
+          if (spinBtn) spinBtn.classList.remove('active');
+          viewer.zoomTo(ligandSel);
+          viewer.zoom(1.4, 600);
+          viewer.render();
+        });
+      }
+
+      var snapshotBtn = document.getElementById('molSnapshot');
+      if (snapshotBtn) {
+        snapshotBtn.addEventListener('click', function () {
+          var uri = viewer.pngURI();
+          var a = document.createElement('a');
+          a.href = uri;
+          a.download = 'als3-4LEB-view.png';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
         });
       }
     })
