@@ -391,7 +391,14 @@
     display:flex; align-items:center; justify-content:center;
   }
   .li-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .li-thumb .flag{ font-size:32px; line-height:1; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.25)); }
   .li-thumb:empty{ display:none; }
+  .li-scholarship-tag{
+    display:inline-block; font-size:0.68rem; font-weight:700; padding:2px 9px; border-radius:100px;
+    margin-left:8px; vertical-align:middle; letter-spacing:.02em;
+  }
+  .li-scholarship-tag.accepted{ background:color-mix(in srgb, var(--teal-ink) 18%, transparent); color:var(--teal-ink); }
+  .li-scholarship-tag.enrolled{ background:color-mix(in srgb, var(--amber-ink) 20%, transparent); color:var(--amber-ink); }
   .li-thumb:empty + .li-body{ padding-left:0; }
   .li-body{flex:1; min-width:0;}
   .about-list .li-title{display:block; color:var(--text); font-weight:600; font-size:0.94rem; margin-bottom:3px;}
