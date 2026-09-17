@@ -10,13 +10,19 @@
     return;
   }
 
-  var viewer = $3Dmol.createViewer(el, { backgroundColor: '#0d1319' });
+  function bgForTheme() {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    return light ? '#eef1ee' : '#212b34';
+  }
+
+  var viewer = $3Dmol.createViewer(el, { backgroundColor: bgForTheme() });
   var spinning = false;
   var ligandSel = { resn: 'UNL' };
   var proteinSel = { resn: 'UNL', invert: true };
 
   function applyStyles(styleName) {
     viewer.setStyle({}, {});
+    viewer.removeAllSurfaces();
     viewer.setStyle(proteinSel, { cartoon: { color: 'spectrum' } });
     if (styleName === 'surface') {
       viewer.addSurface($3Dmol.SurfaceType.VDW, { opacity: 0.82, color: 'white' }, proteinSel);
@@ -33,16 +39,27 @@
     .then(function (pdbText) {
       viewer.addModel(pdbText, 'pdb');
       applyStyles('cartoon');
+      viewer.resize();
       viewer.zoomTo();
       viewer.render();
       if (loadingEl) loadingEl.remove();
+
+      window.addEventListener('resize', function () {
+        viewer.resize();
+        viewer.render();
+      });
+
+      var themeObserver = new MutationObserver(function () {
+        viewer.setBackgroundColor(bgForTheme());
+        viewer.render();
+      });
+      themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
       var buttons = document.querySelectorAll('[data-mol-style]');
       buttons.forEach(function (btn) {
         btn.addEventListener('click', function () {
           buttons.forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          viewer.removeAllSurfaces();
           applyStyles(btn.getAttribute('data-mol-style'));
         });
       });
