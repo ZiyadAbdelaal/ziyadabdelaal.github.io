@@ -227,3 +227,18 @@ if(cf){
     window.location.href = 'mailto:ziyadabdelaal1@gmail.com?subject=' + subject + '&body=' + body;
   });
 }
+
+// awards/competitions/volunteering carousels
+document.querySelectorAll('.carousel-wrap').forEach(function(wrap){
+  var track = wrap.querySelector('.carousel-track');
+  var prev = wrap.querySelector('.carousel-nav.prev');
+  var next = wrap.querySelector('.carousel-nav.next');
+  if(!track) return;
+  function scrollByCard(dir){
+    var card = track.querySelector('.carousel-card');
+    var step = card ? card.getBoundingClientRect().width + 16 : 280;
+    track.scrollBy({ left: dir * step, behavior: 'smooth' });
+  }
+  if(prev) prev.addEventListener('click', function(){ scrollByCard(-1); });
+  if(next) next.addEventListener('click', function(){ scrollByCard(1); });
+});
