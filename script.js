@@ -242,3 +242,20 @@ document.querySelectorAll('.carousel-wrap').forEach(function(wrap){
   if(prev) prev.addEventListener('click', function(){ scrollByCard(-1); });
   if(next) next.addEventListener('click', function(){ scrollByCard(1); });
 });
+
+// staggered reveal for carousel cards as each row scrolls into view
+document.querySelectorAll('.carousel-track').forEach(function(track){
+  var cards = track.querySelectorAll('.carousel-card');
+  var revealed = false;
+  var revealObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !revealed){
+        revealed = true;
+        cards.forEach(function(card, i){
+          setTimeout(function(){ card.classList.add('in-view'); }, i * 70);
+        });
+      }
+    });
+  }, {threshold:0.2});
+  revealObs.observe(track);
+});
