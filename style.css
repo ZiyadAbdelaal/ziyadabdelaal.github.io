@@ -234,6 +234,34 @@
   .filter-btn:hover{color:var(--text); border-color:var(--text-dim);}
   .filter-btn.active{background:var(--fbg); color:var(--fc); border-color:var(--fc);}
 
+  .mol-card{
+    border:1px solid var(--line); border-radius:12px; background:var(--surface);
+    margin:18px 0 30px; overflow:hidden;
+  }
+  .mol-card-head{ padding:20px 22px 0; }
+  .mol-card-head h4{ font-size:1rem; font-weight:600; margin-bottom:4px; }
+  .mol-card-head p{ font-size:0.86rem; color:var(--text-dim); margin:0 0 16px; max-width:64ch; }
+  .mol-viewer{
+    position:relative; height:420px; background:radial-gradient(circle at 50% 30%, #10161c, #060809);
+  }
+  .mol-viewer canvas{ outline:none; }
+  .mol-viewer-hint{
+    position:absolute; bottom:10px; left:12px; font-size:0.72rem; color:rgba(255,255,255,0.55);
+    pointer-events:none; letter-spacing:.02em;
+  }
+  .mol-viewer-loading{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color:rgba(255,255,255,0.6); font-size:0.85rem;
+  }
+  .mol-controls{ display:flex; flex-wrap:wrap; gap:8px; padding:14px 22px 20px; }
+  .mol-btn{
+    font-size:0.8rem; padding:7px 14px; border-radius:100px; cursor:pointer;
+    border:1px solid var(--line-strong); background:transparent; color:var(--text-dim);
+    font-family:'Inter',sans-serif; transition:all .15s;
+  }
+  .mol-btn:hover{ color:var(--text); border-color:var(--text-dim); }
+  .mol-btn.active{ background:var(--teal); color:#08221d; border-color:var(--teal); }
+
   .research-grid{display:grid; gap:20px;}
   .research-card{
     border:1px solid var(--line); border-left:3px solid var(--card-color, var(--teal)); border-radius:8px; padding:22px;

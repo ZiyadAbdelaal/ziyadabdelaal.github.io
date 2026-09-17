@@ -68,6 +68,23 @@
             dual-engine (PharmaCoNet + AutoDock Vina) consensus docking framework.
           </div>
         </div>
+
+        <div class="mol-card">
+          <div class="mol-card-head">
+            <h4>Als3 &ndash; inhibitor complex</h4>
+            <p>Docking pose from &ldquo;Discovery of novel <em>Candida albicans</em> Als3 inhibitor classes&rdquo; &mdash; drag to rotate, scroll to zoom.</p>
+          </div>
+          <div class="mol-viewer" id="molViewer" data-pdb="assets/4LEB_complex.pdb">
+            <div class="mol-viewer-loading" id="molLoading">Loading structure&hellip;</div>
+            <div class="mol-viewer-hint">drag to rotate &middot; scroll to zoom</div>
+          </div>
+          <div class="mol-controls">
+            <button class="mol-btn active" data-mol-style="cartoon">Cartoon</button>
+            <button class="mol-btn" data-mol-style="surface">Surface</button>
+            <button class="mol-btn" id="molSpin">Spin</button>
+            <button class="mol-btn" id="molReset">Reset view</button>
+          </div>
+        </div>
         <div class="exp-item">
           <div class="exp-role">Research Assistant</div>
           <div class="exp-org">October University for Modern Sciences and Arts (MSA)</div>
@@ -238,6 +255,8 @@
     <div class="footer-note">Search these files for <code>[</code> or class <code>fill</code> to find every placeholder that still needs your details.</div>
   </div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.1.0/3Dmol-min.js"></script>
+<script src="mol-viewer.js"></script>
 <script src="script.js"></script>
 
 </body>
