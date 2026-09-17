@@ -85,6 +85,7 @@
     border-bottom:1px solid var(--line);
   }
   nav .wrap{display:flex; align-items:center; justify-content:space-between; height:72px;}
+  .nav-menu{display:flex; align-items:center; gap:36px;}
   .brand{font-family:'Fraunces', serif; font-size:1.2rem; font-weight:600; text-decoration:none; display:flex; align-items:center; gap:10px;}
   .avatar-sm{
     width:34px; height:34px; border-radius:50%;
@@ -178,7 +179,7 @@
   .theme-toggle:hover{border-color:var(--teal-ink); color:var(--teal-ink); background:color-mix(in srgb, var(--teal-ink) 10%, transparent); transform:translateY(-2px);}
   .theme-toggle:hover svg{ transform:rotate(25deg) scale(1.12); }
   .theme-toggle:active{ transform:translateY(0) scale(0.92); }
-  .nav-right{display:flex; align-items:center;}
+  .nav-right{display:flex; align-items:center; gap:10px;}
 
   @media (max-width:640px){
     .navlinks{
