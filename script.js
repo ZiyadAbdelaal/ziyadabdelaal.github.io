@@ -118,3 +118,88 @@ filterBtns.forEach(function(btn){
     });
   });
 });
+
+// back-to-top floating button
+(function(){
+  var btn = document.createElement('button');
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>';
+  document.body.appendChild(btn);
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('visible', window.scrollY > 500);
+  });
+  btn.addEventListener('click', function(){
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+// toast + copy-to-clipboard
+(function(){
+  var toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(toast);
+  var toastTimer;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('visible'); }, 1800);
+  }
+  document.querySelectorAll('.copy-btn[data-copy]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var text = btn.getAttribute('data-copy');
+      function done(ok){ showToast(ok ? 'Copied to clipboard!' : "Couldn't copy — copy it manually."); }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); });
+      } else {
+        try{
+          var ta = document.createElement('textarea');
+          ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          done(true);
+        }catch(e){ done(false); }
+      }
+    });
+  });
+})();
+
+// publications: live search + author filter
+(function(){
+  var pubs = document.querySelectorAll('#publications .pub');
+  if(!pubs.length) return;
+  var searchInput = document.getElementById('pubSearch');
+  var shownEl = document.getElementById('pubShown');
+  var emptyEl = document.getElementById('pubEmpty');
+  var pubFilterBtns = document.querySelectorAll('#pubFilters .filter-btn');
+  var activeFilter = 'all';
+
+  function apply(){
+    var q = (searchInput ? searchInput.value : '').trim().toLowerCase();
+    var shown = 0;
+    pubs.forEach(function(p){
+      var matchesFilter = activeFilter === 'all' || p.getAttribute('data-author') === activeFilter;
+      var matchesSearch = !q || (p.getAttribute('data-search') || '').indexOf(q) !== -1;
+      var visible = matchesFilter && matchesSearch;
+      p.classList.toggle('hidden', !visible);
+      if(visible) shown++;
+    });
+    if(shownEl) shownEl.textContent = shown;
+    if(emptyEl) emptyEl.style.display = shown === 0 ? 'block' : 'none';
+  }
+
+  if(searchInput) searchInput.addEventListener('input', apply);
+  pubFilterBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      pubFilterBtns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      activeFilter = btn.getAttribute('data-filter');
+      apply();
+    });
+  });
+})();
