@@ -56,45 +56,56 @@
         <button class="filter-btn" data-filter="validation" style="--fbg:rgba(94,179,234,0.14); --fc:var(--sky-ink);">Validation</button>
         <button class="filter-btn" data-filter="natural" style="--fbg:rgba(164,138,240,0.14); --fc:var(--violet-ink);">Natural Products</button>
       </div>
-      <div class="research-grid">
-        <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)" data-cat="docking">
-          <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
-          <p>
-            Large-scale structure-based screening of a curated antifungal/antibiofilm library against
-            <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
-            via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
-            correlation, pointing to mechanistic heterogeneity across the library.
-          </p>
-          <div class="chip-row">
-            <span class="chip">Molecular Docking</span>
-            <span class="chip">Als3</span>
-            <span class="chip">DFT / HOMO&ndash;LUMO</span>
+      <div class="research-timeline">
+        <div class="year-block">
+          <div class="year-label"><span class="fill">[2023]</span></div>
+          <div class="research-grid">
+            <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)" data-cat="natural">
+              <h3>Natural Carotenoid Screening against Als3</h3>
+              <p>
+                First published study to screen natural carotenoids against Als3, identifying
+                <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
+                later antifungal library and consensus-docking work.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Natural Products</span>
+                <span class="chip">Virtual Screening</span>
+                <span class="chip">Als3</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)" data-cat="validation">
-          <h3>Dual-Engine Consensus Docking</h3>
-          <p>
-            Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
-            validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
-            pose predictions on a manuscript now under revision.
-          </p>
-          <div class="chip-row">
-            <span class="chip">Consensus Docking</span>
-            <span class="chip">RMSD Validation</span>
-            <span class="chip">CADD</span>
-          </div>
-        </div>
-        <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)" data-cat="natural">
-          <h3>Natural Carotenoid Screening against Als3</h3>
-          <p>
-            First published study to screen natural carotenoids against Als3, identifying
-            <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
-            later antifungal library and consensus-docking work.
-          </p>
-          <div class="chip-row">
-            <span class="chip">Natural Products</span>
-            <span class="chip">Virtual Screening</span>
-            <span class="chip">Als3</span>
+
+        <div class="year-block">
+          <div class="year-label"><span class="fill">[2024]</span></div>
+          <div class="research-grid">
+            <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)" data-cat="docking">
+              <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
+              <p>
+                Large-scale structure-based screening of a curated antifungal/antibiofilm library against
+                <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
+                via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
+                correlation, pointing to mechanistic heterogeneity across the library.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Molecular Docking</span>
+                <span class="chip">Als3</span>
+                <span class="chip">DFT / HOMO&ndash;LUMO</span>
+              </div>
+            </div>
+            <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)" data-cat="validation">
+              <h3>Dual-Engine Consensus Docking</h3>
+              <p>
+                Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
+                validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
+                pose predictions on a manuscript now under revision.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Consensus Docking</span>
+                <span class="chip">RMSD Validation</span>
+                <span class="chip">CADD</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
