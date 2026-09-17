@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects — Ziyad Abdelaal</title>
 <meta name="description" content="Computational drug discovery projects by Ziyad Abdelaal, centered on C. albicans Als3.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Projects — Ziyad Abdelaal">
+<meta property="og:description" content="Computational drug discovery projects by Ziyad Abdelaal, centered on C. albicans Als3.">
+<meta property="og:image" content="https://ziyadabdelaal.github.io/assets/og-image.jpg">
+<meta property="og:url" content="https://ziyadabdelaal.github.io/projects.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Projects — Ziyad Abdelaal">
+<meta name="twitter:description" content="Computational drug discovery projects by Ziyad Abdelaal, centered on C. albicans Als3.">
+<meta name="twitter:image" content="https://ziyadabdelaal.github.io/assets/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -48,70 +57,6 @@
     </div>
   </div>
 
-  <section id="research" style="border-top:none; padding-top:8px;">
-    <div class="wrap">
-      <div class="filter-row" id="researchFilters">
-        <button class="filter-btn active" data-filter="all" style="--fbg:rgba(148,163,158,0.16); --fc:var(--text);">All</button>
-        <button class="filter-btn" data-filter="docking" style="--fbg:rgba(79,209,181,0.14); --fc:var(--teal-ink);">Docking</button>
-        <button class="filter-btn" data-filter="validation" style="--fbg:rgba(94,179,234,0.14); --fc:var(--sky-ink);">Validation</button>
-        <button class="filter-btn" data-filter="natural" style="--fbg:rgba(164,138,240,0.14); --fc:var(--violet-ink);">Natural Products</button>
-      </div>
-      <div class="research-timeline">
-        <div class="year-block">
-          <div class="year-label"><span class="fill">[2023]</span></div>
-          <div class="research-grid">
-            <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)" data-cat="natural">
-              <h3>Natural Carotenoid Screening against Als3</h3>
-              <p>
-                First published study to screen natural carotenoids against Als3, identifying
-                <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
-                later antifungal library and consensus-docking work.
-              </p>
-              <div class="chip-row">
-                <span class="chip">Natural Products</span>
-                <span class="chip">Virtual Screening</span>
-                <span class="chip">Als3</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="year-block">
-          <div class="year-label"><span class="fill">[2024]</span></div>
-          <div class="research-grid">
-            <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)" data-cat="docking">
-              <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
-              <p>
-                Large-scale structure-based screening of a curated antifungal/antibiofilm library against
-                <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
-                via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
-                correlation, pointing to mechanistic heterogeneity across the library.
-              </p>
-              <div class="chip-row">
-                <span class="chip">Molecular Docking</span>
-                <span class="chip">Als3</span>
-                <span class="chip">DFT / HOMO&ndash;LUMO</span>
-              </div>
-            </div>
-            <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)" data-cat="validation">
-              <h3>Dual-Engine Consensus Docking</h3>
-              <p>
-                Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
-                validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
-                pose predictions on a manuscript now under revision.
-              </p>
-              <div class="chip-row">
-                <span class="chip">Consensus Docking</span>
-                <span class="chip">RMSD Validation</span>
-                <span class="chip">CADD</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="structure" style="padding-top:0;">
     <div class="wrap">
       <div class="eyebrow">Interactive</div>
@@ -132,6 +77,73 @@
           <button class="mol-btn" id="molSpin">Spin</button>
           <button class="mol-btn" id="molReset">Reset view</button>
           <button class="mol-btn" id="molSnapshot">Save image</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research" style="border-top:none; padding-top:8px;">
+    <div class="wrap">
+      <div class="filter-row" id="researchFilters">
+        <button class="filter-btn active" data-filter="all" style="--fbg:rgba(148,163,158,0.16); --fc:var(--text);">All</button>
+        <button class="filter-btn" data-filter="docking" style="--fbg:rgba(79,209,181,0.14); --fc:var(--teal-ink);">Docking</button>
+        <button class="filter-btn" data-filter="validation" style="--fbg:rgba(94,179,234,0.14); --fc:var(--sky-ink);">Validation</button>
+        <button class="filter-btn" data-filter="natural" style="--fbg:rgba(164,138,240,0.14); --fc:var(--violet-ink);">Natural Products</button>
+      </div>
+      <div class="research-timeline">
+        <div class="year-block">
+          <div class="year-label">2023</div>
+          <div class="research-grid">
+            <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)" data-cat="natural">
+              <img class="research-card-img" src="assets/project-carotenoids.jpg" alt="" onerror="this.remove()">
+              <h3>Natural Carotenoid Screening against Als3</h3>
+              <p>
+                First published study to screen natural carotenoids against Als3, identifying
+                <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
+                later antifungal library and consensus-docking work.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Natural Products</span>
+                <span class="chip">Virtual Screening</span>
+                <span class="chip">Als3</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="year-block">
+          <div class="year-label">2024</div>
+          <div class="research-grid">
+            <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)" data-cat="docking">
+              <img class="research-card-img" src="assets/project-docking.jpg" alt="" onerror="this.remove()">
+              <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
+              <p>
+                Large-scale structure-based screening of a curated antifungal/antibiofilm library against
+                <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
+                via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
+                correlation, pointing to mechanistic heterogeneity across the library.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Molecular Docking</span>
+                <span class="chip">Als3</span>
+                <span class="chip">DFT / HOMO&ndash;LUMO</span>
+              </div>
+            </div>
+            <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)" data-cat="validation">
+              <img class="research-card-img" src="assets/project-validation.jpg" alt="" onerror="this.remove()">
+              <h3>Dual-Engine Consensus Docking</h3>
+              <p>
+                Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
+                validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
+                pose predictions on a manuscript now under revision.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Consensus Docking</span>
+                <span class="chip">RMSD Validation</span>
+                <span class="chip">CADD</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -186,13 +198,11 @@
     <div class="footer-grid">
       <div class="footer-links">
         <a href="https://scholar.google.com/citations?user=3E9q8EMAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
-        <a href="#" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/ziyad-abdelaal" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:ziyadabdelaal1@gmail.com">Email</a><button class="copy-btn" data-copy="ziyadabdelaal1@gmail.com" title="Copy email" aria-label="Copy email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
       </div>
       <div style="color:var(--text-dim); font-size:0.85rem;">&copy; <span id="year"></span> Ziyad Abdelaal. All rights reserved.</div>
     </div>
-    <div class="footer-note">Search these files for <code>[</code> or class <code>fill</code> to find every placeholder that still needs your details.</div>
   </div>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.1.0/3Dmol-min.js"></script>

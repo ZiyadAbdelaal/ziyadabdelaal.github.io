@@ -167,6 +167,25 @@ filterBtns.forEach(function(btn){
       }
     });
   });
+  document.querySelectorAll('.copy-bibtex[data-bibtex]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var text = btn.getAttribute('data-bibtex');
+      function done(ok){ showToast(ok ? 'BibTeX copied!' : "Couldn't copy — copy it manually."); }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(false); });
+      } else {
+        try{
+          var ta = document.createElement('textarea');
+          ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          done(true);
+        }catch(e){ done(false); }
+      }
+    });
+  });
 })();
 
 // publications: live search + author filter
