@@ -38,7 +38,7 @@
       <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
     </div>
     <ul class="navlinks" id="navLinks">
-      <li><a href="index.html#about">About</a></li>
+      <li><button class="navlink-btn" id="aboutBtn" type="button">About</button></li>
       <li><a href="experience.html">Experience</a></li>
       <li><a href="projects.html">Projects</a></li>
       <li><a href="publications.html">Publications</a></li>
@@ -46,6 +46,33 @@
     </ul>
   </div>
 </nav>
+
+<div class="about-modal-backdrop" id="aboutModalBackdrop" hidden>
+  <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+    <div class="about-modal-head">
+      <h3 id="aboutModalTitle"><span class="about-modal-icon">&#128100;</span> About</h3>
+      <button class="about-modal-close" id="aboutModalClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="about-modal-body">
+      <p>
+        I am a <strong>Master's student in computational medicinal chemistry</strong>,
+        working at the intersection of medicinal chemistry and structure-based drug design.
+        My research centers on <strong><em>Candida albicans</em> Als3</strong> (PDB: 4LEB), a
+        cell-surface adhesin protein involved in biofilm formation, as a target for new antifungal
+        and antibiofilm agents. Across two manuscripts I've combined large-scale molecular docking,
+        DFT/HOMO&ndash;LUMO analysis, scaffold classification, and a dual-engine consensus docking
+        framework (PharmaCoNet + AutoDock Vina) to screen, validate, and rationalize candidate
+        compounds against this target.
+      </p>
+      <p>
+        I am currently pursuing my M.Sc. in South Korea, funded by the Global Korea Scholarship
+        (GKS). I also serve as a peer reviewer, most recently for an <em>A. baumannii</em> docking
+        manuscript, and I'm preparing to apply for a <strong>DPhil in bioinformatics or synthetic
+        biology at the University of Oxford</strong>.
+      </p>
+    </div>
+  </div>
+</div>
 
 <main id="main">
   <div class="page-header">

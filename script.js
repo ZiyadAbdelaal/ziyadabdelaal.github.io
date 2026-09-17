@@ -223,6 +223,30 @@ filterBtns.forEach(function(btn){
   });
 })();
 
+// about modal
+(function(){
+  var btn = document.getElementById('aboutBtn');
+  var backdrop = document.getElementById('aboutModalBackdrop');
+  var closeBtn = document.getElementById('aboutModalClose');
+  if(!btn || !backdrop) return;
+  function open(){
+    backdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function close(){
+    backdrop.hidden = true;
+    document.body.style.overflow = '';
+  }
+  btn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', function(e){
+    if(e.target === backdrop) close();
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !backdrop.hidden) close();
+  });
+})();
+
 // contact form -> mailto (static site, no backend)
 var cf = document.getElementById('contactForm');
 if(cf){
