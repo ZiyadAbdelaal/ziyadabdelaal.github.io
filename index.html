@@ -184,6 +184,22 @@
     </div>
   </section>
 
+  <section id="domain-map" style="border-top:none; padding-top:8px;">
+    <div class="wrap">
+      <div class="eyebrow">Interconnections</div>
+      <h2 class="section-title">Research Domains &amp; Interconnections</h2>
+      <p class="domain-map-intro">Explore how the methods behind the Als3 work connect &mdash; drag nodes to reposition, hover for a description.</p>
+      <button class="btn btn-ghost domain-map-reset" id="domainMapReset">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path></svg>
+        Reset Map View
+      </button>
+      <div class="domain-map-card">
+        <div id="domainMap"></div>
+        <div class="domain-map-tooltip" id="domainMapTooltip"></div>
+      </div>
+    </div>
+  </section>
+
   <section id="about">
     <div class="wrap">
       <div class="eyebrow">Recognition</div>
@@ -335,6 +351,8 @@
     </div>
   </div>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="domain-map.js"></script>
 <script src="script.js"></script>
 
 </body>

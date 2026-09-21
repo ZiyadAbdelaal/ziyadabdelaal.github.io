@@ -700,3 +700,28 @@
     section{ padding:18px 0; break-inside:avoid; }
     a{ text-decoration:underline; }
   }
+
+  /* research domain interconnection map */
+  .domain-map-intro{ color:var(--text-dim); font-size:0.95rem; max-width:64ch; margin-bottom:18px; }
+  .domain-map-reset{ margin-bottom:18px; padding:9px 18px; font-size:0.86rem; }
+  .domain-map-card{
+    position:relative; border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--surface); overflow:hidden;
+  }
+  #domainMap{ width:100%; }
+  #domainMap svg{ cursor:grab; }
+  .domain-map-link{ stroke:var(--line-strong); stroke-width:1.3px; }
+  .domain-map-node circle{ cursor:grab; stroke:var(--surface); stroke-width:2px; transition:opacity .15s; }
+  .domain-map-node:active circle{ cursor:grabbing; }
+  .domain-map-node circle:hover{ opacity:0.85; }
+  .domain-map-label{
+    font-family:'Inter', sans-serif; font-size:12px; fill:var(--text-dim); pointer-events:none;
+  }
+  .domain-map-tooltip{
+    position:absolute; top:0; left:0; z-index:5; max-width:220px;
+    background:var(--ink); color:var(--text); border:1px solid var(--line-strong);
+    border-radius:8px; padding:8px 12px; font-size:0.8rem; line-height:1.4;
+    pointer-events:none; opacity:0; transition:opacity .12s ease;
+    box-shadow:0 12px 26px -14px rgba(0,0,0,0.5);
+  }
+  .domain-map-tooltip.visible{ opacity:1; }
