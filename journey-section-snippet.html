@@ -1,0 +1,322 @@
+<!-- =====================================================================
+     JOURNEY MAP v2 — replacement for the <section id="journey"> block
+     in index.html (currently around lines 163–256).
+
+     HOW TO INSTALL
+     1. Move the <style> block below into the <head> of index.html,
+        OR leave it exactly where it is — it works either way.
+     2. Delete your old <section id="journey"> ... </section> entirely.
+     3. Paste everything below in its place.
+     4. Delete the line  <script src="journey-map.js"></script>  near the
+        bottom of index.html, and delete journey-map.js from the repo.
+        The new section carries its own script.
+
+     This block is deliberately self-contained: every colour falls back to
+     a literal hex if the matching custom property is missing from
+     style.css, so it can never render as a black rectangle again.
+     ===================================================================== -->
+
+<style>
+  /* ---- Journey map v2 — fully self-contained, no dependency on
+         variables that may be missing from style.css ------------ */
+  .jm{
+    --jm-surface: var(--surface, #1a222a);
+    --jm-plot:    var(--surface-2, #212b34);
+    --jm-text:    var(--text, #eef1ee);
+    --jm-dim:     var(--text-dim, #a4b0ac);
+    --jm-line:    var(--line, rgba(238,241,238,0.10));
+    --jm-grid:    var(--line-strong, rgba(238,241,238,0.20));
+    --jm-egypt:   var(--amber-ink, #f0a94e);
+    --jm-korea:   var(--teal-ink, #4fd1b5);
+    --jm-uk:      var(--violet-ink, #a48af0);
+    --jm-radius:  var(--radius, 14px);
+  }
+  .jm-intro{ color:var(--jm-dim); font-size:.95rem; line-height:1.6; max-width:62ch; margin:0 0 22px; }
+  .jm-card{
+    border:1px solid var(--jm-line); border-radius:var(--jm-radius);
+    background:var(--jm-surface); overflow:hidden;
+  }
+  .jm-svg{ display:block; width:100%; height:auto; background:var(--jm-plot); }
+
+  .jm-grid-line{ stroke:var(--jm-grid); stroke-width:.7; fill:none; opacity:.55; }
+  .jm-grid-line.major{ opacity:.9; stroke-width:1; }
+  .jm-grid-text{ font-family:'Inter',system-ui,sans-serif; font-size:10px; fill:var(--jm-dim); opacity:.7; }
+
+  .jm-route{ fill:none; stroke:var(--jm-korea); stroke-width:2.2; stroke-linecap:round; opacity:.9; }
+  .jm-route-glow{ fill:none; stroke:var(--jm-korea); stroke-width:7; opacity:.12; stroke-linecap:round; }
+  .jm-validate{ fill:none; stroke:var(--jm-uk); stroke-width:1.8; stroke-dasharray:6 7; stroke-linecap:round; opacity:.85; }
+
+  .jm-plane{ fill:var(--jm-korea); }
+
+  .jm-stop{ cursor:pointer; }
+  .jm-stop:focus{ outline:none; }
+  .jm-halo{ fill:currentColor; opacity:0; transition:opacity .22s ease; }
+  .jm-ring{ fill:var(--jm-surface); stroke:currentColor; stroke-width:2.6;
+    transform-box:fill-box; transform-origin:center; transition:transform .22s ease, stroke-width .22s ease; }
+  .jm-ring.dashed{ stroke-dasharray:4.5 4; }
+  .jm-core{ fill:currentColor; transform-box:fill-box; transform-origin:center; transition:transform .22s ease; }
+  .jm-core.hollow{ fill:none; stroke:currentColor; stroke-width:2; }
+  .jm-name{ font-family:'Manrope','Inter',sans-serif; font-weight:700; font-size:14px; fill:var(--jm-text); pointer-events:none; }
+  .jm-coord{ font-family:'Inter',system-ui,sans-serif; font-size:10.5px; fill:var(--jm-dim); pointer-events:none; }
+
+  .jm-stop:hover .jm-halo,
+  .jm-stop:focus-visible .jm-halo,
+  .jm-stop.is-active .jm-halo{ opacity:.18; }
+  .jm-stop:hover .jm-ring,
+  .jm-stop:focus-visible .jm-ring,
+  .jm-stop.is-active .jm-ring{ transform:scale(1.24); stroke-width:3.2; }
+  .jm-stop:hover .jm-core,
+  .jm-stop:focus-visible .jm-core,
+  .jm-stop.is-active .jm-core{ transform:scale(1.18); }
+
+  .jm-tag{ font-family:'Inter',system-ui,sans-serif; font-size:10px; fill:var(--jm-uk); }
+
+  .jm-legend{
+    display:flex; flex-wrap:wrap; gap:8px 22px;
+    padding:12px clamp(16px,3vw,26px); border-top:1px solid var(--jm-line);
+    font-size:.78rem; color:var(--jm-dim);
+  }
+  .jm-legend span{ display:inline-flex; align-items:center; gap:8px; }
+  .jm-swatch{ width:22px; height:0; border-top:2px solid var(--jm-korea); }
+  .jm-swatch.dash{ border-top:2px dashed var(--jm-uk); }
+
+  .jm-panels{ border-top:1px solid var(--jm-line); padding:22px clamp(16px,3vw,26px); }
+  .jm-panel{ display:none; }
+  .jm-panel.is-active{ display:block; animation:jmFade .28s ease; }
+  @keyframes jmFade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+  .jm-panel-head{ display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 12px; margin-bottom:8px; }
+  .jm-panel-title{ font-family:'Manrope','Inter',sans-serif; font-weight:700; font-size:1.08rem; color:var(--jm-text); }
+  .jm-panel-when{ font-size:.8rem; color:var(--jm-dim); }
+  .jm-panel-body{ color:var(--jm-dim); font-size:.93rem; line-height:1.65; max-width:68ch; margin:0; }
+  .jm-panel-body + .jm-panel-body{ margin-top:10px; }
+  .jm-pill{
+    display:inline-block; margin-top:12px; padding:4px 11px; border-radius:999px;
+    font-size:.74rem; letter-spacing:.01em;
+    color:var(--jm-uk); border:1px solid currentColor; background:transparent;
+  }
+  .jm-nav{ display:flex; flex-wrap:wrap; gap:8px; padding:0 clamp(16px,3vw,26px) 20px; }
+  .jm-nav button{
+    font:inherit; font-size:.82rem; cursor:pointer;
+    padding:7px 14px; border-radius:999px; min-height:40px;
+    background:transparent; color:var(--jm-dim);
+    border:1px solid var(--jm-line); transition:color .18s, border-color .18s;
+  }
+  .jm-nav button.is-active{ color:var(--jm-text); border-color:currentColor; }
+  .jm-nav button:hover{ color:var(--jm-text); }
+
+  @media (max-width:640px){
+    .jm-name{ font-size:16px; } .jm-coord{ font-size:12px; } .jm-grid-text{ display:none; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .jm-panel.is-active{ animation:none; }
+    .jm-halo, .jm-ring, .jm-core{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<button class="demo-toggle" id="demoToggle" type="button">Switch theme</button>
+
+<section id="journey" class="jm">
+  <div class="wrap">
+    <div class="eyebrow">My Story</div>
+    <h2 class="section-title">Three coordinates, two moves</h2>
+    <p class="jm-intro">
+      Plotted on a real lat/long grid. The solid arc is a relocation I actually made;
+      the dashed line is a degree that travelled instead of me. Select a point to read the detail.
+    </p>
+
+    <div class="jm-card">
+      <svg class="jm-svg" viewBox="0 0 960 360" role="img"
+           aria-label="Coordinate map showing 6th of October City Egypt, University of Greenwich in London, and Gyeongsan South Korea">
+        <title>Academic journey plotted by coordinates</title>
+
+        <!-- graticule: parallels -->
+        <g class="jm-grid-line">
+          <line x1="0" y1="316.4" x2="960" y2="316.4"></line>
+          <line x1="0" y1="261.8" x2="960" y2="261.8"></line>
+          <line x1="0" y1="152.7" x2="960" y2="152.7"></line>
+          <line x1="0" y1="98.2"  x2="960" y2="98.2"></line>
+          <line x1="0" y1="43.6"  x2="960" y2="43.6"></line>
+        </g>
+        <line class="jm-grid-line major" x1="0" y1="207.3" x2="960" y2="207.3"></line>
+
+        <!-- graticule: meridians -->
+        <g class="jm-grid-line">
+          <line x1="54.9"  y1="0" x2="54.9"  y2="360"></line>
+          <line x1="219.4" y1="0" x2="219.4" y2="360"></line>
+          <line x1="301.7" y1="0" x2="301.7" y2="360"></line>
+          <line x1="384"   y1="0" x2="384"   y2="360"></line>
+          <line x1="466.3" y1="0" x2="466.3" y2="360"></line>
+          <line x1="548.6" y1="0" x2="548.6" y2="360"></line>
+          <line x1="630.9" y1="0" x2="630.9" y2="360"></line>
+          <line x1="713.2" y1="0" x2="713.2" y2="360"></line>
+          <line x1="795.5" y1="0" x2="795.5" y2="360"></line>
+          <line x1="877.8" y1="0" x2="877.8" y2="360"></line>
+        </g>
+        <line class="jm-grid-line major" x1="137.1" y1="0" x2="137.1" y2="360"></line>
+
+        <g class="jm-grid-text">
+          <text x="8" y="204">30&#176;N</text>
+          <text x="8" y="95">50&#176;N</text>
+          <text x="141" y="352">0&#176; prime meridian</text>
+          <text x="634" y="352">90&#176;E</text>
+        </g>
+
+        <!-- relocation arc: Egypt to South Korea -->
+        <path class="jm-route-glow" d="M308,207 Q577,17 843,176"></path>
+        <path id="jmRoute" class="jm-route" d="M308,207 Q577,17 843,176"></path>
+
+        <!-- travelling aircraft -->
+        <g class="jm-plane" id="jmPlane">
+          <animateMotion dur="11s" repeatCount="indefinite" rotate="auto">
+            <mpath xlink:href="#jmRoute" href="#jmRoute"></mpath>
+          </animateMotion>
+          <path d="M11,0 L-8,-6.5 L-3.5,0 L-8,6.5 Z"></path>
+        </g>
+
+        <!-- validation link: Egypt to Greenwich (credential, not travel) -->
+        <path class="jm-validate" d="M296,197 Q205,168 145,103"></path>
+        <text class="jm-tag" x="196" y="140" text-anchor="middle">degree validated by</text>
+
+        <!-- Egypt -->
+        <g class="jm-stop is-active" data-stop="0" tabindex="0" role="button"
+           style="color:var(--jm-egypt)" aria-label="6th of October City, Egypt — MSA University">
+          <circle class="jm-halo" cx="308" cy="207" r="30"></circle>
+          <circle class="jm-ring" cx="308" cy="207" r="13"></circle>
+          <circle class="jm-core" cx="308" cy="207" r="5"></circle>
+          <text class="jm-name"  x="308" y="243" text-anchor="middle">6th of October City</text>
+          <text class="jm-coord" x="308" y="259" text-anchor="middle">29.9&#176; N, 30.9&#176; E &#183; Egypt</text>
+        </g>
+
+        <!-- United Kingdom: awarding body, hollow marker -->
+        <g class="jm-stop" data-stop="1" tabindex="0" role="button"
+           style="color:var(--jm-uk)" aria-label="University of Greenwich, London — awarding body">
+          <circle class="jm-halo" cx="137" cy="90" r="30"></circle>
+          <circle class="jm-ring dashed" cx="137" cy="90" r="13"></circle>
+          <circle class="jm-core hollow" cx="137" cy="90" r="4.5"></circle>
+          <text class="jm-name"  x="137" y="42" text-anchor="middle">Greenwich, London</text>
+          <text class="jm-coord" x="137" y="58" text-anchor="middle">51.5&#176; N, 0.0&#176; &#183; awarding body</text>
+        </g>
+
+        <!-- South Korea -->
+        <g class="jm-stop" data-stop="2" tabindex="0" role="button"
+           style="color:var(--jm-korea)" aria-label="Gyeongsan, South Korea — Yeungnam University">
+          <circle class="jm-halo" cx="843" cy="176" r="30"></circle>
+          <circle class="jm-ring" cx="843" cy="176" r="13"></circle>
+          <circle class="jm-core" cx="843" cy="176" r="5"></circle>
+          <text class="jm-name"  x="843" y="212" text-anchor="middle">Gyeongsan</text>
+          <text class="jm-coord" x="843" y="228" text-anchor="middle">35.8&#176; N, 128.7&#176; E &#183; South Korea</text>
+        </g>
+      </svg>
+
+      <div class="jm-legend">
+        <span><i class="jm-swatch"></i> relocation</span>
+        <span><i class="jm-swatch dash"></i> degree validated abroad, studied on site</span>
+      </div>
+
+      <div class="jm-nav" id="jmNav">
+        <button type="button" data-goto="0" class="is-active">Egypt</button>
+        <button type="button" data-goto="1">United Kingdom</button>
+        <button type="button" data-goto="2">South Korea</button>
+      </div>
+
+      <div class="jm-panels" id="jmPanels">
+        <div class="jm-panel is-active" data-panel="0">
+          <div class="jm-panel-head">
+            <span class="jm-panel-title">MSA University &#8212; where the work started</span>
+            <span class="jm-panel-when">2019 &#8211; 2023</span>
+          </div>
+          <p class="jm-panel-body">
+            BSc in Biotechnological Sciences at October University for Modern Sciences and Arts,
+            6th of October City. Graduated with First Class Honours. This is where I first met
+            molecular modelling, and where the thread that became my Als3 work began.
+          </p>
+        </div>
+
+        <div class="jm-panel" data-panel="1">
+          <div class="jm-panel-head">
+            <span class="jm-panel-title">University of Greenwich &#8212; the awarding body</span>
+            <span class="jm-panel-when">BSc (Hons) conferred 2023</span>
+          </div>
+          <p class="jm-panel-body">
+            My programme in Egypt was validated by the University of Greenwich, so the same four
+            years of study were examined to Greenwich standards, moderated by Greenwich academics,
+            and conferred as a British BSc (Hons) alongside the Egyptian degree.
+          </p>
+          <p class="jm-panel-body">
+            I sat every exam in Cairo. The degree crossed the Channel; I never did &#8212; which is
+            exactly why this point is drawn hollow and linked by a dashed line rather than a flight path.
+          </p>
+          <span class="jm-pill">UK degree, earned on site in Egypt</span>
+        </div>
+
+        <div class="jm-panel" data-panel="2">
+          <div class="jm-panel-head">
+            <span class="jm-panel-title">Yeungnam University &#8212; current post</span>
+            <span class="jm-panel-when">2024 &#8211; present</span>
+          </div>
+          <p class="jm-panel-body">
+            M.Sc. student in the Department of Chemical Engineering, funded by the Global Korea
+            Scholarship. My research targets <em>Candida albicans</em> Als3 for antifungal and
+            antibiofilm drug discovery, using consensus docking, DFT descriptors, and
+            scaffold-level analysis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('journey');
+  if (!root) return;
+  var stops  = root.querySelectorAll('.jm-stop');
+  var panels = root.querySelectorAll('.jm-panel');
+  var navBtns = root.querySelectorAll('.jm-nav button');
+  if (!stops.length) return;
+
+  function select(i) {
+    i = String(i);
+    stops.forEach(function (s) {
+      s.classList.toggle('is-active', s.getAttribute('data-stop') === i);
+    });
+    panels.forEach(function (p) {
+      p.classList.toggle('is-active', p.getAttribute('data-panel') === i);
+    });
+    navBtns.forEach(function (b) {
+      b.classList.toggle('is-active', b.getAttribute('data-goto') === i);
+    });
+  }
+
+  stops.forEach(function (stop) {
+    var i = stop.getAttribute('data-stop');
+    stop.addEventListener('click', function () { select(i); });
+    stop.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+        e.preventDefault(); select(i);
+      }
+    });
+  });
+  navBtns.forEach(function (b) {
+    b.addEventListener('click', function () { select(b.getAttribute('data-goto')); });
+  });
+
+  // respect reduced-motion for the SMIL aircraft animation
+  try {
+    var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var svg = root.querySelector('.jm-svg');
+    var plane = document.getElementById('jmPlane');
+    function applyMotion() {
+      if (!svg) return;
+      if (mq.matches) { svg.pauseAnimations(); if (plane) plane.style.display = 'none'; }
+      else { svg.unpauseAnimations(); if (plane) plane.style.display = ''; }
+    }
+    applyMotion();
+    if (mq.addEventListener) mq.addEventListener('change', applyMotion);
+  } catch (e) {}
+
+  select(0);
+})();
+</script>
