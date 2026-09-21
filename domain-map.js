@@ -4,26 +4,26 @@
 
   var nodes = [
     { id: 'Als3', r: 30, color: 'coral', desc: 'Cell-surface adhesin of C. albicans \u2014 the central drug target across all projects.' },
+    { id: 'Drug Discovery', r: 24, color: 'teal', desc: 'The overarching goal \u2014 turning computational hits into validated antifungal drug candidates.' },
     { id: 'Molecular Docking', r: 22, color: 'teal', desc: 'Structure-based screening of compound libraries (AutoDock Vina, Discovery Studio).' },
-    { id: 'Consensus Docking', r: 20, color: 'sky', desc: 'Dual-engine validation (PharmaCoNet + AutoDock Vina) for confident binding poses.' },
-    { id: 'Natural Products', r: 18, color: 'teal', desc: 'Virtual screening of natural compound libraries, e.g. carotenoids.' },
+    { id: 'Biofilm', r: 18, color: 'sky', desc: 'Als3-driven C. albicans biofilm formation \u2014 the virulence mechanism these candidates aim to block.' },
     { id: 'DFT / Quantum Chemistry', r: 18, color: 'violet', desc: 'HOMO\u2013LUMO and electrostatic potential analysis (VeloxChem, ORCA).' },
+    { id: 'MESP', r: 14, color: 'violet', desc: 'Molecular electrostatic potential mapping to visualize reactive sites and binding-relevant charge distribution.' },
     { id: 'Cheminformatics', r: 17, color: 'amber', desc: 'Scaffold classification and library analysis (RDKit, DataWarrior).' },
-    { id: 'Scaffold Classification', r: 14, color: 'teal', desc: 'ClassyFire & Murcko decomposition of hit compounds.' },
-    { id: 'RMSD Validation', r: 14, color: 'amber', desc: 'Python-based reproducibility checks across docking engines.' },
     { id: 'MD Simulation', r: 16, color: 'sky', desc: 'Molecular dynamics to confirm stable ligand\u2013protein binding.' },
     { id: 'ADMET', r: 15, color: 'violet', desc: 'Predicting drug-likeness and toxicity of top candidates.' }
   ];
 
   var links = [
     { source: 'Als3', target: 'Molecular Docking' },
-    { source: 'Als3', target: 'Natural Products' },
-    { source: 'Als3', target: 'Consensus Docking' },
+    { source: 'Als3', target: 'Biofilm' },
+    { source: 'Als3', target: 'Drug Discovery' },
+    { source: 'Drug Discovery', target: 'Molecular Docking' },
+    { source: 'Drug Discovery', target: 'Biofilm' },
+    { source: 'Drug Discovery', target: 'ADMET' },
     { source: 'Molecular Docking', target: 'DFT / Quantum Chemistry' },
     { source: 'Molecular Docking', target: 'Cheminformatics' },
-    { source: 'Cheminformatics', target: 'Scaffold Classification' },
-    { source: 'Consensus Docking', target: 'RMSD Validation' },
-    { source: 'Consensus Docking', target: 'Molecular Docking' },
+    { source: 'DFT / Quantum Chemistry', target: 'MESP' },
     { source: 'DFT / Quantum Chemistry', target: 'MD Simulation' },
     { source: 'Cheminformatics', target: 'ADMET' },
     { source: 'MD Simulation', target: 'ADMET' }
