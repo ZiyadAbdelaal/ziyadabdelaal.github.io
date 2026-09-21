@@ -66,7 +66,8 @@
         compounds against this target.
       </p>
       <p>
-        I am currently pursuing my M.Sc. in South Korea, funded by the Global Korea Scholarship
+        I am currently pursuing my M.Sc. in the <strong>Department of Chemical Engineering at
+        Yeungnam University</strong>, South Korea, funded by the Global Korea Scholarship
         (GKS). I also serve as a peer reviewer, most recently for an <em>A. baumannii</em> docking
         manuscript, and I'm preparing to apply for a <strong>DPhil in bioinformatics or synthetic
         biology at the University of Oxford</strong>.
@@ -158,6 +159,101 @@
       </div>
     </div>
   </header>
+
+  <section id="journey" style="padding-top:40px;">
+    <div class="wrap">
+      <div class="eyebrow">My Story</div>
+      <h2 class="section-title">The journey so far</h2>
+      <p class="journey-intro">Egypt &rarr; the UK &rarr; South Korea &mdash; click a stop on the map.</p>
+
+      <div class="journey-card">
+        <svg id="journeyMap" viewBox="0 0 900 420" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="journeySea" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--journey-sea-1)"></stop>
+              <stop offset="100%" stop-color="var(--journey-sea-2)"></stop>
+            </linearGradient>
+          </defs>
+
+          <rect x="0" y="0" width="900" height="420" rx="18" fill="url(#journeySea)"></rect>
+
+          <g class="journey-cloud" style="--drift:26s">
+            <ellipse cx="120" cy="55" rx="34" ry="14"></ellipse>
+            <ellipse cx="148" cy="48" rx="24" ry="12"></ellipse>
+            <ellipse cx="96" cy="48" rx="22" ry="11"></ellipse>
+          </g>
+          <g class="journey-cloud" style="--drift:34s; animation-delay:-9s;">
+            <ellipse cx="560" cy="40" rx="30" ry="12"></ellipse>
+            <ellipse cx="584" cy="34" rx="20" ry="10"></ellipse>
+            <ellipse cx="538" cy="34" rx="18" ry="9"></ellipse>
+          </g>
+
+          <!-- landmasses -->
+          <path class="journey-land" d="M120,200 C88,238 86,318 128,360 C168,400 232,392 262,350 C292,310 282,248 250,208 C220,168 150,160 120,200 Z"></path>
+          <path class="journey-land" d="M338,92 C316,112 322,152 354,166 C386,182 432,170 448,140 C462,110 440,80 404,74 C374,68 354,76 338,92 Z"></path>
+          <path class="journey-land" d="M598,180 C578,230 588,302 640,332 C702,368 784,352 814,300 C846,248 824,188 772,158 C720,128 628,140 598,180 Z"></path>
+
+          <!-- flight path -->
+          <path id="journeyPath" class="journey-flightpath" d="M186,258 Q 270,140 392,124 Q 560,98 706,220"></path>
+
+          <g class="journey-plane">
+            <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+              <mpath xlink:href="#journeyPath" href="#journeyPath"></mpath>
+            </animateMotion>
+            <text x="0" y="0" font-size="26" text-anchor="middle" dominant-baseline="middle">&#9992;&#65039;</text>
+          </g>
+
+          <!-- stop 1: Egypt -->
+          <g class="journey-stop" data-stop="0" tabindex="0" role="button" aria-label="Egypt — MSA University">
+            <path class="journey-pin" style="--pin-color:var(--amber-ink)" d="M186,208 c-20,0 -34,15 -34,34 c0,25 34,58 34,58 s34,-33 34,-58 c0,-19 -14,-34 -34,-34z"></path>
+            <circle cx="186" cy="242" r="12" class="journey-pin-dot"></circle>
+            <text x="186" y="247" text-anchor="middle" font-size="14">&#127467;&#127468;</text>
+            <text x="186" y="322" text-anchor="middle" class="journey-label">Egypt</text>
+          </g>
+
+          <!-- stop 2: UK -->
+          <g class="journey-stop" data-stop="1" tabindex="0" role="button" aria-label="United Kingdom — University of Greenwich">
+            <path class="journey-pin" style="--pin-color:var(--violet-ink)" d="M392,74 c-20,0 -34,15 -34,34 c0,25 34,58 34,58 s34,-33 34,-58 c0,-19 -14,-34 -34,-34z"></path>
+            <circle cx="392" cy="108" r="12" class="journey-pin-dot"></circle>
+            <text x="392" y="113" text-anchor="middle" font-size="14">&#127468;&#127463;</text>
+            <text x="392" y="188" text-anchor="middle" class="journey-label">UK</text>
+          </g>
+
+          <!-- stop 3: South Korea -->
+          <g class="journey-stop" data-stop="2" tabindex="0" role="button" aria-label="South Korea — Yeungnam University">
+            <path class="journey-pin" style="--pin-color:var(--teal-ink)" d="M706,170 c-20,0 -34,15 -34,34 c0,25 34,58 34,58 s34,-33 34,-58 c0,-19 -14,-34 -34,-34z"></path>
+            <circle cx="706" cy="204" r="12" class="journey-pin-dot"></circle>
+            <text x="706" y="209" text-anchor="middle" font-size="14">&#127472;&#127479;</text>
+            <text x="706" y="284" text-anchor="middle" class="journey-label">South Korea</text>
+          </g>
+        </svg>
+
+        <div class="journey-info" id="journeyInfo">
+          <div class="journey-info-panel active" data-panel="0">
+            <span class="journey-info-flag">&#127467;&#127468;</span>
+            <div>
+              <div class="journey-info-title">MSA University <span class="journey-info-date">2019 &ndash; 2023</span></div>
+              <div class="journey-info-desc">Where it all started &mdash; BSc in Biotechnological Sciences, 6th of October City, Egypt. Graduated with First Class Honors.</div>
+            </div>
+          </div>
+          <div class="journey-info-panel" data-panel="1">
+            <span class="journey-info-flag">&#127468;&#127463;</span>
+            <div>
+              <div class="journey-info-title">University of Greenwich <span class="journey-info-date">Overseas year</span></div>
+              <div class="journey-info-desc">Completed part of the degree as an overseas student through MSA's dual-accredited program &mdash; same BSc, a new city.</div>
+            </div>
+          </div>
+          <div class="journey-info-panel" data-panel="2">
+            <span class="journey-info-flag">&#127472;&#127479;</span>
+            <div>
+              <div class="journey-info-title">Yeungnam University <span class="journey-info-date">2024 &ndash; Present</span></div>
+              <div class="journey-info-desc">Now an M.Sc. student in the Department of Chemical Engineering, funded by the Global Korea Scholarship (GKS) &mdash; researching Als3-targeted antifungal drug discovery.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section id="highlights" style="padding-top:40px;">
     <div class="wrap">
@@ -330,7 +426,7 @@
         </div>
         <div class="tl-item" style="--dot-color:var(--text-dim); --dot-color-ink:var(--text-dim)">
           <div class="tl-date">2024</div>
-          <div class="tl-text">Began M.Sc. studies in South Korea, funded by the Global Korea Scholarship (GKS).</div>
+          <div class="tl-text">Began M.Sc. studies in the Department of Chemical Engineering at Yeungnam University, South Korea, funded by the Global Korea Scholarship (GKS).</div>
         </div>
       </div>
     </div>
@@ -353,6 +449,7 @@
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="domain-map.js"></script>
+<script src="journey-map.js"></script>
 <script src="script.js"></script>
 
 </body>

@@ -725,3 +725,31 @@
     box-shadow:0 12px 26px -14px rgba(0,0,0,0.5);
   }
   .domain-map-tooltip.visible{ opacity:1; }
+
+  /* academic journey — cartoon map */
+  :root{ --journey-sea-1:#bfe3f0; --journey-sea-2:#8fcbe0; --journey-land:#f4e3b8; --journey-land-line:#dcc385; }
+  :root[data-theme="light"]{ --journey-sea-1:#cdeaf5; --journey-sea-2:#9fd4e8; --journey-land:#f6e8c4; --journey-land-line:#e2cd97; }
+  .journey-intro{ color:var(--text-dim); font-size:0.95rem; margin-bottom:18px; }
+  .journey-card{
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface);
+  }
+  #journeyMap{ width:100%; height:auto; display:block; }
+  .journey-land{ fill:var(--journey-land); stroke:var(--journey-land-line); stroke-width:2; }
+  .journey-cloud{ fill:rgba(255,255,255,0.75); animation:journeyDrift var(--drift, 28s) linear infinite; }
+  @keyframes journeyDrift{ 0%{ transform:translateX(-30px); } 50%{ transform:translateX(30px); } 100%{ transform:translateX(-30px); } }
+  .journey-flightpath{ fill:none; stroke:var(--text-dim); stroke-width:2.5; stroke-dasharray:2 10; stroke-linecap:round; opacity:0.55; }
+  .journey-plane text{ fill:var(--text); }
+  .journey-stop{ cursor:pointer; }
+  .journey-pin{ transition:transform .2s ease; transform-origin:center; transform-box:fill-box; fill:var(--pin-color, var(--teal-ink)); stroke:var(--surface); stroke-width:2; }
+  .journey-pin-dot{ fill:var(--surface); pointer-events:none; }
+  .journey-stop:hover .journey-pin, .journey-stop:focus-visible .journey-pin{ transform:translateY(-6px) scale(1.08); }
+  .journey-stop.active .journey-pin{ transform:translateY(-8px) scale(1.14); }
+  .journey-label{ font-family:'Manrope','Inter',sans-serif; font-weight:700; font-size:15px; fill:var(--text); pointer-events:none; }
+
+  .journey-info{ border-top:1px solid var(--line); padding:20px clamp(18px,3vw,28px); }
+  .journey-info-panel{ display:none; gap:14px; align-items:flex-start; }
+  .journey-info-panel.active{ display:flex; }
+  .journey-info-flag{ font-size:1.8rem; line-height:1; flex:none; }
+  .journey-info-title{ font-weight:700; font-size:1.02rem; color:var(--text); }
+  .journey-info-date{ font-weight:500; font-size:0.78rem; color:var(--text-dim); margin-left:8px; }
+  .journey-info-desc{ margin-top:4px; color:var(--text-dim); font-size:0.92rem; line-height:1.55; max-width:60ch; }
