@@ -287,15 +287,18 @@ filterBtns.forEach(function(btn){
   if(closeBtn) closeBtn.addEventListener('click', close);
   var journeyLink = document.getElementById('aboutModalJourneyLink');
   if(journeyLink){
-    var journeyTarget = document.getElementById('journey');
-    if(journeyTarget){
+    var journeyOpenBtn = document.getElementById('journeyOpenBtn');
+    if(journeyOpenBtn){
       journeyLink.addEventListener('click', function(e){
         e.preventDefault();
         close();
-        journeyTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        journeyOpenBtn.click();
       });
     } else {
-      journeyLink.setAttribute('href', 'index.html#journey');
+      journeyLink.setAttribute('href', 'index.html');
+      journeyLink.addEventListener('click', function(){
+        try{ sessionStorage.setItem('openJourney', '1'); }catch(e){}
+      });
     }
   }
   backdrop.addEventListener('click', function(e){
@@ -304,6 +307,50 @@ filterBtns.forEach(function(btn){
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape' && !backdrop.hidden) close();
   });
+})();
+
+// journey modal
+(function(){
+  var openBtn = document.getElementById('journeyOpenBtn');
+  var backdrop = document.getElementById('journeyModalBackdrop');
+  if(!openBtn || !backdrop) return;
+  var closeBtn = document.getElementById('journeyModalClose');
+  var stops = backdrop.querySelectorAll('.wmap-stop');
+  var panels = backdrop.querySelectorAll('.journey-panel');
+  var navBtns = backdrop.querySelectorAll('#journeyNav button');
+
+  function select(i){
+    i = String(i);
+    stops.forEach(function(s){ s.classList.toggle('is-active', s.getAttribute('data-stop') === i); });
+    panels.forEach(function(p){ p.classList.toggle('is-active', p.getAttribute('data-panel') === i); });
+    navBtns.forEach(function(b){ b.classList.toggle('is-active', b.getAttribute('data-goto') === i); });
+  }
+  stops.forEach(function(stop){
+    var i = stop.getAttribute('data-stop');
+    stop.addEventListener('click', function(){ select(i); });
+    stop.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); select(i); }
+    });
+  });
+  navBtns.forEach(function(b){
+    b.addEventListener('click', function(){ select(b.getAttribute('data-goto')); });
+  });
+
+  function open(){ backdrop.hidden = false; document.body.style.overflow = 'hidden'; select(0); }
+  function close(){ backdrop.hidden = true; document.body.style.overflow = ''; }
+  openBtn.addEventListener('click', open);
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', function(e){ if(e.target === backdrop) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !backdrop.hidden) close();
+  });
+
+  try{
+    if(sessionStorage.getItem('openJourney') === '1'){
+      sessionStorage.removeItem('openJourney');
+      open();
+    }
+  }catch(e){}
 })();
 
 // contact form -> mailto (static site, no backend)
