@@ -18,6 +18,194 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== Hero globe widget — self-contained, cannot be broken by style.css ===== */
+.gl-card{
+  --gl-surface: var(--surface, #1a222a);
+  --gl-surface2: var(--surface-2, #212b34);
+  --gl-text: var(--text, #eef1ee);
+  --gl-dim: var(--text-dim, #a4b0ac);
+  --gl-line: var(--line, rgba(238,241,238,0.10));
+  --gl-line2: var(--line-strong, rgba(238,241,238,0.20));
+  --gl-teal: var(--teal-ink, #4fd1b5);
+  --gl-amber: var(--amber-ink, #f0a94e);
+  --gl-violet: var(--violet-ink, #a48af0);
+  --gl-r: var(--radius, 14px);
+
+  display:flex; flex-direction:column; align-items:center; gap:0;
+  width:100%; padding:20px 18px 18px; cursor:pointer; text-align:center;
+  border:1px solid var(--gl-line); border-radius:var(--gl-r);
+  background:var(--gl-surface); color:inherit; font:inherit;
+  transition:border-color .25s ease, transform .25s ease;
+}
+.gl-card:hover, .gl-card:focus-visible{ border-color:var(--gl-line2); transform:translateY(-2px); }
+.gl-card:focus-visible{ outline:2px solid var(--gl-teal); outline-offset:3px; }
+
+.gl-globe{ width:clamp(120px,14vw,164px); height:auto; display:block; margin-bottom:14px; }
+.gl-ocean{ fill:var(--gl-surface2); }
+.gl-rim{ fill:none; stroke:var(--gl-line2); stroke-width:2; }
+.gl-land{ fill:var(--gl-teal); opacity:.32; }
+.gl-grid{ fill:none; stroke:var(--gl-line2); stroke-width:1; opacity:.5; }
+.gl-shine{ fill:#ffffff; opacity:.07; }
+.gl-spin{ animation:glSpin 26s linear infinite; }
+@keyframes glSpin{ from{ transform:translateX(0) } to{ transform:translateX(-200px) } }
+
+.gl-pin-halo{ opacity:.25; animation:glPing 2.8s ease-out infinite; transform-box:fill-box; transform-origin:center; }
+.gl-pin-halo.b{ animation-delay:.9s } .gl-pin-halo.c{ animation-delay:1.8s }
+@keyframes glPing{ 0%{ transform:scale(.4); opacity:.4 } 70%,100%{ transform:scale(1.9); opacity:0 } }
+.gl-orbit{ fill:none; stroke:var(--gl-violet); stroke-width:1.4; stroke-dasharray:4 6; opacity:.55; }
+.gl-plane{ fill:var(--gl-teal); }
+
+.gl-label{
+  font-family:'Manrope','Inter',sans-serif; font-weight:700;
+  font-size:.92rem; color:var(--gl-text); margin-bottom:4px;
+}
+.gl-caption{ font-size:.78rem; line-height:1.5; color:var(--gl-dim); max-width:22ch; }
+.gl-cta{
+  display:inline-flex; align-items:center; gap:6px; margin-top:12px;
+  font-size:.76rem; font-weight:600; color:var(--gl-teal);
+}
+.gl-cta svg{ width:13px; height:13px; transition:transform .25s ease; }
+.gl-card:hover .gl-cta svg{ transform:translateX(3px); }
+
+/* copyable email chip in the hero */
+.gl-mail{
+  display:inline-flex; align-items:center; gap:0; margin-top:14px;
+  border:1px solid var(--line, rgba(238,241,238,0.10)); border-radius:999px;
+  background:var(--surface, #1a222a); overflow:hidden;
+}
+.gl-mail a{
+  padding:8px 6px 8px 15px; font-size:.84rem; text-decoration:none;
+  color:var(--text-dim, #a4b0ac); transition:color .2s;
+}
+.gl-mail a:hover{ color:var(--text, #eef1ee); }
+.gl-mail button{
+  display:inline-flex; align-items:center; gap:6px;
+  font:inherit; font-size:.76rem; cursor:pointer; min-height:40px;
+  padding:8px 14px 8px 8px; border:0; background:transparent;
+  color:var(--teal-ink, #4fd1b5);
+}
+.gl-mail button svg{ width:13px; height:13px; }
+
+@media (prefers-reduced-motion: reduce){
+  .gl-spin, .gl-pin-halo{ animation:none; }
+  .gl-card:hover{ transform:none; }
+}
+</style>
+<style>
+/* --- modal + world map styles, inlined so a stale style.css cannot break them --- */
+.about-modal-backdrop{
+    position:fixed; inset:0; background:rgba(8,10,12,0.6); backdrop-filter:blur(2px);
+    display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;
+  }
+.about-modal-backdrop[hidden]{ display:none; }
+.about-modal{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:16px;
+    max-width:640px; width:100%; max-height:85vh; overflow-y:auto;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+    animation:aboutModalIn .18s ease;
+  }
+.about-modal-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 24px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--surface);
+  }
+.about-modal-head h3{ font-size:1.25rem; display:flex; align-items:center; gap:10px; margin:0; }
+.about-modal-icon{ font-size:1.1rem; }
+.about-modal-close{
+    width:32px; height:32px; border-radius:50%; border:1px solid var(--line-strong); background:transparent;
+    color:var(--text-dim); font-size:1.3rem; line-height:1; cursor:pointer; transition:all .15s ease;
+  }
+.about-modal-close:hover{ color:var(--text); border-color:var(--text-dim); }
+.about-modal-body{ padding:22px 24px 26px; }
+.about-modal-body p{ margin:0 0 16px; color:var(--text); line-height:1.6; }
+.about-modal-body p:last-child{ margin-bottom:0; }
+.journey-modal-backdrop{
+    position:fixed; inset:0; background:rgba(8,10,12,0.65); backdrop-filter:blur(3px);
+    display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;
+  }
+.journey-modal-backdrop[hidden]{ display:none; }
+.journey-modal{
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:18px;
+    max-width:760px; width:100%; max-height:90vh; overflow-y:auto;
+    box-shadow:0 40px 80px -24px rgba(0,0,0,0.65); animation:aboutModalIn .2s ease;
+  }
+.journey-modal-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 26px 0; position:sticky; top:0; background:var(--surface); z-index:2;
+  }
+.journey-modal-head h3{ font-size:1.25rem; margin:0; }
+.journey-modal-intro{ padding:6px 26px 16px; color:var(--text-dim); font-size:0.92rem; }
+.wmap-wrap{ background:#0d1319; margin:0 26px; border-radius:12px; overflow:hidden; }
+.wmap-svg{ display:block; width:100%; height:auto; }
+.wmap-dots{ fill:rgba(238,241,238,0.16); }
+.wmap-stop{ cursor:pointer; }
+.wmap-stop:focus{ outline:none; }
+.wmap-halo{ transition:opacity .2s ease; }
+.wmap-ring{ transform-box:fill-box; transform-origin:center; transition:transform .2s ease; }
+.wmap-stop:hover .wmap-halo, .wmap-stop:focus-visible .wmap-halo, .wmap-stop.is-active .wmap-halo{ opacity:0.35; }
+.wmap-stop:hover .wmap-ring, .wmap-stop:focus-visible .wmap-ring, .wmap-stop.is-active .wmap-ring{ transform:scale(1.35); }
+.wmap-stop text{ font-family:'Inter',sans-serif; pointer-events:none; }
+.journey-nav{ display:flex; flex-wrap:wrap; gap:8px; padding:18px 26px 0; }
+.journey-nav button{
+    font-family:'Inter',sans-serif; font-size:0.82rem; cursor:pointer;
+    padding:7px 14px; border-radius:100px; background:transparent; color:var(--text-dim);
+    border:1px solid var(--line-strong); transition:color .18s ease, border-color .18s ease;
+  }
+.journey-nav button.is-active{ color:var(--text); border-color:var(--teal-ink); }
+.journey-nav button:hover{ color:var(--text); }
+.journey-panels{ padding:16px 26px 26px; }
+.journey-panel{ display:none; }
+.journey-panel.is-active{ display:block; animation:jmFade .25s ease; }
+.journey-panel-head{ display:flex; align-items:baseline; flex-wrap:wrap; gap:6px 12px; margin-bottom:8px; }
+.journey-panel-title{ font-family:'Fraunces', Georgia, serif; font-weight:500; font-size:1.05rem; color:var(--text); }
+.journey-panel-when{ font-size:0.8rem; color:var(--text-dim); }
+.journey-panel p{ color:var(--text-dim); font-size:0.92rem; line-height:1.65; margin:0 0 10px; }
+.journey-panel p:last-child{ margin-bottom:0; }
+.about-modal-journey-link{
+    display:inline-flex; align-items:center; gap:6px; margin-top:6px;
+    color:var(--teal-ink); font-weight:600; font-size:0.92rem; text-decoration:none;
+    border-bottom:1px solid transparent; transition:border-color .15s ease;
+  }
+.about-modal-journey-link:hover{ border-color:var(--teal-ink); }
+.hero-right-col{ display:flex; flex-direction:column; gap:16px; }
+.mini-journey-card{
+    display:flex; align-items:center; gap:14px; width:100%; text-align:left; cursor:pointer;
+    background:var(--surface); border:1px solid var(--line); border-radius:18px;
+    padding:16px 18px; font-family:'Inter',sans-serif;
+    transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+  }
+.mini-journey-card:hover{ border-color:var(--teal-ink); box-shadow:0 20px 40px -22px rgba(0,0,0,0.5); transform:translateY(-2px); }
+.mini-journey-icon{
+    flex:none; width:38px; height:38px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--teal-ink) 16%, transparent); color:var(--teal-ink);
+  }
+.mini-journey-icon svg{ width:19px; height:19px; }
+.mini-journey-text{ flex:1; min-width:0; }
+.mini-journey-label{ display:block; font-size:0.92rem; font-weight:700; color:var(--text); margin-bottom:2px; }
+.mini-journey-caption{ display:block; font-size:0.8rem; color:var(--text-dim); }
+.mini-journey-arrow{ flex:none; width:16px; height:16px; color:var(--text-dim); transition:transform .2s ease, color .2s ease; }
+.mini-journey-card:hover .mini-journey-arrow{ transform:translateX(3px); color:var(--teal-ink); }
+/* copy-to-clipboard + toast */
+  .copy-btn{
+    display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px;
+    border-radius:50%; border:1px solid var(--line-strong); background:transparent; color:var(--text-dim);
+    cursor:pointer; margin-left:6px; vertical-align:middle; transition:all .15s ease;
+  }
+.copy-btn svg{ width:12px; height:12px; }
+.copy-btn:hover{ color:var(--teal-ink); border-color:var(--teal-ink); }
+
+@keyframes aboutModalIn{ from{opacity:0; transform:translateY(10px) scale(.98)} to{opacity:1; transform:none} }
+/* world-map markers: hover + active feedback */
+.wmap-stop{ cursor:pointer; }
+.wmap-stop .wmap-halo{ transition:opacity .25s ease; }
+.wmap-stop:hover .wmap-halo, .wmap-stop:focus-visible .wmap-halo, .wmap-stop.is-active .wmap-halo{ opacity:.3; }
+.wmap-stop .wmap-ring{ transform-box:fill-box; transform-origin:center; transition:transform .25s ease; }
+.wmap-stop:hover .wmap-ring, .wmap-stop:focus-visible .wmap-ring, .wmap-stop.is-active .wmap-ring{ transform:scale(1.35); }
+.wmap-dots{ opacity:.26; }
+
+</style>
 </head>
 <body>
 
@@ -35,7 +223,6 @@
       <li><a href="experience.html">Experience</a></li>
       <li><a href="projects.html">Projects</a></li>
       <li><a href="publications.html">Publications</a></li>
-      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
@@ -143,11 +330,26 @@
             <a class="btn btn-primary" href="mailto:ziyadabdelaal1@gmail.com">Get in touch</a>
             <a class="btn btn-ghost" href="assets/Ziyad_Abdelaal_CV.pdf" target="_blank" rel="noopener">View CV</a>
           </div>
+          <div class="gl-mail">
+            <a href="mailto:ziyadabdelaal1@gmail.com">ziyadabdelaal1@gmail.com</a>
+            <button class="copy-btn" type="button" data-copy="ziyadabdelaal1@gmail.com" aria-label="Copy email address">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
           <div class="social-row">
+            <a href="https://orcid.org/0009-0007-3720-7805" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID 0009-0007-3720-7805" style="--social-color:#A6CE39">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zM7.37 18.16H5.62V7.35h1.75v10.81zM6.5 6.18a1.02 1.02 0 1 1 0-2.04 1.02 1.02 0 0 1 0 2.04zm5.06 11.98H9.8V7.35h3.65c3.47 0 4.99 2.48 4.99 5.41 0 3.18-2.49 5.4-5.08 5.4zm.16-9.26h-1.17v7.71h1.14c2.3 0 3.6-1.4 3.6-3.85 0-2.2-1.12-3.86-3.57-3.86z"/></svg>
+            </a>
+            <a href="https://www.researchgate.net/profile/Ziyad-Abdelaal" target="_blank" rel="noopener" aria-label="ResearchGate" title="ResearchGate" style="--social-color:#00CCBB">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 0H4.4A4.4 4.4 0 0 0 0 4.4v15.2A4.4 4.4 0 0 0 4.4 24h15.2a4.4 4.4 0 0 0 4.4-4.4V4.4A4.4 4.4 0 0 0 19.6 0zM15.9 5.3c1.6 0 2.8 1.1 2.8 2.7 0 1.6-1.2 2.7-2.8 2.7-1.6 0-2.8-1.1-2.8-2.7 0-1.6 1.2-2.7 2.8-2.7zm0 1.2c-.9 0-1.5.6-1.5 1.5s.6 1.5 1.5 1.5 1.5-.6 1.5-1.5-.6-1.5-1.5-1.5zM5.6 7.2h3.2c2 0 3.3 1.1 3.3 2.9 0 1.4-.8 2.4-2.1 2.7l2.6 4.4h-1.8l-2.4-4.2H7.1v4.2H5.6V7.2zm1.5 1.3v3.2h1.6c1.1 0 1.8-.6 1.8-1.6s-.7-1.6-1.8-1.6H7.1z"/></svg>
+            </a>
             <a href="https://www.linkedin.com/in/ziyad-abdelaal" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" style="--social-color:#0A66C2">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.24h4.5V23H.24V8.24zM8.27 8.24h4.31v2.01h.06c.6-1.13 2.07-2.33 4.26-2.33 4.55 0 5.39 3 5.39 6.9V23h-4.5v-6.34c0-1.51-.03-3.46-2.11-3.46-2.11 0-2.44 1.65-2.44 3.35V23h-4.5V8.24z"/></svg>
             </a>
-            <a href="https://scholar.google.com/citations?user=3E9q8EMAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar" style="--social-color:#4285F4">
+            <a href="https://orcid.org/0009-0007-3720-7805" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://www.researchgate.net/profile/Ziyad-Abdelaal" target="_blank" rel="noopener">ResearchGate</a>
+        <a href="https://scholar.google.com/citations?user=3E9q8EMAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar" style="--social-color:#4285F4">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.36 3.4a7.8 7.8 0 0 1 3.72-3.06L12 6.56l3.92 3.28a7.8 7.8 0 0 1 3.72 3.06L24 9.5 12 0z"/></svg>
             </a>
             <a href="https://github.com/ZiyadAbdelaal" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub" style="--social-color:#181717">
@@ -167,15 +369,52 @@
             </div>
           </div>
 
-          <button class="mini-journey-card" id="journeyOpenBtn" type="button">
-            <span class="mini-journey-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 4 6 4 9s-1.5 6.4-4 9c-2.5-2.6-4-6-4-9s1.5-6.4 4-9z"></path></svg>
+          <button class="gl-card" id="journeyOpenBtn" type="button" aria-haspopup="dialog">
+            <svg class="gl-globe" viewBox="0 0 200 200" role="img" aria-label="Cartoon globe showing Egypt, the United Kingdom, and South Korea">
+              <defs>
+                <clipPath id="glClip"><circle cx="100" cy="100" r="72"></circle></clipPath>
+              </defs>
+
+              <circle class="gl-ocean" cx="100" cy="100" r="72"></circle>
+
+              <g clip-path="url(#glClip)">
+                <g class="gl-spin"><g transform="translate(0,0)"><path class="gl-land" d="M18,58 q16,-16 36,-10 q20,6 16,22 q-4,16 -24,18 q-22,2 -28,-12 q-6,-12 0,-18z"/><path class="gl-land" d="M30,104 q14,-8 24,4 q10,14 4,30 q-6,16 -18,12 q-14,-4 -16,-22 q-2,-18 6,-24z"/><path class="gl-land" d="M86,46 q28,-12 52,2 q22,12 14,30 q-8,18 -34,16 q-30,-2 -36,-20 q-6,-18 4,-28z"/><path class="gl-land" d="M104,100 q20,-6 30,10 q10,16 -2,26 q-14,12 -30,2 q-14,-10 -10,-24 q2,-10 12,-14z"/><path class="gl-land" d="M150,132 q18,-4 22,10 q4,14 -10,18 q-16,4 -20,-10 q-4,-14 8,-18z"/><path class="gl-land" d="M60,150 q16,-6 22,8 q4,12 -8,16 q-14,4 -18,-8 q-4,-12 4,-16z"/></g><g transform="translate(200,0)"><path class="gl-land" d="M18,58 q16,-16 36,-10 q20,6 16,22 q-4,16 -24,18 q-22,2 -28,-12 q-6,-12 0,-18z"/><path class="gl-land" d="M30,104 q14,-8 24,4 q10,14 4,30 q-6,16 -18,12 q-14,-4 -16,-22 q-2,-18 6,-24z"/><path class="gl-land" d="M86,46 q28,-12 52,2 q22,12 14,30 q-8,18 -34,16 q-30,-2 -36,-20 q-6,-18 4,-28z"/><path class="gl-land" d="M104,100 q20,-6 30,10 q10,16 -2,26 q-14,12 -30,2 q-14,-10 -10,-24 q2,-10 12,-14z"/><path class="gl-land" d="M150,132 q18,-4 22,10 q4,14 -10,18 q-16,4 -20,-10 q-4,-14 8,-18z"/><path class="gl-land" d="M60,150 q16,-6 22,8 q4,12 -8,16 q-14,4 -18,-8 q-4,-12 4,-16z"/></g></g>
+                <g class="gl-grid">
+                  <ellipse cx="100" cy="100" rx="24" ry="72"></ellipse>
+                  <ellipse cx="100" cy="100" rx="52" ry="72"></ellipse>
+                  <line x1="28" y1="100" x2="172" y2="100"></line>
+                  <line x1="40" y1="64" x2="160" y2="64"></line>
+                  <line x1="40" y1="136" x2="160" y2="136"></line>
+                </g>
+                <ellipse class="gl-shine" cx="74" cy="66" rx="30" ry="20" transform="rotate(-28 74 66)"></ellipse>
+              </g>
+
+              <circle class="gl-rim" cx="100" cy="100" r="72"></circle>
+
+              <!-- orbit ribbon + little plane -->
+              <ellipse class="gl-orbit" cx="100" cy="100" rx="88" ry="34" transform="rotate(-22 100 100)"></ellipse>
+              <g class="gl-plane">
+                <animateMotion dur="14s" repeatCount="indefinite" rotate="auto"
+                  path="M188,100 a88,34 -22 1,1 -176,0 a88,34 -22 1,1 176,0"></animateMotion>
+                <path d="M7,0 L-5,-4.4 L-2,0 L-5,4.4 Z"></path>
+              </g>
+
+              <!-- Egypt -->
+              <circle class="gl-pin-halo" cx="104" cy="112" r="7" fill="var(--gl-amber)"></circle>
+              <circle cx="104" cy="112" r="5.2" fill="var(--gl-surface)" stroke="var(--gl-amber)" stroke-width="2.6"></circle>
+              <!-- United Kingdom: hollow, the degree that travelled instead of me -->
+              <circle class="gl-pin-halo b" cx="82" cy="78" r="7" fill="var(--gl-violet)"></circle>
+              <circle cx="82" cy="78" r="4.8" fill="var(--gl-surface)" stroke="var(--gl-violet)" stroke-width="2.4" stroke-dasharray="3 2.6"></circle>
+              <!-- South Korea -->
+              <circle class="gl-pin-halo c" cx="142" cy="96" r="7" fill="var(--gl-teal)"></circle>
+              <circle cx="142" cy="96" r="5.2" fill="var(--gl-surface)" stroke="var(--gl-teal)" stroke-width="2.6"></circle>
+            </svg>
+
+            <span class="gl-label">The Journey</span>
+            <span class="gl-caption">Egypt to South Korea, with a British degree earned without leaving Cairo</span>
+            <span class="gl-cta">Open the map
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
             </span>
-            <span class="mini-journey-text">
-              <span class="mini-journey-label">The Journey</span>
-              <span class="mini-journey-caption">Egypt &rarr; South Korea, UK-validated degree</span>
-            </span>
-            <svg class="mini-journey-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
           </button>
         </div>
       </div>

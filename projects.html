@@ -2,22 +2,145 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Projects — Ziyad Abdelaal</title>
-<meta name="description" content="Computational drug discovery projects by Ziyad Abdelaal, centered on C. albicans Als3.">
+<meta name="description" content="Structure-based drug discovery projects targeting Candida albicans Als3 — docking, consensus scoring, DFT, and the toolkit behind them.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Projects — Ziyad Abdelaal">
-<meta property="og:description" content="Computational drug discovery projects by Ziyad Abdelaal, centered on C. albicans Als3.">
+<meta property="og:description" content="Structure-based drug discovery projects targeting Candida albicans Als3.">
 <meta property="og:image" content="https://ziyadabdelaal.github.io/assets/og-image.jpg">
 <meta property="og:url" content="https://ziyadabdelaal.github.io/projects.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Projects — Ziyad Abdelaal">
-<meta name="twitter:description" content="Computational drug discovery projects by Ziyad Abdelaal, centered on C. albicans Als3.">
+<meta name="twitter:description" content="Structure-based drug discovery projects targeting Candida albicans Als3.">
 <meta name="twitter:image" content="https://ziyadabdelaal.github.io/assets/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== Projects page — self-contained ===== */
+.pj{
+  --pj-surface: var(--surface, #1a222a);
+  --pj-surface2: var(--surface-2, #212b34);
+  --pj-text: var(--text, #eef1ee);
+  --pj-dim: var(--text-dim, #a4b0ac);
+  --pj-line: var(--line, rgba(238,241,238,0.10));
+  --pj-line2: var(--line-strong, rgba(238,241,238,0.20));
+  --pj-teal: var(--teal-ink, #4fd1b5);
+  --pj-amber: var(--amber-ink, #f0a94e);
+  --pj-violet: var(--violet-ink, #a48af0);
+  --pj-sky: var(--sky-ink, #5eb3ea);
+  --pj-coral: var(--coral-ink, #f0716c);
+  --pj-r: var(--radius, 14px);
+}
+.pj-lede{ color:var(--pj-dim); font-size:1rem; line-height:1.65; max-width:62ch; margin:0 0 30px; }
+
+/* --- viewer panel --- */
+.pj-viewer{
+  border:1px solid var(--pj-line); border-radius:var(--pj-r);
+  background:var(--pj-surface); overflow:hidden; margin-bottom:14px;
+}
+.pj-viewer-head{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:10px; padding:16px clamp(16px,2.4vw,22px); border-bottom:1px solid var(--pj-line);
+}
+.pj-viewer-title{ font-family:'Manrope','Inter',sans-serif; font-weight:700; font-size:1rem; color:var(--pj-text); margin:0; }
+.pj-viewer-sub{ font-size:.82rem; color:var(--pj-dim); margin:3px 0 0; }
+.pj-live{
+  display:inline-flex; align-items:center; gap:7px; font-size:.74rem; font-weight:600;
+  color:var(--pj-teal); border:1px solid currentColor; border-radius:999px; padding:4px 11px;
+}
+.pj-live i{ width:6px; height:6px; border-radius:50%; background:currentColor; animation:pjBlink 2s ease-in-out infinite; }
+@keyframes pjBlink{ 0%,100%{opacity:1} 50%{opacity:.25} }
+
+/* --- filters --- */
+.pj-filters{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 24px; }
+.pj-filters button{
+  font:inherit; font-size:.84rem; padding:8px 15px; min-height:40px; cursor:pointer;
+  border-radius:999px; border:1px solid var(--pj-line);
+  background:transparent; color:var(--pj-dim);
+  transition:color .2s, border-color .2s, background .2s;
+}
+.pj-filters button:hover{ color:var(--pj-text); }
+.pj-filters button.is-on{ color:var(--pj-text); border-color:var(--pj-line2); background:var(--pj-surface2); }
+
+/* --- project cards --- */
+.pj-stack{ display:grid; gap:16px; }
+.pj-card{
+  position:relative; overflow:hidden;
+  border:1px solid var(--pj-line); border-radius:var(--pj-r);
+  background:var(--pj-surface);
+  transition:border-color .24s ease, opacity .3s ease, transform .3s ease;
+}
+.pj-card::before{
+  content:""; position:absolute; inset:0 auto 0 0; width:3px;
+  background:var(--pj-accent, var(--pj-teal));
+}
+.pj-card:hover{ border-color:var(--pj-line2); }
+.pj-card[hidden]{ display:none; }
+.pj-card.is-in{ animation:pjIn .45s cubic-bezier(.22,.9,.3,1) backwards; }
+@keyframes pjIn{ from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none} }
+
+.pj-card-top{ padding:22px clamp(18px,2.6vw,26px) 0 calc(clamp(18px,2.6vw,26px) + 3px); }
+.pj-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:9px; }
+.pj-year{ font-size:.78rem; font-weight:700; color:var(--pj-accent, var(--pj-teal)); }
+.pj-status{
+  font-size:.7rem; font-weight:600; padding:3px 9px; border-radius:999px;
+  color:var(--pj-dim); border:1px solid var(--pj-line); background:var(--pj-surface2);
+}
+.pj-title{
+  font-family:'Manrope','Inter',sans-serif; font-weight:700; font-size:1.14rem;
+  color:var(--pj-text); margin:0 0 9px; line-height:1.35;
+}
+.pj-summary{ font-size:.94rem; line-height:1.68; color:var(--pj-dim); margin:0; max-width:72ch; }
+.pj-summary strong{ color:var(--pj-text); font-weight:600; }
+.pj-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+.pj-tag{
+  font-size:.73rem; padding:4px 10px; border-radius:999px;
+  color:var(--pj-dim); border:1px solid var(--pj-line); background:var(--pj-surface2);
+}
+
+/* --- expandable detail --- */
+.pj-more{
+  display:inline-flex; align-items:center; gap:8px; margin:16px 0 0;
+  font:inherit; font-size:.84rem; font-weight:600; cursor:pointer;
+  background:transparent; border:0; padding:8px 0; min-height:40px;
+  color:var(--pj-accent, var(--pj-teal));
+}
+.pj-more svg{ width:14px; height:14px; transition:transform .3s cubic-bezier(.65,0,.35,1); }
+.pj-card.is-open .pj-more svg{ transform:rotate(90deg); }
+.pj-detail{
+  display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .38s cubic-bezier(.65,0,.35,1);
+}
+.pj-card.is-open .pj-detail{ grid-template-rows:1fr; }
+.pj-detail-inner{ overflow:hidden; }
+.pj-detail-pad{
+  padding:4px clamp(18px,2.6vw,26px) 24px calc(clamp(18px,2.6vw,26px) + 3px);
+}
+.pj-facts{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); margin-top:10px; }
+.pj-fact{ border-top:1px solid var(--pj-line); padding-top:11px; }
+.pj-fact-k{ font-size:.76rem; color:var(--pj-accent, var(--pj-teal)); font-weight:600; margin-bottom:5px; }
+.pj-fact-v{ font-size:.89rem; line-height:1.65; color:var(--pj-dim); }
+.pj-card-foot{ padding-bottom:22px; }
+
+/* --- toolkit --- */
+.pj-kit{ display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); }
+.pj-kit-box{
+  padding:20px; border:1px solid var(--pj-line); border-radius:var(--pj-r);
+  background:var(--pj-surface); border-top:3px solid var(--pj-accent, var(--pj-teal));
+}
+.pj-kit-box h3{ font-family:'Manrope','Inter',sans-serif; font-size:.95rem; margin:0 0 12px; color:var(--pj-text); }
+
+@media (prefers-reduced-motion: reduce){
+  .pj-card.is-in{ animation:none }
+  .pj-detail{ transition:none }
+  .pj-more svg{ transition:none }
+  .pj-live i{ animation:none }
+}
+</style>
 </head>
 <body>
 
@@ -35,7 +158,6 @@
       <li><a href="experience.html">Experience</a></li>
       <li><a href="projects.html">Projects</a></li>
       <li><a href="publications.html">Publications</a></li>
-      <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
@@ -48,65 +170,28 @@
   </div>
 </nav>
 
-<div class="about-modal-backdrop" id="aboutModalBackdrop" hidden>
-  <div class="about-modal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
-    <div class="about-modal-head">
-      <h3 id="aboutModalTitle"><span class="about-modal-icon">&#128100;</span> My Story</h3>
-      <button class="about-modal-close" id="aboutModalClose" aria-label="Close">&times;</button>
-    </div>
-    <div class="about-modal-body">
-      <p>
-        I am a <strong>Master's student in computational medicinal chemistry</strong>, working at the
-        intersection of medicinal chemistry and structure-based drug design. My research centres on
-        <strong><em>Candida albicans</em> Als3</strong> (PDB: 4LEB), a cell-surface adhesin involved in
-        biofilm formation, as a target for new antifungal and antibiofilm agents. Across two manuscripts
-        I have combined large-scale molecular docking, DFT/HOMO&ndash;LUMO analysis, scaffold
-        classification, and a dual-engine consensus docking framework (PharmaCoNet + AutoDock Vina) to
-        screen, validate, and rationalise candidate compounds against this target.
-      </p>
-      <p>
-        My undergraduate training was at <strong>MSA University</strong> in 6th of October City, Egypt,
-        on a programme <strong>validated by the University of Greenwich</strong>. The work was examined
-        to Greenwich standards and moderated by Greenwich academics, so I hold a
-        <strong>British BSc (Hons)</strong> in addition to the Egyptian degree, awarded with First Class
-        Honours. Every exam was sat in Egypt &mdash; the degree is genuinely British, the four years were
-        genuinely Egyptian, and I think that combination says something useful about how I learned to
-        work: to an external standard, without the external address.
-      </p>
-      <p>
-        I am currently pursuing my M.Sc. in the <strong>Department of Chemical Engineering at Yeungnam
-        University</strong>, South Korea, funded by the <strong>Global Korea Scholarship (GKS)</strong>.
-        I also serve as a peer reviewer, most recently for an <em>A. baumannii</em> docking manuscript,
-        and I am preparing to apply for a <strong>DPhil in bioinformatics or synthetic biology at the
-        University of Oxford</strong>.
-      </p>
-      <a href="index.html#journey" class="about-modal-journey-link" id="aboutModalJourneyLink">See the full journey, plotted by coordinates &rarr;</a>
-    </div>
-  </div>
-</div>
+<main id="main" class="pj">
 
-
-<main id="main">
-  <div class="page-header">
+  <section id="structure" style="padding-top:40px;">
     <div class="wrap">
       <div class="eyebrow">Projects</div>
-      <h1>Projects</h1>
-      <p>Structure-based drug discovery work centered on <em>C. albicans</em> Als3, plus the toolkit behind it.</p>
-    </div>
-  </div>
-
-  <section id="structure" style="padding-top:0;">
-    <div class="wrap">
-      <div class="eyebrow">Interactive</div>
-      <h2 class="section-title">Als3 &ndash; inhibitor complex</h2>
-      <p style="color:var(--text-dim); max-width:64ch; margin:-10px 0 22px;">
-        Docking pose from &ldquo;Discovery of novel <em>C. albicans</em> Als3 inhibitor classes.&rdquo;
-        Drag to rotate, scroll to zoom.
+      <h1 class="section-title">One target, three angles</h1>
+      <p class="pj-lede">
+        Everything below circles the same protein: <em>Candida albicans</em> Als3, the adhesin that
+        lets the fungus stick to host tissue and build a biofilm. Start by turning the structure
+        itself, then open a card to see how each study approached it.
       </p>
-      <div class="mol-card">
-        <div class="mol-viewer" id="molViewer" data-pdb="assets/4LEB_complex.pdb" style="position:relative; height:460px; overflow:hidden; border-radius:12px;">
+
+      <div class="pj-viewer">
+        <div class="pj-viewer-head">
+          <div>
+            <h2 class="pj-viewer-title">Als3 &ndash; inhibitor complex, PDB 4LEB</h2>
+            <p class="pj-viewer-sub">Docking pose from the natural-carotenoid screening study.</p>
+          </div>
+          <span class="pj-live"><i></i> interactive</span>
+        </div>
+        <div class="mol-viewer" id="molViewer" data-pdb="assets/4LEB_complex.pdb" style="position:relative; height:460px; overflow:hidden;">
           <div class="mol-viewer-loading" id="molLoading">Loading structure&hellip;</div>
-          <div class="mol-viewer-hint">drag to rotate &middot; scroll to zoom &middot; hover a residue to see its name</div>
         </div>
         <div class="mol-controls">
           <button class="mol-btn active" data-mol-style="cartoon">Cartoon</button>
@@ -116,114 +201,199 @@
           <button class="mol-btn" id="molReset">Reset view</button>
           <button class="mol-btn" id="molSnapshot">Save image</button>
         </div>
+        <p class="pj-viewer-sub" style="padding:12px clamp(16px,2.4vw,22px);">
+          Drag to rotate &middot; scroll to zoom &middot; hover a residue to see its name
+        </p>
       </div>
     </div>
   </section>
 
-  <section id="research" style="border-top:none; padding-top:8px;">
+  <section id="work" style="padding-top:28px;">
     <div class="wrap">
-      <div class="filter-row" id="researchFilters">
-        <button class="filter-btn active" data-filter="all" style="--fbg:rgba(148,163,158,0.16); --fc:var(--text);">All</button>
-        <button class="filter-btn" data-filter="docking" style="--fbg:rgba(79,209,181,0.14); --fc:var(--teal-ink);">Docking</button>
-        <button class="filter-btn" data-filter="validation" style="--fbg:rgba(94,179,234,0.14); --fc:var(--sky-ink);">Validation</button>
-        <button class="filter-btn" data-filter="natural" style="--fbg:rgba(164,138,240,0.14); --fc:var(--violet-ink);">Natural Products</button>
-      </div>
-      <div class="research-timeline">
-        <div class="year-block">
-          <div class="year-label">2023</div>
-          <div class="research-grid">
-            <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)" data-cat="natural">
-              <img class="research-card-img" src="assets/project-carotenoids.jpg" alt="" onerror="this.remove()">
-              <h3>Natural Carotenoid Screening against Als3</h3>
-              <p>
-                First published study to screen natural carotenoids against Als3, identifying
-                <strong>mangicrocin</strong> as a top hit and establishing a starting point for the
-                later antifungal library and consensus-docking work.
-              </p>
-              <div class="chip-row">
-                <span class="chip">Natural Products</span>
-                <span class="chip">Virtual Screening</span>
-                <span class="chip">Als3</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="eyebrow">Research threads</div>
+      <h2 class="section-title">The work</h2>
 
-        <div class="year-block">
-          <div class="year-label">2024</div>
-          <div class="research-grid">
-            <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)" data-cat="docking">
-              <img class="research-card-img" src="assets/project-docking.jpg" alt="" onerror="this.remove()">
-              <h3>Antifungal &amp; Antibiofilm Docking against Als3</h3>
-              <p>
-                Large-scale structure-based screening of a curated antifungal/antibiofilm library against
-                <em>C. albicans</em> Als3 (PDB 4LEB). Scaffold classification (ClassyFire, Murcko decomposition
-                via RDKit) and residue-interaction analysis across 228 diagrams revealed a weak score&ndash;activity
-                correlation, pointing to mechanistic heterogeneity across the library.
-              </p>
-              <div class="chip-row">
-                <span class="chip">Molecular Docking</span>
-                <span class="chip">Als3</span>
-                <span class="chip">DFT / HOMO&ndash;LUMO</span>
-              </div>
+      <div class="pj-filters" id="pjFilters" role="group" aria-label="Filter projects">
+        <button type="button" data-filter="all" class="is-on">All</button>
+        <button type="button" data-filter="docking">Docking</button>
+        <button type="button" data-filter="validation">Method validation</button>
+        <button type="button" data-filter="natural">Natural products</button>
+      </div>
+
+      <div class="pj-stack" id="pjStack">
+
+        <article class="pj-card" data-cat="docking validation" style="--pj-accent:var(--pj-sky)">
+          <div class="pj-card-top">
+            <div class="pj-meta">
+              <span class="pj-year">2025</span>
+              <span class="pj-status">manuscript under revision</span>
             </div>
-            <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)" data-cat="validation">
-              <img class="research-card-img" src="assets/project-validation.jpg" alt="" onerror="this.remove()">
-              <h3>Dual-Engine Consensus Docking</h3>
-              <p>
-                Built a PharmaCoNet + AutoDock Vina consensus framework, with Python-based RMSD
-                validation, to satisfy a reviewer's request for stronger confidence in Als3 binding
-                pose predictions on a manuscript now under revision.
-              </p>
-              <div class="chip-row">
-                <span class="chip">Consensus Docking</span>
-                <span class="chip">RMSD Validation</span>
-                <span class="chip">CADD</span>
+            <h3 class="pj-title">Dual-engine consensus docking framework</h3>
+            <p class="pj-summary">
+              A reviewer asked for stronger confidence in the Als3 binding-pose predictions. Rather than
+              re-running the same engine harder, I built a <strong>PharmaCoNet + AutoDock Vina</strong>
+              consensus pipeline with Python-based RMSD validation, so a pose only survives if two
+              independent scoring philosophies agree on it.
+            </p>
+            <div class="pj-tags">
+              <span class="pj-tag">Consensus docking</span><span class="pj-tag">RMSD validation</span>
+              <span class="pj-tag">Python</span><span class="pj-tag">CADD</span>
+            </div>
+            <button class="pj-more" type="button" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+              How it works
+            </button>
+          </div>
+          <div class="pj-detail">
+            <div class="pj-detail-inner">
+              <div class="pj-detail-pad">
+                <div class="pj-facts">
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">The problem</div>
+                    <div class="pj-fact-v">A single docking engine's top pose is a hypothesis, not a result. Agreement between engines is weak evidence; agreement plus low RMSD is considerably stronger.</div>
+                  </div>
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">What I built</div>
+                    <div class="pj-fact-v">A Python pipeline that docks with both engines, aligns the resulting poses, computes pairwise RMSD, and retains only poses converging below a set threshold.</div>
+                  </div>
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">Why it matters</div>
+                    <div class="pj-fact-v">It converts a reviewer objection into a reusable method. The same framework now applies to any target in the group, not only Als3.</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          <div class="pj-card-foot"></div>
+        </article>
+
+        <article class="pj-card" data-cat="docking" style="--pj-accent:var(--pj-teal)">
+          <div class="pj-card-top">
+            <div class="pj-meta">
+              <span class="pj-year">2024</span>
+              <span class="pj-status">manuscript</span>
+            </div>
+            <h3 class="pj-title">Antifungal and antibiofilm library screening against Als3</h3>
+            <p class="pj-summary">
+              Large-scale structure-based screening of a curated antifungal/antibiofilm library against
+              Als3 (PDB 4LEB), with scaffold classification by ClassyFire and Murcko decomposition in
+              RDKit. Residue-interaction analysis across <strong>228 diagrams</strong> revealed a
+              <strong>weak score&ndash;activity correlation</strong> &mdash; which is the interesting
+              result, not a failed one.
+            </p>
+            <div class="pj-tags">
+              <span class="pj-tag">Molecular docking</span><span class="pj-tag">Als3</span>
+              <span class="pj-tag">DFT / HOMO&ndash;LUMO</span><span class="pj-tag">RDKit</span>
+              <span class="pj-tag">ClassyFire</span>
+            </div>
+            <button class="pj-more" type="button" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+              What it showed
+            </button>
+          </div>
+          <div class="pj-detail">
+            <div class="pj-detail-inner">
+              <div class="pj-detail-pad">
+                <div class="pj-facts">
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">Approach</div>
+                    <div class="pj-fact-v">Dock the curated library, classify every hit by chemical scaffold, then read the residue-level interaction pattern rather than trusting the score alone.</div>
+                  </div>
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">Finding</div>
+                    <div class="pj-fact-v">Docking score tracked reported activity only weakly, pointing to mechanistic heterogeneity: the library is not acting through one shared binding mode.</div>
+                  </div>
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">Limitation</div>
+                    <div class="pj-fact-v">Rigid-receptor docking cannot capture Als3 conformational change, and the activity data are aggregated across assay types. Both bound how far the correlation can be pushed.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pj-card-foot"></div>
+        </article>
+
+        <article class="pj-card" data-cat="docking natural" style="--pj-accent:var(--pj-amber)">
+          <div class="pj-card-top">
+            <div class="pj-meta">
+              <span class="pj-year">2023</span>
+              <span class="pj-status">published</span>
+            </div>
+            <h3 class="pj-title">Natural carotenoid screening against Als3</h3>
+            <p class="pj-summary">
+              The first published study to screen natural carotenoids against Als3, identifying
+              <strong>mangicrocin</strong> as the top hit. This became the entry point for everything
+              after it &mdash; the library work and the consensus framework both grew out of questions
+              this study raised.
+            </p>
+            <div class="pj-tags">
+              <span class="pj-tag">Natural products</span><span class="pj-tag">Virtual screening</span>
+              <span class="pj-tag">Als3</span>
+            </div>
+            <button class="pj-more" type="button" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+              Why carotenoids
+            </button>
+          </div>
+          <div class="pj-detail">
+            <div class="pj-detail-inner">
+              <div class="pj-detail-pad">
+                <div class="pj-facts">
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">Rationale</div>
+                    <div class="pj-fact-v">Carotenoids are long, flexible, amphipathic molecules &mdash; an unusual fit for the extended peptide-binding groove of an adhesin, and largely unexplored against this target.</div>
+                  </div>
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">Outcome</div>
+                    <div class="pj-fact-v">Mangicrocin emerged as the leading candidate, giving a concrete starting scaffold instead of a general claim about the class.</div>
+                  </div>
+                  <div class="pj-fact">
+                    <div class="pj-fact-k">What it opened</div>
+                    <div class="pj-fact-v">It raised the question of whether score alone can rank such flexible ligands, which is precisely what the next two projects went on to test.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="pj-card-foot"></div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <section id="toolkit">
+  <section id="toolkit" style="padding-top:28px;">
     <div class="wrap">
-      <div class="eyebrow">Toolkit</div>
+      <div class="eyebrow">Behind the work</div>
       <h2 class="section-title">Methods &amp; software</h2>
-      <div class="research-grid">
-        <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)">
+      <div class="pj-kit" style="margin-top:26px;">
+        <div class="pj-kit-box" style="--pj-accent:var(--pj-teal)">
           <h3>Docking &amp; CADD</h3>
-          <div class="chip-row">
-            <span class="chip">Discovery Studio</span>
-            <span class="chip">AutoDock Vina</span>
-            <span class="chip">PharmaCoNet</span>
-            <span class="chip">MD Simulation</span>
-            <span class="chip">ADMET</span>
+          <div class="pj-tags" style="margin-top:0;">
+            <span class="pj-tag">AutoDock Vina</span><span class="pj-tag">PharmaCoNet</span>
+            <span class="pj-tag">Discovery Studio</span><span class="pj-tag">MD simulation</span>
+            <span class="pj-tag">ADMET</span>
           </div>
         </div>
-        <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)">
-          <h3>Quantum Chemistry</h3>
-          <div class="chip-row">
-            <span class="chip">DFT</span>
-            <span class="chip">VeloxChem</span>
-            <span class="chip">ORCA</span>
-            <span class="chip">MESP</span>
+        <div class="pj-kit-box" style="--pj-accent:var(--pj-violet)">
+          <h3>Quantum chemistry</h3>
+          <div class="pj-tags" style="margin-top:0;">
+            <span class="pj-tag">DFT</span><span class="pj-tag">VeloxChem</span>
+            <span class="pj-tag">ORCA</span><span class="pj-tag">MESP</span>
           </div>
         </div>
-        <div class="research-card" style="--card-color:var(--amber); --card-color-ink:var(--amber-ink)">
+        <div class="pj-kit-box" style="--pj-accent:var(--pj-sky)">
           <h3>Cheminformatics</h3>
-          <div class="chip-row">
-            <span class="chip">RDKit</span>
-            <span class="chip">DataWarrior</span>
-            <span class="chip">ClassyFire</span>
+          <div class="pj-tags" style="margin-top:0;">
+            <span class="pj-tag">RDKit</span><span class="pj-tag">DataWarrior</span>
+            <span class="pj-tag">ClassyFire</span>
           </div>
         </div>
-        <div class="research-card" style="--card-color:var(--coral); --card-color-ink:var(--coral-ink)">
+        <div class="pj-kit-box" style="--pj-accent:var(--pj-coral)">
           <h3>Environment</h3>
-          <div class="chip-row">
-            <span class="chip">Python</span>
-            <span class="chip">Anaconda / Jupyter</span>
+          <div class="pj-tags" style="margin-top:0;">
+            <span class="pj-tag">Python</span><span class="pj-tag">Anaconda / Jupyter</span>
           </div>
         </div>
       </div>
@@ -236,6 +406,8 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-links">
+        <a href="https://orcid.org/0009-0007-3720-7805" target="_blank" rel="noopener">ORCID</a>
+        <a href="https://www.researchgate.net/profile/Ziyad-Abdelaal" target="_blank" rel="noopener">ResearchGate</a>
         <a href="https://scholar.google.com/citations?user=3E9q8EMAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
         <a href="https://github.com/ZiyadAbdelaal" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/ziyad-abdelaal" target="_blank" rel="noopener">LinkedIn</a>
@@ -245,9 +417,44 @@
     </div>
   </div>
 </footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/3Dmol/2.1.0/3Dmol-min.js"></script>
 <script src="mol-viewer.js"></script>
 <script src="script.js"></script>
+<script>
+(function () {
+  var stack = document.getElementById('pjStack');
+  if (!stack) return;
+  var cards = stack.querySelectorAll('.pj-card');
+
+  // expand / collapse
+  cards.forEach(function (card) {
+    var btn = card.querySelector('.pj-more');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var open = card.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  // filters
+  var bar = document.getElementById('pjFilters');
+  if (!bar) return;
+  bar.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      bar.querySelectorAll('button').forEach(function (x) { x.classList.remove('is-on'); });
+      b.classList.add('is-on');
+      var f = b.getAttribute('data-filter');
+      cards.forEach(function (c) {
+        var show = f === 'all' || (c.getAttribute('data-cat') || '').indexOf(f) > -1;
+        c.hidden = !show;
+        c.classList.remove('is-in');
+        if (show) { void c.offsetWidth; c.classList.add('is-in'); }
+      });
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
