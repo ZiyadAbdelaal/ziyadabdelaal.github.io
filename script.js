@@ -285,6 +285,19 @@ filterBtns.forEach(function(btn){
   }
   btn.addEventListener('click', open);
   if(closeBtn) closeBtn.addEventListener('click', close);
+  var journeyLink = document.getElementById('aboutModalJourneyLink');
+  if(journeyLink){
+    var journeyTarget = document.getElementById('journey');
+    if(journeyTarget){
+      journeyLink.addEventListener('click', function(e){
+        e.preventDefault();
+        close();
+        journeyTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    } else {
+      journeyLink.setAttribute('href', 'index.html#journey');
+    }
+  }
   backdrop.addEventListener('click', function(e){
     if(e.target === backdrop) close();
   });

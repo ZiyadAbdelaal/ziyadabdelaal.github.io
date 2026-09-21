@@ -172,6 +172,12 @@
   .about-modal-body{ padding:22px 24px 26px; }
   .about-modal-body p{ margin:0 0 16px; color:var(--text); line-height:1.6; }
   .about-modal-body p:last-child{ margin-bottom:0; }
+  .about-modal-journey-link{
+    display:inline-flex; align-items:center; gap:6px; margin-top:6px;
+    color:var(--teal-ink); font-weight:600; font-size:0.92rem; text-decoration:none;
+    border-bottom:1px solid transparent; transition:border-color .15s ease;
+  }
+  .about-modal-journey-link:hover{ border-color:var(--teal-ink); }
   .navtoggle{display:none; background:none; border:0; color:var(--text); font-size:1.4rem; cursor:pointer;}
 
   .theme-toggle{
