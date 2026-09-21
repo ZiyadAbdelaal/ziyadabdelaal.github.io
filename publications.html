@@ -122,12 +122,19 @@
 
           <blockquote class="pub-pullquote">Mangicrocin bound Als3 more than twice as tightly as the reference inhibitor rutin &mdash; and kept that edge across five different <em>Candida</em> species.</blockquote>
 
-          <button class="pub-abstract-toggle" data-target="abs1" aria-expanded="false">
-            <span class="toggle-label">Read abstract</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <button class="pub-abstract-toggle"
+            data-title="Targeting Als3 adhesin of clinically relevant <em>Candida</em> species using natural carotenoids: an in-silico study"
+            data-venue="Molecular Diversity, 30, 6221&ndash;6237 &middot; Published March 2026"
+            data-authors="<span class=&quot;me&quot;>Z Abdelaal</span>, BR Boya, JH Lee, J Lee"
+            data-fig="assets/pub-fig-carotenoids.jpg"
+            data-figcap="Fig. 1, Mol Divers (2026) 30:6221&ndash;6237"
+            data-quote="Mangicrocin bound Als3 more than twice as tightly as the reference inhibitor rutin &mdash; and kept that edge across five different <em>Candida</em> species."
+            data-link="https://link.springer.com/article/10.1007/s11030-026-11525-2"
+            data-abstract="abs1">
+            <span class="toggle-label">Read Abstract</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
           </button>
-          <div class="pub-abstract" id="abs1" hidden>
-            <p>
+          <template id="abs1"><p>
               Candidemia carries mortality rates as high as 75%, driven in part by multidrug-resistant
               biofilms. This study targeted the Als3 adhesin &mdash; the main driver of <em>Candida</em>
               attachment &mdash; as a non-lethal anti-biofilm strategy. A library of 1,570 natural
@@ -142,8 +149,7 @@
               simulations confirmed stable retention in the binding pocket, and ADMET profiling suggested
               the top five hits are non-toxic and druggable &mdash; though, as a fully computational study,
               these findings still require experimental validation.
-            </p>
-          </div>
+          </p></template>
 
           <div class="pub-links">
             <a href="https://link.springer.com/article/10.1007/s11030-026-11525-2" target="_blank" rel="noopener">Article</a>
@@ -167,12 +173,19 @@
 
           <blockquote class="pub-pullquote">10 &micro;g/mL of decafluorobenzophenone cut biofilm mass to about 1&ndash;2% of control &mdash; and a 36-fold drop in ALS3 expression pointed straight at the mechanism.</blockquote>
 
-          <button class="pub-abstract-toggle" data-target="abs2" aria-expanded="false">
-            <span class="toggle-label">Read abstract</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <button class="pub-abstract-toggle"
+            data-title="Antibiofilm and Anti-Hyphal Activities of Halogenated Benzophenones Against Azole-Resistant <em>Candida albicans</em>"
+            data-venue="International Journal of Molecular Sciences, 27(17), 7528 &middot; Published August 2026"
+            data-authors="J Jo, <span class=&quot;me&quot;>Z Abdelaal</span>, YG Kim, JH Lee, J Lee"
+            data-fig="https://pub.mdpi-res.com/ijms/ijms-27-07528/article_deploy/html/images/ijms-27-07528-g001.png?1787406434"
+            data-figcap="Fig. 1, Int. J. Mol. Sci. 2026, 27(17), 7528 &middot; CC BY 3.0"
+            data-quote="10 &micro;g/mL of decafluorobenzophenone cut biofilm mass to about 1&ndash;2% of control &mdash; and a 36-fold drop in ALS3 expression pointed straight at the mechanism."
+            data-link="https://www.mdpi.com/1422-0067/27/17/7528"
+            data-abstract="abs2">
+            <span class="toggle-label">Read Abstract</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
           </button>
-          <div class="pub-abstract" id="abs2" hidden>
-            <p>
+          <template id="abs2"><p>
               <em>Candida albicans</em> biofilms drive persistent, drug-resistant infections, so this study
               targeted virulence rather than growth: a library of 101 structurally diverse benzophenones
               was screened for antibiofilm and anti-hyphal activity against azole-resistant <em>C.
@@ -187,8 +200,7 @@
               plant germination, and hemolysis &mdash; the compound stayed low-toxicity even at active
               concentrations, positioning halogenation as a key lever for turning a weak antifungal
               scaffold into a strong, selective anti-virulence lead.
-            </p>
-          </div>
+          </p></template>
 
           <div class="pub-links">
             <a href="https://www.mdpi.com/1422-0067/27/17/7528" target="_blank" rel="noopener">Article</a>
@@ -199,6 +211,24 @@
       <p id="pubEmpty" class="fill" style="display:none;">No publications match your search.</p>
     </div>
   </section>
+
+  <div class="pub-modal-backdrop" id="pubModalBackdrop" hidden>
+    <div class="pub-modal" role="dialog" aria-modal="true" aria-labelledby="pubModalTitle">
+      <button class="pub-modal-close" id="pubModalClose" aria-label="Close">&times;</button>
+      <div class="pub-modal-fig">
+        <img id="pubModalImg" src="" alt="">
+        <span class="pub-modal-figcap" id="pubModalFigcap"></span>
+      </div>
+      <div class="pub-modal-body">
+        <div class="pub-modal-venue" id="pubModalVenue"></div>
+        <h3 id="pubModalTitle"></h3>
+        <div class="pub-modal-authors" id="pubModalAuthors"></div>
+        <blockquote class="pub-pullquote" id="pubModalQuote"></blockquote>
+        <div class="pub-modal-abstract" id="pubModalAbstract"></div>
+        <a class="btn btn-primary" id="pubModalLink" href="#" target="_blank" rel="noopener">Read full article &rarr;</a>
+      </div>
+    </div>
+  </div>
 </main>
 
 <footer>

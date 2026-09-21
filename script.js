@@ -188,17 +188,51 @@ filterBtns.forEach(function(btn){
   });
 })();
 
-// publication abstract toggle
-document.querySelectorAll('.pub-abstract-toggle').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    var target = document.getElementById(btn.getAttribute('data-target'));
-    if(!target) return;
-    var expanded = btn.getAttribute('aria-expanded') === 'true';
-    btn.setAttribute('aria-expanded', String(!expanded));
-    target.hidden = expanded;
-    btn.querySelector('.toggle-label').textContent = expanded ? 'Read abstract' : 'Hide abstract';
+// publication abstract modal
+(function(){
+  var backdrop = document.getElementById('pubModalBackdrop');
+  if(!backdrop) return;
+  var closeBtn = document.getElementById('pubModalClose');
+  var imgEl = document.getElementById('pubModalImg');
+  var figcapEl = document.getElementById('pubModalFigcap');
+  var venueEl = document.getElementById('pubModalVenue');
+  var titleEl = document.getElementById('pubModalTitle');
+  var authorsEl = document.getElementById('pubModalAuthors');
+  var quoteEl = document.getElementById('pubModalQuote');
+  var abstractEl = document.getElementById('pubModalAbstract');
+  var linkEl = document.getElementById('pubModalLink');
+
+  function open(btn){
+    titleEl.innerHTML = btn.getAttribute('data-title') || '';
+    venueEl.innerHTML = btn.getAttribute('data-venue') || '';
+    authorsEl.innerHTML = btn.getAttribute('data-authors') || '';
+    quoteEl.innerHTML = btn.getAttribute('data-quote') || '';
+    linkEl.href = btn.getAttribute('data-link') || '#';
+    var fig = btn.getAttribute('data-fig');
+    var figcap = btn.getAttribute('data-figcap');
+    imgEl.onerror = function(){ imgEl.removeAttribute('src'); };
+    imgEl.src = fig || '';
+    imgEl.alt = titleEl.textContent;
+    figcapEl.textContent = figcap || '';
+    var tplId = btn.getAttribute('data-abstract');
+    var tpl = tplId ? document.getElementById(tplId) : null;
+    abstractEl.innerHTML = tpl ? tpl.innerHTML : '';
+    backdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+  function close(){
+    backdrop.hidden = true;
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.pub-abstract-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){ open(btn); });
   });
-});
+  if(closeBtn) closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', function(e){ if(e.target === backdrop) close(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !backdrop.hidden) close();
+  });
+})();
 
 // publications: live search + author filter
 (function(){
