@@ -21,8 +21,8 @@
     --sky-ink:#5eb3ea;
     --navy:#7c93e6;
 
-    --max: 1280px;
-    --gutter: clamp(20px, 4.2vw, 56px);
+    --max: 1440px;
+    --gutter: clamp(20px, 4.5vw, 64px);
     --section-y: clamp(72px, 7vw, 112px);
     --radius: 14px;
     --grid-dot: rgba(238,241,238,0.055);
@@ -643,7 +643,7 @@
      =========================================================== */
 
   /* Use more of the screen on large monitors */
-  @media (min-width:1600px){ :root{ --max:1400px; } }
+  @media (min-width:1700px){ :root{ --max:1600px; } }
   @media (max-width:520px){ :root{ --section-y:56px; } }
 
   ::selection{ background:color-mix(in srgb, var(--teal) 30%, transparent); }
