@@ -188,6 +188,18 @@ filterBtns.forEach(function(btn){
   });
 })();
 
+// publication abstract toggle
+document.querySelectorAll('.pub-abstract-toggle').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var target = document.getElementById(btn.getAttribute('data-target'));
+    if(!target) return;
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    target.hidden = expanded;
+    btn.querySelector('.toggle-label').textContent = expanded ? 'Read abstract' : 'Hide abstract';
+  });
+});
+
 // publications: live search + author filter
 (function(){
   var pubs = document.querySelectorAll('#publications .pub');
