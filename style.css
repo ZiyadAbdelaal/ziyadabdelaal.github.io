@@ -778,9 +778,11 @@
   /* research domain interconnection map */
   .domain-map-intro{ color:var(--text-dim); font-size:0.95rem; max-width:64ch; margin-bottom:18px; }
   .domain-map-reset{ margin-bottom:18px; padding:9px 18px; font-size:0.86rem; }
+  .highlights-split{ display:grid; grid-template-columns:1fr; gap:48px; }
+  @media (min-width:900px){ .highlights-split{ grid-template-columns:1fr 1fr; } }
+
   .domain-map-card{
-    position:relative; border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--surface); overflow:hidden;
+    position:relative; border:none; background:transparent; overflow:visible;
   }
   #domainMap{ width:100%; }
   #domainMap svg{ cursor:grab; }

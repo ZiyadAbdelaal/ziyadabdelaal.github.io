@@ -30,7 +30,7 @@
   ];
 
   var width = container.clientWidth || 800;
-  var height = 340;
+  var height = 320;
 
   var svg = d3.select(container).append('svg')
     .attr('viewBox', [0, 0, width, height])
@@ -46,12 +46,12 @@
   function colorVar(name) { return 'var(--' + name + '-ink)'; }
 
   var simulation = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(120).strength(0.55))
-    .force('charge', d3.forceManyBody().strength(-420))
+    .force('link', d3.forceLink(links).id(function (d) { return d.id; }).distance(75).strength(0.6))
+    .force('charge', d3.forceManyBody().strength(-260))
     .force('center', d3.forceCenter(width / 2, height / 2))
-    .force('x', d3.forceX(width / 2).strength(0.06))
-    .force('y', d3.forceY(height / 2).strength(0.09))
-    .force('collide', d3.forceCollide().radius(function (d) { return d.r + 14; }));
+    .force('x', d3.forceX(width / 2).strength(0.07))
+    .force('y', d3.forceY(height / 2).strength(0.1))
+    .force('collide', d3.forceCollide().radius(function (d) { return d.r + 10; }));
 
   var link = linkGroup.selectAll('line')
     .data(links)

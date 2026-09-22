@@ -483,41 +483,43 @@
 
   <section id="highlights" style="padding-top:40px;">
     <div class="wrap">
-      <div class="eyebrow">Research Highlights</div>
-      <h2 class="section-title">What I work on</h2>
-      <div class="research-grid">
-        <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)">
-          <h3>Structure-Based Antifungal Discovery</h3>
-          <p>Large-scale molecular docking against <em>C. albicans</em> Als3 (PDB 4LEB) to screen antifungal and antibiofilm candidates, paired with DFT/HOMO&ndash;LUMO analysis and scaffold classification.</p>
-          <div class="chip-row"><span class="chip">Molecular Docking</span><span class="chip">Als3</span></div>
+      <div class="highlights-split">
+        <div class="highlights-col">
+          <div class="eyebrow">Research Highlights</div>
+          <h2 class="section-title">What I work on</h2>
+          <div class="research-grid" style="grid-template-columns:1fr;">
+            <div class="research-card" style="--card-color:var(--teal); --card-color-ink:var(--teal-ink)">
+              <h3>Structure-Based Antifungal Discovery</h3>
+              <p>Large-scale molecular docking against <em>C. albicans</em> Als3 (PDB 4LEB) to screen antifungal and antibiofilm candidates, paired with DFT/HOMO&ndash;LUMO analysis and scaffold classification.</p>
+              <div class="chip-row"><span class="chip">Molecular Docking</span><span class="chip">Als3</span></div>
+            </div>
+            <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)">
+              <h3>Consensus Docking &amp; Validation</h3>
+              <p>A dual-engine (PharmaCoNet + AutoDock Vina) consensus framework with Python-based RMSD validation, built to strengthen confidence in predicted binding poses.</p>
+              <div class="chip-row"><span class="chip">Consensus Docking</span><span class="chip">RMSD</span></div>
+            </div>
+            <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)">
+              <h3>Quantum &amp; Cheminformatic Descriptors</h3>
+              <p>DFT-derived electronic descriptors and scaffold-based library filtering (ClassyFire, Murcko decomposition) to rationalize activity trends across natural-product and synthetic compound sets.</p>
+              <div class="chip-row"><span class="chip">DFT</span><span class="chip">Cheminformatics</span></div>
+            </div>
+          </div>
+          <p style="margin-top:24px;"><a href="projects.html" style="color:var(--navy); text-decoration:underline; font-weight:600;">See full projects &amp; the interactive Als3 structure &rarr;</a></p>
         </div>
-        <div class="research-card" style="--card-color:var(--sky); --card-color-ink:var(--sky-ink)">
-          <h3>Consensus Docking &amp; Validation</h3>
-          <p>A dual-engine (PharmaCoNet + AutoDock Vina) consensus framework with Python-based RMSD validation, built to strengthen confidence in predicted binding poses.</p>
-          <div class="chip-row"><span class="chip">Consensus Docking</span><span class="chip">RMSD</span></div>
-        </div>
-        <div class="research-card" style="--card-color:var(--violet); --card-color-ink:var(--violet-ink)">
-          <h3>Quantum &amp; Cheminformatic Descriptors</h3>
-          <p>DFT-derived electronic descriptors and scaffold-based library filtering (ClassyFire, Murcko decomposition) to rationalize activity trends across natural-product and synthetic compound sets.</p>
-          <div class="chip-row"><span class="chip">DFT</span><span class="chip">Cheminformatics</span></div>
-        </div>
-      </div>
-      <p style="margin-top:24px;"><a href="projects.html" style="color:var(--navy); text-decoration:underline; font-weight:600;">See full projects &amp; the interactive Als3 structure &rarr;</a></p>
-    </div>
-  </section>
 
-  <section id="domain-map" style="border-top:none; padding-top:8px;">
-    <div class="wrap">
-      <div class="eyebrow">Interconnections</div>
-      <h2 class="section-title">Research Domains &amp; Interconnections</h2>
-      <p class="domain-map-intro">Explore how the methods behind the Als3 work connect &mdash; drag nodes to reposition, hover for a description.</p>
-      <button class="btn btn-ghost domain-map-reset" id="domainMapReset">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path></svg>
-        Reset Map View
-      </button>
-      <div class="domain-map-card">
-        <div id="domainMap"></div>
-        <div class="domain-map-tooltip" id="domainMapTooltip"></div>
+        <div class="highlights-col">
+          <div class="eyebrow">Interconnections</div>
+          <h2 class="section-title">Research Domains &amp; Interconnections</h2>
+          <p class="domain-map-intro">Explore how the methods behind the Als3 work connect &mdash; drag nodes to reposition, hover for a description.</p>
+          <button class="btn btn-ghost domain-map-reset" id="domainMapReset">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path></svg>
+            Reset Map View
+          </button>
+          <div class="domain-map-card">
+            <div id="domainMap"></div>
+            <div class="domain-map-tooltip" id="domainMapTooltip"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
