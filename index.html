@@ -71,22 +71,16 @@
 
 /* copyable email chip in the hero */
 .gl-mail{
-  display:inline-flex; align-items:center; gap:0; margin-top:14px;
-  border:1px solid var(--line, rgba(238,241,238,0.10)); border-radius:999px;
-  background:var(--surface, #1a222a); overflow:hidden;
+  display:inline-flex; align-items:center; margin-top:14px;
 }
-.gl-mail a{
-  padding:8px 6px 8px 15px; font-size:.84rem; text-decoration:none;
-  color:var(--text-dim, #a4b0ac); transition:color .2s;
+.gl-mail .copy-btn{
+  width:40px; height:40px; border-radius:50%;
+  border:1px solid var(--line, rgba(238,241,238,0.10));
+  background:var(--surface, #1a222a); color:var(--teal-ink, #4fd1b5);
+  transition:color .2s, border-color .2s;
 }
-.gl-mail a:hover{ color:var(--text, #eef1ee); }
-.gl-mail button{
-  display:inline-flex; align-items:center; gap:6px;
-  font:inherit; font-size:.76rem; cursor:pointer; min-height:40px;
-  padding:8px 14px 8px 8px; border:0; background:transparent;
-  color:var(--teal-ink, #4fd1b5);
-}
-.gl-mail button svg{ width:13px; height:13px; }
+.gl-mail .copy-btn:hover{ border-color:var(--teal-ink, #4fd1b5); }
+.gl-mail .copy-btn svg{ width:16px; height:16px; }
 
 @media (prefers-reduced-motion: reduce){
   .gl-spin, .gl-pin-halo{ animation:none; }
@@ -331,10 +325,8 @@
             <a class="btn btn-ghost" href="assets/Ziyad_Abdelaal_CV.pdf" target="_blank" rel="noopener">View CV</a>
           </div>
           <div class="gl-mail">
-            <a href="mailto:ziyadabdelaal1@gmail.com">ziyadabdelaal1@gmail.com</a>
-            <button class="copy-btn" type="button" data-copy="ziyadabdelaal1@gmail.com" aria-label="Copy email address">
+            <button class="copy-btn" type="button" data-copy="ziyadabdelaal1@gmail.com" aria-label="Copy email address" title="Copy email address">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              Copy
             </button>
           </div>
           <div class="social-row">
@@ -347,9 +339,7 @@
             <a href="https://www.linkedin.com/in/ziyad-abdelaal" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn" style="--social-color:#0A66C2">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.24 8.24h4.5V23H.24V8.24zM8.27 8.24h4.31v2.01h.06c.6-1.13 2.07-2.33 4.26-2.33 4.55 0 5.39 3 5.39 6.9V23h-4.5v-6.34c0-1.51-.03-3.46-2.11-3.46-2.11 0-2.44 1.65-2.44 3.35V23h-4.5V8.24z"/></svg>
             </a>
-            <a href="https://orcid.org/0009-0007-3720-7805" target="_blank" rel="noopener">ORCID</a>
-        <a href="https://www.researchgate.net/profile/Ziyad-Abdelaal" target="_blank" rel="noopener">ResearchGate</a>
-        <a href="https://scholar.google.com/citations?user=3E9q8EMAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar" style="--social-color:#4285F4">
+            <a href="https://scholar.google.com/citations?user=3E9q8EMAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar" style="--social-color:#4285F4">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.36 3.4a7.8 7.8 0 0 1 3.72-3.06L12 6.56l3.92 3.28a7.8 7.8 0 0 1 3.72 3.06L24 9.5 12 0z"/></svg>
             </a>
             <a href="https://github.com/ZiyadAbdelaal" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub" style="--social-color:#181717">
