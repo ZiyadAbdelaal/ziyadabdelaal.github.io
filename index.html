@@ -21,7 +21,13 @@
 
 <style>
 /* ===== Hero globe widget — self-contained, cannot be broken by style.css ===== */
-.name-row{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+.name-row{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+
+.journey-icon-wrap{ display:flex; flex-direction:column; align-items:center; gap:4px; flex:none; }
+.journey-icon-caption{
+  font-family:'Manrope','Inter',sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.02em; color:var(--text-dim, #a4b0ac); white-space:nowrap;
+}
 
 .journey-icon-btn{
   --gl-surface: var(--surface, #1a222a);
@@ -32,7 +38,7 @@
   --gl-violet: var(--violet-ink, #a48af0);
 
   display:inline-flex; align-items:center; justify-content:center;
-  width:46px; height:46px; padding:0; margin:0; flex:none;
+  width:72px; height:72px; padding:0; margin:0; flex:none;
   border:none; border-radius:50%; background:transparent; cursor:pointer;
   transition:transform .25s ease;
 }
@@ -115,9 +121,9 @@
   }
 .journey-modal-head h3{ font-size:1.25rem; margin:0; }
 .journey-modal-intro{ padding:6px 26px 16px; color:var(--text-dim); font-size:0.92rem; }
-.wmap-wrap{ background:#0d1319; margin:0 26px; border-radius:12px; overflow:hidden; }
+.wmap-wrap{ background:var(--surface-2); margin:0 26px; border-radius:12px; overflow:hidden; border:1px solid var(--line); }
 .wmap-svg{ display:block; width:100%; height:auto; }
-.wmap-dots{ fill:rgba(238,241,238,0.16); }
+.wmap-dots{ fill:var(--line-strong); }
 .wmap-stop{ cursor:pointer; }
 .wmap-stop:focus{ outline:none; }
 .wmap-halo{ transition:opacity .2s ease; }
@@ -287,7 +293,8 @@
           <div class="kicker"><span class="dot"></span>M.Sc. Student &middot; Computational Medicinal Chemistry &amp; CADD</div>
           <div class="name-row">
             <h1 class="name">Ziyad Abdelaal</h1>
-            <button class="journey-icon-btn" id="journeyOpenBtn" type="button" aria-haspopup="dialog" aria-label="My academic journey — Egypt to South Korea" title="My academic journey">
+            <div class="journey-icon-wrap">
+              <button class="journey-icon-btn" id="journeyOpenBtn" type="button" aria-haspopup="dialog" aria-label="My academic journey — Egypt to South Korea" title="My academic journey">
               <svg class="gl-globe" viewBox="0 0 200 200" role="img" aria-label="Cartoon globe showing Egypt, the United Kingdom, and South Korea">
                 <defs>
                   <clipPath id="glClip"><circle cx="100" cy="100" r="72"></circle></clipPath>
@@ -323,7 +330,9 @@
                 <circle class="gl-pin-halo c" cx="142" cy="96" r="7" fill="var(--gl-teal)"></circle>
                 <circle cx="142" cy="96" r="5.2" fill="var(--gl-surface)" stroke="var(--gl-teal)" stroke-width="2.6"></circle>
               </svg>
-            </button>
+              </button>
+              <span class="journey-icon-caption">My Journey</span>
+            </div>
           </div>
           <div class="phd-banner">
             <span class="phd-banner-dot"></span>
@@ -404,18 +413,18 @@
 
           <g class="wmap-stop is-active" data-stop="0" tabindex="0" role="button" aria-label="Egypt">
             <circle cx="586" cy="167" r="16" fill="#f0a94e" opacity="0" class="wmap-halo"></circle>
-            <circle cx="586" cy="167" r="7" fill="#0d1319" stroke="#f0a94e" stroke-width="3" class="wmap-ring"></circle>
-            <text x="586" y="192" text-anchor="middle" font-size="15" font-weight="700" fill="#eef1ee">Egypt</text>
+            <circle cx="586" cy="167" r="7" fill="var(--surface-2)" stroke="#f0a94e" stroke-width="3" class="wmap-ring"></circle>
+            <text x="586" y="192" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">Egypt</text>
           </g>
           <g class="wmap-stop" data-stop="1" tabindex="0" role="button" aria-label="United Kingdom">
             <circle cx="505" cy="110" r="16" fill="#a48af0" opacity="0" class="wmap-halo"></circle>
-            <circle cx="505" cy="110" r="6" fill="#0d1319" stroke="#a48af0" stroke-width="2.6" stroke-dasharray="3 3" class="wmap-ring"></circle>
-            <text x="505" y="94" text-anchor="middle" font-size="15" font-weight="700" fill="#eef1ee">United Kingdom</text>
+            <circle cx="505" cy="110" r="6" fill="var(--surface-2)" stroke="#a48af0" stroke-width="2.6" stroke-dasharray="3 3" class="wmap-ring"></circle>
+            <text x="505" y="94" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">United Kingdom</text>
           </g>
           <g class="wmap-stop" data-stop="2" tabindex="0" role="button" aria-label="South Korea">
             <circle cx="857" cy="150" r="16" fill="#4fd1b5" opacity="0" class="wmap-halo"></circle>
-            <circle cx="857" cy="150" r="7" fill="#0d1319" stroke="#4fd1b5" stroke-width="3" class="wmap-ring"></circle>
-            <text x="857" y="175" text-anchor="middle" font-size="15" font-weight="700" fill="#eef1ee">South Korea</text>
+            <circle cx="857" cy="150" r="7" fill="var(--surface-2)" stroke="#4fd1b5" stroke-width="3" class="wmap-ring"></circle>
+            <text x="857" y="175" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text)">South Korea</text>
           </g>
         </svg>
       </div>
@@ -434,8 +443,8 @@
           </div>
           <p>
             BSc in Biotechnological Sciences at October University for Modern Sciences and Arts,
-            6th of October City. Graduated with First Class Honours. This is where I first met
-            molecular modelling, and where the thread that became my Als3 work began.
+            6th of October City. Graduated with First Class Honours. My passion for computational
+            biology started at the prototyping lab.
           </p>
         </div>
         <div class="journey-panel" data-panel="1">
@@ -447,10 +456,6 @@
             My programme in Egypt was validated by the University of Greenwich, so the same four
             years of study were examined to Greenwich standards, moderated by Greenwich academics,
             and conferred as a British BSc (Hons) alongside the Egyptian degree.
-          </p>
-          <p>
-            I sat every exam in Cairo. The degree crossed the Channel; I never did &mdash; which is
-            why this stop is drawn hollow and linked by a dashed line rather than a solid route.
           </p>
         </div>
         <div class="journey-panel" data-panel="2">
