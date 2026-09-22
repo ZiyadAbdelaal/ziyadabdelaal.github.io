@@ -192,7 +192,7 @@
 
   .wmap-wrap{ background:#0d1319; margin:0 26px; border-radius:12px; overflow:hidden; }
   .wmap-svg{ display:block; width:100%; height:auto; }
-  .wmap-dots{ fill:rgba(238,241,238,0.16); }
+  .wmap-land{ fill:rgba(94,179,234,0.22); stroke:rgba(94,179,234,0.4); stroke-width:0.8; }
   .wmap-stop{ cursor:pointer; }
   .wmap-stop:focus{ outline:none; }
   .wmap-halo{ transition:opacity .2s ease; }
