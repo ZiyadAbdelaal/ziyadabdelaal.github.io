@@ -21,28 +21,25 @@
 
 <style>
 /* ===== Hero globe widget — self-contained, cannot be broken by style.css ===== */
-.gl-card{
+.name-row{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+
+.journey-icon-btn{
   --gl-surface: var(--surface, #1a222a);
   --gl-surface2: var(--surface-2, #212b34);
-  --gl-text: var(--text, #eef1ee);
-  --gl-dim: var(--text-dim, #a4b0ac);
-  --gl-line: var(--line, rgba(238,241,238,0.10));
   --gl-line2: var(--line-strong, rgba(238,241,238,0.20));
   --gl-teal: var(--teal-ink, #4fd1b5);
   --gl-amber: var(--amber-ink, #f0a94e);
   --gl-violet: var(--violet-ink, #a48af0);
-  --gl-r: var(--radius, 14px);
 
-  display:flex; flex-direction:column; align-items:center; gap:0;
-  width:100%; padding:20px 18px 18px; cursor:pointer; text-align:center;
-  border:1px solid var(--gl-line); border-radius:var(--gl-r);
-  background:var(--gl-surface); color:inherit; font:inherit;
-  transition:border-color .25s ease, transform .25s ease;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:46px; height:46px; padding:0; margin:0; flex:none;
+  border:none; border-radius:50%; background:transparent; cursor:pointer;
+  transition:transform .25s ease;
 }
-.gl-card:hover, .gl-card:focus-visible{ border-color:var(--gl-line2); transform:translateY(-2px); }
-.gl-card:focus-visible{ outline:2px solid var(--gl-teal); outline-offset:3px; }
+.journey-icon-btn:hover, .journey-icon-btn:focus-visible{ transform:translateY(-2px) scale(1.06); }
+.journey-icon-btn:focus-visible{ outline:2px solid var(--gl-teal); outline-offset:3px; border-radius:50%; }
+.journey-icon-btn .gl-globe{ width:100%; height:100%; margin:0; }
 
-.gl-globe{ width:clamp(120px,14vw,164px); height:auto; display:block; margin-bottom:14px; }
 .gl-ocean{ fill:var(--gl-surface2); }
 .gl-rim{ fill:none; stroke:var(--gl-line2); stroke-width:2; }
 .gl-land{ fill:var(--gl-teal); opacity:.32; }
@@ -56,18 +53,6 @@
 @keyframes glPing{ 0%{ transform:scale(.4); opacity:.4 } 70%,100%{ transform:scale(1.9); opacity:0 } }
 .gl-orbit{ fill:none; stroke:var(--gl-violet); stroke-width:1.4; stroke-dasharray:4 6; opacity:.55; }
 .gl-plane{ fill:var(--gl-teal); }
-
-.gl-label{
-  font-family:'Manrope','Inter',sans-serif; font-weight:700;
-  font-size:.92rem; color:var(--gl-text); margin-bottom:4px;
-}
-.gl-caption{ font-size:.78rem; line-height:1.5; color:var(--gl-dim); max-width:22ch; }
-.gl-cta{
-  display:inline-flex; align-items:center; gap:6px; margin-top:12px;
-  font-size:.76rem; font-weight:600; color:var(--gl-teal);
-}
-.gl-cta svg{ width:13px; height:13px; transition:transform .25s ease; }
-.gl-card:hover .gl-cta svg{ transform:translateX(3px); }
 
 /* copyable email chip in the hero */
 .gl-mail{
@@ -84,7 +69,7 @@
 
 @media (prefers-reduced-motion: reduce){
   .gl-spin, .gl-pin-halo{ animation:none; }
-  .gl-card:hover{ transform:none; }
+  .journey-icon-btn:hover{ transform:none; }
 }
 </style>
 <style>
@@ -300,7 +285,46 @@
         <div class="hero-intro">
           <span class="avatar-lg"><img class="avatar-img" src="assets/profile.jpg" alt="Ziyad Abdelaal" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"><span class="avatar-fallback">ZA</span></span>
           <div class="kicker"><span class="dot"></span>M.Sc. Student &middot; Computational Medicinal Chemistry &amp; CADD</div>
-          <h1 class="name">Ziyad Abdelaal</h1>
+          <div class="name-row">
+            <h1 class="name">Ziyad Abdelaal</h1>
+            <button class="journey-icon-btn" id="journeyOpenBtn" type="button" aria-haspopup="dialog" aria-label="My academic journey — Egypt to South Korea" title="My academic journey">
+              <svg class="gl-globe" viewBox="0 0 200 200" role="img" aria-label="Cartoon globe showing Egypt, the United Kingdom, and South Korea">
+                <defs>
+                  <clipPath id="glClip"><circle cx="100" cy="100" r="72"></circle></clipPath>
+                </defs>
+
+                <circle class="gl-ocean" cx="100" cy="100" r="72"></circle>
+
+                <g clip-path="url(#glClip)">
+                  <g class="gl-spin"><g transform="translate(0,0)"><path class="gl-land" d="M18,58 q16,-16 36,-10 q20,6 16,22 q-4,16 -24,18 q-22,2 -28,-12 q-6,-12 0,-18z"/><path class="gl-land" d="M30,104 q14,-8 24,4 q10,14 4,30 q-6,16 -18,12 q-14,-4 -16,-22 q-2,-18 6,-24z"/><path class="gl-land" d="M86,46 q28,-12 52,2 q22,12 14,30 q-8,18 -34,16 q-30,-2 -36,-20 q-6,-18 4,-28z"/><path class="gl-land" d="M104,100 q20,-6 30,10 q10,16 -2,26 q-14,12 -30,2 q-14,-10 -10,-24 q2,-10 12,-14z"/><path class="gl-land" d="M150,132 q18,-4 22,10 q4,14 -10,18 q-16,4 -20,-10 q-4,-14 8,-18z"/><path class="gl-land" d="M60,150 q16,-6 22,8 q4,12 -8,16 q-14,4 -18,-8 q-4,-12 4,-16z"/></g><g transform="translate(200,0)"><path class="gl-land" d="M18,58 q16,-16 36,-10 q20,6 16,22 q-4,16 -24,18 q-22,2 -28,-12 q-6,-12 0,-18z"/><path class="gl-land" d="M30,104 q14,-8 24,4 q10,14 4,30 q-6,16 -18,12 q-14,-4 -16,-22 q-2,-18 6,-24z"/><path class="gl-land" d="M86,46 q28,-12 52,2 q22,12 14,30 q-8,18 -34,16 q-30,-2 -36,-20 q-6,-18 4,-28z"/><path class="gl-land" d="M104,100 q20,-6 30,10 q10,16 -2,26 q-14,12 -30,2 q-14,-10 -10,-24 q2,-10 12,-14z"/><path class="gl-land" d="M150,132 q18,-4 22,10 q4,14 -10,18 q-16,4 -20,-10 q-4,-14 8,-18z"/><path class="gl-land" d="M60,150 q16,-6 22,8 q4,12 -8,16 q-14,4 -18,-8 q-4,-12 4,-16z"/></g></g>
+                  <g class="gl-grid">
+                    <ellipse cx="100" cy="100" rx="24" ry="72"></ellipse>
+                    <ellipse cx="100" cy="100" rx="52" ry="72"></ellipse>
+                    <line x1="28" y1="100" x2="172" y2="100"></line>
+                    <line x1="40" y1="64" x2="160" y2="64"></line>
+                    <line x1="40" y1="136" x2="160" y2="136"></line>
+                  </g>
+                  <ellipse class="gl-shine" cx="74" cy="66" rx="30" ry="20" transform="rotate(-28 74 66)"></ellipse>
+                </g>
+
+                <circle class="gl-rim" cx="100" cy="100" r="72"></circle>
+
+                <ellipse class="gl-orbit" cx="100" cy="100" rx="88" ry="34" transform="rotate(-22 100 100)"></ellipse>
+                <g class="gl-plane">
+                  <animateMotion dur="14s" repeatCount="indefinite" rotate="auto"
+                    path="M188,100 a88,34 -22 1,1 -176,0 a88,34 -22 1,1 176,0"></animateMotion>
+                  <path d="M7,0 L-5,-4.4 L-2,0 L-5,4.4 Z"></path>
+                </g>
+
+                <circle class="gl-pin-halo" cx="104" cy="112" r="7" fill="var(--gl-amber)"></circle>
+                <circle cx="104" cy="112" r="5.2" fill="var(--gl-surface)" stroke="var(--gl-amber)" stroke-width="2.6"></circle>
+                <circle class="gl-pin-halo b" cx="82" cy="78" r="7" fill="var(--gl-violet)"></circle>
+                <circle cx="82" cy="78" r="4.8" fill="var(--gl-surface)" stroke="var(--gl-violet)" stroke-width="2.4" stroke-dasharray="3 2.6"></circle>
+                <circle class="gl-pin-halo c" cx="142" cy="96" r="7" fill="var(--gl-teal)"></circle>
+                <circle cx="142" cy="96" r="5.2" fill="var(--gl-surface)" stroke="var(--gl-teal)" stroke-width="2.6"></circle>
+              </svg>
+            </button>
+          </div>
           <div class="phd-banner">
             <span class="phd-banner-dot"></span>
             Open to PhD positions in <strong>computational drug discovery / structure-based CADD</strong>
@@ -357,55 +381,7 @@
               <div class="stat" style="--stat-color:var(--violet); --stat-color-ink:var(--violet-ink)"><div class="num" data-count="228">0</div><div class="label">Interaction diagrams analyzed</div></div>
               <div class="stat" style="--stat-color:var(--coral); --stat-color-ink:var(--coral-ink)"><div class="num" data-count="36">0</div><div class="label">Compounds in DFT dataset</div></div>
             </div>
-          </div>
-
-          <button class="gl-card" id="journeyOpenBtn" type="button" aria-haspopup="dialog">
-            <svg class="gl-globe" viewBox="0 0 200 200" role="img" aria-label="Cartoon globe showing Egypt, the United Kingdom, and South Korea">
-              <defs>
-                <clipPath id="glClip"><circle cx="100" cy="100" r="72"></circle></clipPath>
-              </defs>
-
-              <circle class="gl-ocean" cx="100" cy="100" r="72"></circle>
-
-              <g clip-path="url(#glClip)">
-                <g class="gl-spin"><g transform="translate(0,0)"><path class="gl-land" d="M18,58 q16,-16 36,-10 q20,6 16,22 q-4,16 -24,18 q-22,2 -28,-12 q-6,-12 0,-18z"/><path class="gl-land" d="M30,104 q14,-8 24,4 q10,14 4,30 q-6,16 -18,12 q-14,-4 -16,-22 q-2,-18 6,-24z"/><path class="gl-land" d="M86,46 q28,-12 52,2 q22,12 14,30 q-8,18 -34,16 q-30,-2 -36,-20 q-6,-18 4,-28z"/><path class="gl-land" d="M104,100 q20,-6 30,10 q10,16 -2,26 q-14,12 -30,2 q-14,-10 -10,-24 q2,-10 12,-14z"/><path class="gl-land" d="M150,132 q18,-4 22,10 q4,14 -10,18 q-16,4 -20,-10 q-4,-14 8,-18z"/><path class="gl-land" d="M60,150 q16,-6 22,8 q4,12 -8,16 q-14,4 -18,-8 q-4,-12 4,-16z"/></g><g transform="translate(200,0)"><path class="gl-land" d="M18,58 q16,-16 36,-10 q20,6 16,22 q-4,16 -24,18 q-22,2 -28,-12 q-6,-12 0,-18z"/><path class="gl-land" d="M30,104 q14,-8 24,4 q10,14 4,30 q-6,16 -18,12 q-14,-4 -16,-22 q-2,-18 6,-24z"/><path class="gl-land" d="M86,46 q28,-12 52,2 q22,12 14,30 q-8,18 -34,16 q-30,-2 -36,-20 q-6,-18 4,-28z"/><path class="gl-land" d="M104,100 q20,-6 30,10 q10,16 -2,26 q-14,12 -30,2 q-14,-10 -10,-24 q2,-10 12,-14z"/><path class="gl-land" d="M150,132 q18,-4 22,10 q4,14 -10,18 q-16,4 -20,-10 q-4,-14 8,-18z"/><path class="gl-land" d="M60,150 q16,-6 22,8 q4,12 -8,16 q-14,4 -18,-8 q-4,-12 4,-16z"/></g></g>
-                <g class="gl-grid">
-                  <ellipse cx="100" cy="100" rx="24" ry="72"></ellipse>
-                  <ellipse cx="100" cy="100" rx="52" ry="72"></ellipse>
-                  <line x1="28" y1="100" x2="172" y2="100"></line>
-                  <line x1="40" y1="64" x2="160" y2="64"></line>
-                  <line x1="40" y1="136" x2="160" y2="136"></line>
-                </g>
-                <ellipse class="gl-shine" cx="74" cy="66" rx="30" ry="20" transform="rotate(-28 74 66)"></ellipse>
-              </g>
-
-              <circle class="gl-rim" cx="100" cy="100" r="72"></circle>
-
-              <!-- orbit ribbon + little plane -->
-              <ellipse class="gl-orbit" cx="100" cy="100" rx="88" ry="34" transform="rotate(-22 100 100)"></ellipse>
-              <g class="gl-plane">
-                <animateMotion dur="14s" repeatCount="indefinite" rotate="auto"
-                  path="M188,100 a88,34 -22 1,1 -176,0 a88,34 -22 1,1 176,0"></animateMotion>
-                <path d="M7,0 L-5,-4.4 L-2,0 L-5,4.4 Z"></path>
-              </g>
-
-              <!-- Egypt -->
-              <circle class="gl-pin-halo" cx="104" cy="112" r="7" fill="var(--gl-amber)"></circle>
-              <circle cx="104" cy="112" r="5.2" fill="var(--gl-surface)" stroke="var(--gl-amber)" stroke-width="2.6"></circle>
-              <!-- United Kingdom: hollow, the degree that travelled instead of me -->
-              <circle class="gl-pin-halo b" cx="82" cy="78" r="7" fill="var(--gl-violet)"></circle>
-              <circle cx="82" cy="78" r="4.8" fill="var(--gl-surface)" stroke="var(--gl-violet)" stroke-width="2.4" stroke-dasharray="3 2.6"></circle>
-              <!-- South Korea -->
-              <circle class="gl-pin-halo c" cx="142" cy="96" r="7" fill="var(--gl-teal)"></circle>
-              <circle cx="142" cy="96" r="5.2" fill="var(--gl-surface)" stroke="var(--gl-teal)" stroke-width="2.6"></circle>
-            </svg>
-
-            <span class="gl-label">The Journey</span>
-            <span class="gl-caption">Egypt to South Korea, with a British degree earned without leaving Cairo</span>
-            <span class="gl-cta">Open the map
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
-            </span>
-          </button>
+        </div>
         </div>
       </div>
     </div>
