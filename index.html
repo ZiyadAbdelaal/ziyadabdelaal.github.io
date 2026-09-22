@@ -62,16 +62,20 @@
 
 /* copyable email chip in the hero */
 .gl-mail{
-  display:inline-flex; align-items:center; margin-top:14px;
+  display:inline-flex; flex-direction:column; align-items:center; gap:6px; margin-top:14px;
 }
 .gl-mail .copy-btn{
   width:40px; height:40px; border-radius:50%;
   border:1px solid var(--line, rgba(238,241,238,0.10));
   background:var(--surface, #1a222a); color:var(--teal-ink, #4fd1b5);
-  transition:color .2s, border-color .2s;
+  transition:color .2s, border-color .2s, transform .2s;
 }
-.gl-mail .copy-btn:hover{ border-color:var(--teal-ink, #4fd1b5); }
+.gl-mail .copy-btn:hover{ border-color:var(--teal-ink, #4fd1b5); transform:translateY(-2px); }
 .gl-mail .copy-btn svg{ width:16px; height:16px; }
+.gl-mail-caption{
+  font-family:'Manrope','Inter',sans-serif; font-weight:700; font-size:.78rem;
+  letter-spacing:.02em; color:var(--text-dim, #a4b0ac); white-space:nowrap;
+}
 
 @media (prefers-reduced-motion: reduce){
   .gl-spin, .gl-pin-halo{ animation:none; }
@@ -319,6 +323,7 @@
             <button class="copy-btn" type="button" data-copy="ziyadabdelaal1@gmail.com" aria-label="Copy email address" title="Copy email address">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
             </button>
+            <span class="gl-mail-caption">Copy Email</span>
           </div>
           <div class="social-row">
             <a href="https://orcid.org/0009-0007-3720-7805" target="_blank" rel="noopener" aria-label="ORCID" title="ORCID 0009-0007-3720-7805" style="--social-color:#A6CE39">

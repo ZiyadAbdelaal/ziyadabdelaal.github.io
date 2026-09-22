@@ -323,7 +323,7 @@
   .social-row a:active{ transform:translateY(-1px) scale(0.96); }
 
   /* stats strip */
-  .hero-grid{display:grid; grid-template-columns:1fr; gap:clamp(40px, 5vw, 64px); align-items:center;}
+  .hero-grid{display:grid; grid-template-columns:1fr; gap:clamp(40px, 5vw, 64px); align-items:start;}
   @media (min-width:900px){ .hero-grid{grid-template-columns:1.1fr 0.9fr;} }
   .hero-stats-panel{
     background:var(--surface); border:1px solid var(--line); border-radius:18px;
